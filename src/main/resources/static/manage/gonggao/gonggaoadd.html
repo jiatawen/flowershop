@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网上花店管理后台</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+<!-- jQuery file -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var $ = jQuery.noConflict();
+$(function() {
+$('#tabsmenu').tabify();
+$(".toggle_container").hide(); 
+$(".trigger").click(function(){
+    $(this).toggleClass("active").next().slideToggle("slow");
+    return false;
+});
+});
+
+function checkform()
+{
+    if (document.getElementById('biaotiid').value=="")
+    {
+        alert("标题不能为空");
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body>
+<div id="panelwrap">
+    
+    
+    <!-- head.jsp content -->
+    <div class="head">
+        <!-- Content from head.jsp goes here -->
+    </div>
+                    
+    <div class="center_content">  
+ 
+    <div id="right_wrap">
+    <div id="right_content">             
+    <h2>[Bean Biaoti Placeholder]</h2> 
+                    
+                    
+
+
+    
+   
+    <div id="tab1" class="tabcontent">
+        
+        <div class="form">
+            
+            <form action="[Bean URL Placeholder]" method="post" onsubmit="return checkform()" >
+            
+            <TABLE cellSpacing=0 cellpadding="5" width="100%" align=center border=1>
+            
+            <tr>
+            <td>
+            标题:
+            </td>
+            <td> 
+            <input type="text" name="biaoti" id="biaotiid" />
+            </td>
+            </tr>
+            
+            <tr>
+            <td>
+            内容:
+            </td>
+            <td> 
+           <textarea rows="7" cols="50" name="neirong"></textarea>
+            </td>
+            </tr>
+            
+            
+             <tr>
+            <td>操作:</td><td> 
+          
+             <input type="submit" value="提交" style="width: 60px" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input  onclick="javascript:history.go(-1);" style="width: 60px" type="button" value="返回" />
+            </td>
+            </tr>
+            
+            </table>
+            </form>
+            
+            
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+     </div>
+     </div><!-- end of right content-->
+                     
+    
+    <!-- left.jsp content -->
+    <div id="left_wrap">
+        <div><!-- Content from left.jsp goes here --></div>
+    </div>
+    
+    
+    <div class="clear"></div>
+    </div> <!--end of center_content-->
+    
+
+</div>
+
+</body>
+</html>

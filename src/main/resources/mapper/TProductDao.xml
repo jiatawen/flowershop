@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.TProductDao">
+
+    <resultMap id="BaseResultMap" type="com.flowershop.entity.TProduct">
+        <!--@Table t_product-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="pname" column="pname" jdbcType="VARCHAR"/>
+        <result property="imgpath" column="imgpath" jdbcType="VARCHAR"/>
+        <result property="createtime" column="createtime" jdbcType="VARCHAR"/>
+        <result property="fenleiid" column="fenleiid" jdbcType="INTEGER"/>
+        <result property="jiage" column="jiage" jdbcType="VARCHAR"/>
+        <result property="tuijian" column="tuijian" jdbcType="VARCHAR"/>
+        <result property="miaoshu" column="miaoshu" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select id,
+               pname,
+               imgpath,
+               createtime,
+               fenleiid,
+               jiage,
+               tuijian,
+               miaoshu
+
+        from t_product
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+        id,pname,imgpath,createtime,fenleiid,jiage,tuijian,miaoshu
+
+        from t_product
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="pname != null and pname != ''">
+                and pname = #{pname}
+            </if>
+            <if test="imgpath != null and imgpath != ''">
+                and imgpath = #{imgpath}
+            </if>
+            <if test="createtime != null and createtime != ''">
+                and createtime = #{createtime}
+            </if>
+            <if test="fenleiid != null">
+                and fenleiid = #{fenleiid}
+            </if>
+            <if test="jiage != null">
+                and jiage = #{jiage}
+            </if>
+            <if test="tuijian != null and tuijian != ''">
+                and tuijian = #{tuijian}
+            </if>
+            <if test="miaoshu != null and miaoshu != ''">
+                and miaoshu = #{miaoshu}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+    select
+    id,pname,imgpath,createtime,fenleiid,jiage,tuijian,miaoshu
+
+    from flower_shop.t_product
+    </select>
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from t_product
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="pname != null and pname != ''">
+                and pname = #{pname}
+            </if>
+            <if test="imgpath != null and imgpath != ''">
+                and imgpath = #{imgpath}
+            </if>
+            <if test="createtime != null and createtime != ''">
+                and createtime = #{createtime}
+            </if>
+            <if test="fenleiid != null">
+                and fenleiid = #{fenleiid}
+            </if>
+            <if test="jiage != null">
+                and jiage = #{jiage}
+            </if>
+            <if test="tuijian != null and tuijian != ''">
+                and tuijian = #{tuijian}
+            </if>
+            <if test="miaoshu != null and miaoshu != ''">
+                and miaoshu = #{miaoshu}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into t_product(pname, imgpath, createtime, fenleiid, jiage, tuijian, miaoshu)
+        values (#{pname}, #{imgpath}, #{createtime}, #{fenleiid}, #{jiage}, #{tuijian}, #{miaoshu})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_product(pname, imgpath, createtime, fenleiid, jiage, tuijian, miaoshu)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.pname}, #{entity.imgpath}, #{entity.createtime}, #{entity.fenleiid}, #{entity.jiage},
+            #{entity.tuijian}, #{entity.miaoshu})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into t_product(pname, imgpath, createtime, fenleiid, jiage, tuijian, miaoshu)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.pname}, #{entity.imgpath}, #{entity.createtime}, #{entity.fenleiid}, #{entity.jiage},
+            #{entity.tuijian}, #{entity.miaoshu})
+        </foreach>
+        on duplicate key update
+        pname = values(pname),
+        imgpath = values(imgpath),
+        createtime = values(createtime),
+        fenleiid = values(fenleiid),
+        jiage = values(jiage),
+        tuijian = values(tuijian),
+        miaoshu = values(miaoshu)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update t_product
+        <set>
+            <if test="pname != null and pname != ''">
+                pname = #{pname},
+            </if>
+            <if test="imgpath != null and imgpath != ''">
+                imgpath = #{imgpath},
+            </if>
+            <if test="createtime != null and createtime != ''">
+                createtime = #{createtime},
+            </if>
+            <if test="fenleiid != null">
+                fenleiid = #{fenleiid},
+            </if>
+            <if test="jiage != null">
+                jiage = #{jiage},
+            </if>
+            <if test="tuijian != null and tuijian != ''">
+                tuijian = #{tuijian},
+            </if>
+            <if test="miaoshu != null and miaoshu != ''">
+                miaoshu = #{miaoshu},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from t_product
+        where id = #{id}
+    </delete>
+
+</mapper>
+

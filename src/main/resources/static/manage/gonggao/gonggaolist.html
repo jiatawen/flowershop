@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网上花店管理后台</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+<!-- jQuery file -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var $ = jQuery.noConflict();
+$(function() {
+$('#tabsmenu').tabify();
+$(".toggle_container").hide(); 
+$(".trigger").click(function(){
+    $(this).toggleClass("active").next().slideToggle("slow");
+    return false;
+});
+});
+</script>
+</head>
+<body>
+<div id="panelwrap">
+    
+    
+    <!-- head.jsp content -->
+    <div class="head">
+        <!-- Content from head.jsp goes here -->
+    </div>
+                    
+    <div class="center_content">  
+ 
+    <div id="right_wrap">
+    <div id="right_content">             
+    <h2>[Bean Biaoti Placeholder]</h2> 
+                    
+                    
+
+
+    
+   
+    <form action="[Bean URL Placeholder]" method="post">
+      <input  onclick="javascript:window.location.href='';" class="buttoncss" type="button" value="添加新公告" />
+     &nbsp;&nbsp;&nbsp;
+       标题:<input type="text" size="10"  name="biaotibiaoti"  value="[Bean Biaotibiaoti Placeholder]"/>     
+       <input type="submit"  value="查询" />     
+    </form>
+             
+                    
+<table id="rounded-corner">
+    <thead>
+        <tr>
+            
+            <th align="left">标题</th>
+            <th align="left">添加时间</th>
+            <th align="left">操作</th>
+           
+        </tr>
+    </thead>
+        <tfoot>
+        <tr>
+            <td colspan="12">[Bean Pagerinfo Placeholder]</td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr class="odd">
+            
+            <td>
+            [Bean Biaoti Placeholder]&nbsp;
+            </td>
+            <td>
+            [Bean Shijian Placeholder]&nbsp;
+            </td>
+            <td>
+            <a href="[Bean Url2 Placeholder]update3?id=[Bean Id Placeholder]">查看</a> &nbsp; &nbsp; &nbsp;
+            <a href="[Bean Url2 Placeholder]update?id=[Bean Id Placeholder]">修改</a> &nbsp; &nbsp; &nbsp;
+            <a href="[Bean Url2 Placeholder]delete?id=[Bean Id Placeholder]" onclick="return confirm('确定要删除吗?'); ">删除</a>
+            </td>
+           
+        </tr>
+  
+        
+    </tbody>
+</table>
+
+    
+
+      
+     </div>
+     
+     </div><!-- end of right content-->
+                     
+    
+    <!-- left.jsp content -->
+    <div id="left_wrap">
+        <div><!-- Content from left.jsp goes here --></div>
+    </div>
+    
+    
+    <div class="clear"></div>
+    </div> <!--end of center_content-->
+    
+
+</div>
+
+</body>
+</html>

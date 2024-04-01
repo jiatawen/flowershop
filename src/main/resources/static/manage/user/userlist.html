@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网上花店管理后台</title>
+    <link rel="stylesheet" type="text/css" href="../../style.css"/>
+
+    <!-- jQuery file -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        $(function () {
+            $('#tabsmenu').tabify();
+            $(".toggle_container").hide();
+            $(".trigger").click(function () {
+                $(this).toggleClass("active").next().slideToggle("slow");
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="panelwrap">
+
+    <div class="header">
+        <div class="title">
+            <span style="font-weight: bold;font-size: 35px;">网上花店管理后台</span>
+
+        </div>
+
+        <div class="header_right">欢迎 xxxx, <a href="manageServlet/passwordupdate" class="settings">修改密码</a> <a
+                href="manageServlet/loginout" class="logout">退出系统</a></div>
+
+    </div>
+
+
+    <div class="submenu">
+
+    </div>
+
+    <div class="center_content">
+
+        <div id="right_wrap">
+            <div id="right_content">
+
+                <h2>${biaoti }</h2>
+                <form action="${url }" method="post">
+
+                    用户名:<input type="text" size="10" name="username" value="${username }"/>
+
+                    <input type="submit" value="查询"/>
+                </form>
+
+
+                <table id="rounded-corner">
+                    <thead>
+                    <tr>
+
+                        <th align="left">用户名</th>
+                        <th align="left">姓名</th>
+                        <th align="left">手机</th>
+                        <th align="left">地址</th>
+
+
+                        <th align="left">操作</th>
+
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <td colspan="12">${pagerinfo }</td>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr class="odd">
+
+                        <td>
+                            ${bean.username }&nbsp;
+                        </td>
+                        <td>
+                            ${bean.xingming }&nbsp;
+                        </td>
+                        <td>
+                            ${bean.dianhua }&nbsp;
+                        </td>
+                        <td>
+                            ${bean.dizhi }&nbsp;
+                        </td>
+
+                        <td>
+
+                            <a href="${url2 }delete?id=${bean.id }"
+                               onclick="return confirm('确定要删除吗?'); ">删除用户</a>
+
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div><!-- end of right content-->
+
+        <div class="sidebar" id="sidebar">
+            <h2>主菜单</h2>
+
+            <ul>
+                <li><a href="<%=basePath2 %>manageServlet/fenleilist">分类管理</a></li>
+                <li><a href="<%=basePath2 %>manageServlet/productlist">鲜花管理</a></li>
+                <li><a href="<%=basePath2 %>manageServlet/gonggaolist">公告管理</a></li>
+                <li><a href="<%=basePath2 %>manageServlet/dingdanlist">订单管理</a></li>
+                <li><a href="<%=basePath2 %>manageServlet/userlist">用户管理</a></li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+</div>
+</body>
+</html>

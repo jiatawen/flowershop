@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网上花店管理后台</title>
+<link rel="stylesheet" type="text/css" href="../style.css" />
+
+<!-- jQuery file -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var $ = jQuery.noConflict();
+$(function() {
+$('#tabsmenu').tabify();
+$(".toggle_container").hide(); 
+$(".trigger").click(function(){
+    $(this).toggleClass("active").next().slideToggle("slow");
+    return false;
+});
+});
+</script>
+</head>
+<body>
+<div id="panelwrap">
+    
+    
+    <!-- head.html content -->
+    <div class="head">
+        <!-- Content from head.html goes here -->
+        <div class="header">
+            <div class="title">
+            <span style="font-weight: bold;font-size: 35px;">网上花店管理后台</span>
+            
+            </div>
+            
+            <div class="header_right">欢迎 xxxx, <a href="./passwordupdate.html" class="settings">修改密码</a> <a href="manageServlet/loginout" class="logout">退出系统</a> </div>
+        
+        </div>
+        
+    </div>
+    
+
+    <div class="submenu">
+    
+    </div>          
+                    
+    <div class="center_content">  
+ 
+    <div id="right_wrap">
+    
+    <div id="right_content">             
+        <br/><br/><br/><br/>
+        <span style="font-weight: bold;font-size: 50px; ">欢迎[Username Placeholder]使用本系统</span>
+    
+    </div>
+     
+     
+     </div><!-- end of right content-->
+                     
+    
+    <!-- left.html content -->
+    <div id="left_wrap">
+        <div id="left_content">
+            <!-- Content from left.html goes here -->
+            <div class="sidebar" id="sidebar">
+                <h2>主菜单</h2>
+                
+                    <ul>
+                        <li><a href="./fenlei/fenleilist.jsp" >分类管理</a></li>
+                        <li><a href="<%=basePath2 %>manageServlet/productlist" >鲜花管理</a></li>
+                        <li><a href="<%=basePath2 %>manageServlet/gonggaolist" >公告管理</a></li>
+                        <li><a href="<%=basePath2 %>manageServlet/dingdanlist" >订单管理</a></li>
+                        <li><a href="<%=basePath2 %>manageServlet/userlist" >用户管理</a></li>
+                    </ul>
+             </div>
+            
+        </div>
+    </div>
+    
+    
+    <div class="clear"></div>
+    </div> 
+    
+    
+
+</div>
+
+</body>
+</html>
