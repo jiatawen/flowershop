@@ -52,9 +52,7 @@ $(".trigger").click(function(){
        分类名:
        <select name="fname">
        <option value="">所有选项</option>
-       <c:forEach items="${fenleilist}" var="bean">
-       <option value="${bean.fname }" <c:if test="${bean.fname==fname }">selected</c:if> >${bean.fname }</option>
-       </c:forEach>
+       <option value="${bean.fname }"  >${bean.fname }</option>
        </select>
        &nbsp;&nbsp;&nbsp;
        商品名:<input type="text" size="10"  name="pname"  value="${pname }"/> 
@@ -82,7 +80,7 @@ $(".trigger").click(function(){
         </tr>
     </tfoot>
     <tbody>
-        <c:forEach items="${list}" var="bean">
+
         <tr class="odd">
             
             <td>
@@ -108,12 +106,8 @@ $(".trigger").click(function(){
             <a href="${url2 }update3?id=${bean.id }">查看</a> &nbsp;
             <a href="${url2 }update?id=${bean.id }">修改</a> &nbsp; 
             <a href="${url2 }delete?id=${bean.id }" onclick="return confirm('确定要删除吗?'); ">删除</a>
-            <c:if test="${bean.tuijian=='未推荐'}">
+
             <a href="${url2 }delete2?id=${bean.id }" onclick="return confirm('确定要推荐吗?'); ">推荐</a>
-            </c:if>
-            <c:if test="${bean.tuijian=='已推荐'}">
-            <a href="${url2 }delete3?id=${bean.id }" onclick="return confirm('确定要取消推荐吗?'); ">取消推荐</a>
-            </c:if>
             </td>
            
         </tr>
