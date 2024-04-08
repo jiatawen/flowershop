@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>网上花店管理后台</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="../../style.css" />
 
 <!-- jQuery file -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 var $ = jQuery.noConflict();
 $(function() {
@@ -46,16 +46,27 @@ function checkform()
 <div id="panelwrap">
     
     
-    <!-- head.jsp content -->
-    <div class="head">
-        <!-- Content from head.jsp goes here -->
+    <div class="header">
+    <div class="title">
+    <span style="font-weight: bold;font-size: 35px;">网上花店管理后台</span>
+    
     </div>
+    
+    <div class="header_right">欢迎 xxx, <a href="manageServlet/passwordupdate" class="settings">修改密码</a> <a href="manageServlet/loginout" class="logout">退出系统</a> </div>
+
+</div>
+
+    
+    <div class="submenu">
+    
+    </div>          
                     
     <div class="center_content">  
  
     <div id="right_wrap">
     <div id="right_content">             
-    <h2>[Bean Biaoti Placeholder]</h2> 
+    
+    <h2>${biaoti }</h2> 
                     
                     
 
@@ -66,7 +77,7 @@ function checkform()
        
         <div class="form">
             
-            <form action="[Bean URL Placeholder]" method="post" enctype="multipart/form-data" >
+            <form action="${url }" method="post" enctype="multipart/form-data" >
             
             <TABLE cellSpacing=0 cellpadding="5" width="100%" align=center border=1>
             
@@ -125,7 +136,7 @@ function checkform()
           
              <input type="submit" value="提交" style="width: 60px" />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input  onclick="javascript:window.location.href='<%=basePath %>../left.html';" style="width: 60px" type="button" value="返回" />
+                <input  onclick="javascript:history.go(-1);" style="width: 60px" type="button" value="返回" />
             </td>
             </tr>
             
@@ -142,17 +153,25 @@ function checkform()
      </div>
      </div><!-- end of right content-->
                      
+                    
+   <div class="sidebar" id="sidebar">
+    <h2>主菜单</h2>
     
-    <!-- left.jsp content -->
-    <div id="left_wrap">
-        <div><!-- Content from left.jsp goes here --></div>
-    </div>
-    
+        <ul>
+            <li><a href="manageServlet/fenleilist" >分类管理</a></li>
+            <li><a href="manageServlet/productlist" >鲜花管理</a></li>
+            <li><a href="manageServlet/gonggaolist" >公告管理</a></li>
+            <li><a href="manageServlet/dingdanlist" >订单管理</a></li>
+            <li><a href="manageServlet/userlist" >用户管理</a></li>
+        </ul>
+
+ </div>        
     
     <div class="clear"></div>
     </div> 
 
 </div>
 
+        
 </body>
 </html>

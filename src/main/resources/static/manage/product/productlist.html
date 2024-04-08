@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>网上花店管理后台</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="../../style.css" />
 
 <!-- jQuery file -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 var $ = jQuery.noConflict();
 $(function() {
@@ -25,10 +25,20 @@ $(".trigger").click(function(){
 <div id="panelwrap">
     
     
-    <!-- head.jsp content -->
-    <div class="head">
-        <!-- Content from head.jsp goes here -->
+    <div class="header">
+    <div class="title">
+    <span style="font-weight: bold;font-size: 35px;">网上花店管理后台</span>
+    
     </div>
+    
+    <div class="header_right">欢迎 xxx, <a href="manageServlet/passwordupdate" class="settings">修改密码</a> <a href="manageServlet/loginout" class="logout">退出系统</a> </div>
+
+</div>
+
+    
+    <div class="submenu">
+    
+    </div>          
                     
     <div class="center_content">  
  
@@ -37,7 +47,7 @@ $(".trigger").click(function(){
     
     <h2>${biaoti }</h2> 
       <form action="${url }" method="post">
-      <input  onclick="javascript:window.location.href='<%=basePath %>../add.html';" class="buttoncss" type="button" value="添加新商品" />
+      <input  onclick="javascript:window.location.href='<%=basePath %>${url2 }add';" class="buttoncss" type="button" value="添加新商品" />
      &nbsp;&nbsp;&nbsp;
        分类名:
        <select name="fname">
@@ -94,15 +104,15 @@ $(".trigger").click(function(){
             ${bean.tuijian }&nbsp;
             </td>
             <td>
-            <a href="../update5.html?id=${bean.id }">上传图片</a> &nbsp; 
-            <a href="../update3.html?id=${bean.id }">查看</a> &nbsp;
-            <a href="../update.html?id=${bean.id }">修改</a> &nbsp; 
-            <a href="../delete.html?id=${bean.id }" onclick="return confirm('确定要删除吗?'); ">删除</a>
+            <a href="${url2 }update5?id=${bean.id }">上传图片</a> &nbsp; 
+            <a href="${url2 }update3?id=${bean.id }">查看</a> &nbsp;
+            <a href="${url2 }update?id=${bean.id }">修改</a> &nbsp; 
+            <a href="${url2 }delete?id=${bean.id }" onclick="return confirm('确定要删除吗?'); ">删除</a>
             <c:if test="${bean.tuijian=='未推荐'}">
-            <a href="../delete2.html?id=${bean.id }" onclick="return confirm('确定要推荐吗?'); ">推荐</a>
+            <a href="${url2 }delete2?id=${bean.id }" onclick="return confirm('确定要推荐吗?'); ">推荐</a>
             </c:if>
             <c:if test="${bean.tuijian=='已推荐'}">
-            <a href="../delete3.html?id=${bean.id }" onclick="return confirm('确定要取消推荐吗?'); ">取消推荐</a>
+            <a href="${url2 }delete3?id=${bean.id }" onclick="return confirm('确定要取消推荐吗?'); ">取消推荐</a>
             </c:if>
             </td>
            
@@ -121,11 +131,19 @@ $(".trigger").click(function(){
      
      </div><!-- end of right content-->
                      
+                    
+     <div class="sidebar" id="sidebar">
+    <h2>主菜单</h2>
     
-    <!-- left.jsp content -->
-    <div id="left_wrap">
-        <div><!-- Content from left.jsp goes here --></div>
-    </div>
+        <ul>
+            <li><a href="../../manageServlet/fenleilist" >分类管理</a></li>
+            <li><a href="../../manageServlet/productlist" >鲜花管理</a></li>
+            <li><a href="../../manageServlet/gonggaolist" >公告管理</a></li>
+            <li><a href="../../manageServlet/dingdanlist" >订单管理</a></li>
+            <li><a href="../../manageServlet/userlist" >用户管理</a></li>
+        </ul>
+
+ </div>
     
     
     <div class="clear"></div>
@@ -133,5 +151,6 @@ $(".trigger").click(function(){
 
 </div>
 
+        
 </body>
 </html>

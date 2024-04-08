@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>网上花店管理后台</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="../../style.css" />
 
 <!-- jQuery file -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 var $ = jQuery.noConflict();
 $(function() {
@@ -28,7 +28,6 @@ function checkform()
 {
      
     
-
     if (document.getElementById('pnameid').value=="")
     {
         alert("商品名不能为空");
@@ -44,19 +43,16 @@ function checkform()
     
     //验证必须为正数
 
-var reg1 =  /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
+    var reg1 =  /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
+    var reg2 =  /^\d+$/;
+    var flag = 0;
+    if(document.getElementById('jiageid').value.match(reg1) != null){
+        flag=1;
+    }
+    if(document.getElementById('jiageid').value.match(reg2) != null){
+        flag=1;
+    }
  
- var reg2 =  /^\d+$/;
- 
- var flag = 0;
- if(document.getElementById('jiageid').value.match(reg1) != null){
-    flag=1
- }
-  if(document.getElementById('jiageid').value.match(reg2) != null){
-    flag=1
- }
- 
-
     if (flag==0)
     {
         alert("销售价格必须为正数");
@@ -76,10 +72,20 @@ var reg1 =  /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
 <div id="panelwrap">
     
     
-    <!-- head.jsp content -->
-    <div class="head">
-        <!-- Content from head.jsp goes here -->
+    <div class="header">
+    <div class="title">
+    <span style="font-weight: bold;font-size: 35px;">网上花店管理后台</span>
+    
     </div>
+    
+    <div class="header_right">欢迎 xxx, <a href="manageServlet/passwordupdate" class="settings">修改密码</a> <a href="manageServlet/loginout" class="logout">退出系统</a> </div>
+
+</div>
+
+    
+    <div class="submenu">
+    
+    </div>          
                     
     <div class="center_content">  
  
@@ -91,6 +97,7 @@ var reg1 =  /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
                     
 
 
+    
     
     <div id="tab1" class="tabcontent">
        
@@ -142,7 +149,7 @@ var reg1 =  /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
             点击数:
             </td>
             <td> 
-            <input type="text" name="jiage" id="jiageid"  value="${bean.dianjishu }" readonly="readonly"/>
+            <input type="text" name="dianjishu" id="dianjishuid"  value="${bean.dianjishu }" readonly="readonly"/>
             </td>
             </tr>
             
@@ -151,7 +158,7 @@ var reg1 =  /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
             销量:
             </td>
             <td> 
-            <input type="text" name="jiage" id="jiageid"  value="${bean.xiaoliang }" readonly="readonly"/>
+            <input type="text" name="xiaoliang" id="xiaoliangid"  value="${bean.xiaoliang }" readonly="readonly"/>
             </td>
             </tr>
             
@@ -160,7 +167,7 @@ var reg1 =  /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
             是否推荐:
             </td>
             <td> 
-            <input type="text" name="jiage" id="jiageid"  value="${bean.tuijian }" readonly="readonly"/>
+            <input type="text" name="tuijian" id="tuijianid"  value="${bean.tuijian }" readonly="readonly"/>
             </td>
             </tr>
             
@@ -195,13 +202,24 @@ var reg1 =  /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
      </div><!-- end of right content-->
                      
                     
-   <%@ include file="../left.jsp" %>        
+   <div class="sidebar" id="sidebar">
+    <h2>主菜单</h2>
     
+        <ul>
+            <li><a href="manageServlet/fenleilist" >分类管理</a></li>
+            <li><a href="manageServlet/productlist" >鲜花管理</a></li>
+            <li><a href="manageServlet/gonggaolist" >公告管理</a></li>
+            <li><a href="manageServlet/dingdanlist" >订单管理</a></li>
+            <li><a href="manageServlet/userlist" >用户管理</a></li>
+        </ul>
+
+ </div>        
     
     <div class="clear"></div>
     </div> 
 
 </div>
 
+        
 </body>
 </html>

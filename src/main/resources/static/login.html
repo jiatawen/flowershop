@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网上花店</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        $(function () {
+            $('#tabsmenu').tabify();
+            $(".toggle_container").hide();
+            $(".trigger").click(function () {
+                $(this).toggleClass("active").next().slideToggle("slow");
+                return false;
+            });
+        });
+
+        function checkform() {
+            if (document.getElementById("usernameid").value == "") {
+                alert('用户名不能为空');
+                return false;
+            }
+
+            if (document.getElementById("passwordid").value == "") {
+                alert('密码不能为空');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="panelwrap">
+        <div class="header">
+            <div class="title"><a href="./">
+                    <span style="font-weight: bold;">网上花店</span>
+                </a></div>
+
+            <div class="header_right">
+                欢迎 xxxx, <a href="passwordupdate.html" class="settings">修改密码</a> <a href="indexServlet/loginout.html" class="logout">退出</a>
+            </div>
+        </div>
+
+        <div class="submenu">
+            <ul>
+                <li><a href=".">主页</a></li>
+                <li><a href="register.html">用户注册</a></li>
+                <li><a href="login.html">用户登录</a></li>
+                <li><a href="indexServlet/gouwuchelist.html">我的购物车</a></li>
+                <li><a href="indexServlet/orderlist.html">我的订单</a></li>
+                <li><a href="indexServlet/userupdate.html">个人信息</a></li>
+                <li><a href="indexServlet/loginout.html">用户退出</a></li>
+            </ul>
+        </div>
+
+        <div class="center_content">
+            <div id="right_wrap">
+                <div id="right_content">
+                    <h2>用户登录</h2>
+                    <div id="tab1" class="tabcontent">
+                        <form action="indexServlet/login" method="post" onsubmit="return checkform()">
+                            <div class="form">
+                                <div class="form_row">
+                                    <label>用户名:</label>
+                                    <input type="text" class="form_input" name="username" id="usernameid" />
+                                </div>
+                                <div class="form_row">
+                                    <label>密码:</label>
+                                    <input type="password" class="form_input" name="password" id="passwordid" />
+                                </div>
+                                <div class="form_row">
+                                    <input type="submit" class="form_submit" value="登录" />
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <h2>鲜花搜索</h2>
+                <form action="./" method="post">
+                    <br />
+                    鲜花名：<input type="text" name="pname" value="xxxx" />
+                    <br /> <br />
+                    价格￥：<input type="text" name="jiage1" size="6" value="xxxx" />--<input type="text" name="jiage2" size="6" value="xxxx" />
+                    <br />
+                    <input type="submit" value="搜索" />
+                </form>
+                <h2>鲜花分类</h2>
+                <ul>
+                    <li><a href="./?tuijian=1">热门推荐</a></li>
+                    <li><a href="./?fenleiid=xxxx">xxxx</a></li>
+                </ul>
+                <h2>销量排行榜</h2>
+                <ul>
+                    <li><a href="indexServlet/productupdate.html?id=xxxx">xxxx</a></li>
+                </ul>
+                <h2>花店公告</h2>
+                <ul>
+                    <li><a href="indexServlet/gonggaoupdate.html?id=xxxx">xxxx</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="footer">
+            <a href="manage/login.html">管理后台</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

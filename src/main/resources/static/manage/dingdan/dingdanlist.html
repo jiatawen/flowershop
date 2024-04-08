@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>网上花店管理后台</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="../../style.css" />
 
 <!-- jQuery file -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 var $ = jQuery.noConflict();
 $(function() {
@@ -25,12 +25,17 @@ $(".trigger").click(function(){
 <div id="panelwrap">
     
     
-    <!-- head.jsp content -->
-    <div class="head">
-        <!-- Content from head.jsp goes here -->
+    <div class="header">
+    <div class="title">
+    <span style="font-weight: bold;font-size: 35px;">网上花店管理后台</span>
+    
     </div>
     
+    <div class="header_right">欢迎 xxx, <a href="manageServlet/passwordupdate" class="settings">修改密码</a> <a href="manageServlet/loginout" class="logout">退出系统</a> </div>
 
+</div>
+
+    
     <div class="submenu">
     
     </div>          
@@ -40,15 +45,15 @@ $(".trigger").click(function(){
     <div id="right_wrap">
     <div id="right_content">             
     
-    <h2>[Biaoti Placeholder]</h2> 
-      <form action="[Url Placeholder]" method="post">
+    <h2>${biaoti }</h2> 
+      <form action="${url }" method="post">
 
-       订单号:<input type="text" size="10"  name="orderid"  value="[Orderid Placeholder]"/>    
+       订单号:<input type="text" size="10"  name="orderid"  value="${orderid }"/>    
        订单状态:
        <select name="status">
        <option value="">所有选项</option>
-       <option value="未处理" [Status Placeholder] >未处理</option>
-       <option value="已处理" [Status Placeholder] >已处理</option>
+       <option value="未处理" <c:if test="${status=='未处理' }">selected</c:if> >未处理</option>
+       <option value="已处理" <c:if test="${status=='已处理' }">selected</c:if> >已处理</option>
        </select>   
        <input type="submit"  value="查询" />     
       </form>
@@ -70,11 +75,41 @@ $(".trigger").click(function(){
     </thead>
         <tfoot>
         <tr>
-            <td colspan="12">[Pagerinfo Placeholder]</td>
+            <td colspan="12">${pagerinfo }</td>
         </tr>
     </tfoot>
     <tbody>
-        [List Placeholder]
+        <c:forEach items="${list}" var="bean">
+        <tr class="odd">
+            
+            <td>
+            ${bean.orderid }&nbsp;
+            </td>
+             <td>
+            ${bean.xingming }&nbsp;
+            </td>
+             <td>
+            ${bean.status }&nbsp;
+            </td>
+             <td>
+            ${bean.shijian }&nbsp;
+            </td>
+             <td>
+            ￥${bean.zongjia }&nbsp;
+            </td>
+            <td>
+           <a href="${url2 }update3?id=${bean.id }">查看订单详情</a> 
+            <a href="${url2 }delete?id=${bean.id }" onclick="return confirm('确定要处理订单吗?'); ">处理订单</a>
+
+            </td>
+           
+        </tr>
+        </c:forEach>
+
+        
+        
+  
+        
     </tbody>
 </table>
 
@@ -85,19 +120,25 @@ $(".trigger").click(function(){
      
      </div><!-- end of right content-->
                      
+                    
+     <div class="sidebar" id="sidebar">
+    <h2>主菜单</h2>
     
-    <!-- left.jsp content -->
-    <div id="left_wrap">
-        <div><!-- Content from left.jsp goes here --></div>
-    </div>
-    
+        <ul>
+            <li><a href="manageServlet/fenleilist" >分类管理</a></li>
+            <li><a href="manageServlet/productlist" >鲜花管理</a></li>
+            <li><a href="manageServlet/gonggaolist" >公告管理</a></li>
+            <li><a href="manageServlet/dingdanlist" >订单管理</a></li>
+            <li><a href="manageServlet/userlist" >用户管理</a></li>
+        </ul>
+
+ </div>        
     
     <div class="clear"></div>
     </div> 
-    
-    
 
 </div>
 
+        
 </body>
 </html>
