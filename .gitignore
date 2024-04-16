@@ -39,5 +39,3 @@ build/
 *.iml
 out
 gen
-
-*.properties
