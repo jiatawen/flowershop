@@ -9,4 +9,9 @@ public class HelloController {
     public String hello(){
         return "/index.html";
     }
+
+    @RequestMapping("/")
+    public String logout(){
+        return "/index.html";
+    }
 }
