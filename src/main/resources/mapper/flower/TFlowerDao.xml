@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.flower.TFlowerDao">
+
+    <resultMap type="com.flowershop.entity.flower.TFlower" id="TFlowerMap">
+        <result property="fId" column="f_id" jdbcType="INTEGER"/>
+        <result property="fColor" column="f_color" jdbcType="VARCHAR"/>
+        <result property="fPrice" column="f_price" jdbcType="VARCHAR"/>
+        <result property="fNumber" column="f_number" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="fId" useGeneratedKeys="true">
+        insert into flower_shop.t_flower(f_color, f_price, f_number)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.fColor}, #{entity.fPrice}, #{entity.fNumber})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="fId" useGeneratedKeys="true">
+        insert into flower_shop.t_flower(f_color, f_price, f_number)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.fColor}, #{entity.fPrice}, #{entity.fNumber})
+        </foreach>
+        on duplicate key update
+        f_color = values(f_color) , f_price = values(f_price) , f_number = values(f_number)
+    </insert>
+
+</mapper>
+

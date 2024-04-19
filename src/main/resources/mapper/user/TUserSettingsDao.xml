@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.user.TUserSettingsDao">
+
+    <resultMap type="com.flowershop.entity.user.TUserSettings" id="TUserSettingsMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="uId" column="u_id" jdbcType="INTEGER"/>
+        <result property="fId" column="f_id" jdbcType="INTEGER"/>
+        <result property="usExpect" column="us_expect" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into flower_shop.t_user_settings(u_id, f_id, us_expect)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uId}, #{entity.fId}, #{entity.usExpect})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into flower_shop.t_user_settings(u_id, f_id, us_expect)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uId}, #{entity.fId}, #{entity.usExpect})
+        </foreach>
+        on duplicate key update
+        u_id = values(u_id) , f_id = values(f_id) , us_expect = values(us_expect)
+    </insert>
+
+</mapper>
+

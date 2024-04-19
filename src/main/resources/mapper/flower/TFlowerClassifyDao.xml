@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.flower.TFlowerClassifyDao">
+
+    <resultMap type="com.flowershop.entity.flower.TFlowerClassify" id="TFlowerClassifyMap">
+        <result property="fcId" column="fc_id" jdbcType="INTEGER"/>
+        <result property="fId" column="f_id" jdbcType="INTEGER"/>
+        <result property="fcColor" column="fc_color" jdbcType="VARCHAR"/>
+        <result property="fcImplication" column="fc_implication" jdbcType="VARCHAR"/>
+        <result property="fcVariety" column="fc_variety" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="fcId" useGeneratedKeys="true">
+        insert into flower_shop.t_flower_classify(f_id, fc_color, fc_implication, fc_variety)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.fId}, #{entity.fcColor}, #{entity.fcImplication}, #{entity.fcVariety})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="fcId" useGeneratedKeys="true">
+        insert into flower_shop.t_flower_classify(f_id, fc_color, fc_implication, fc_variety)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.fId}, #{entity.fcColor}, #{entity.fcImplication}, #{entity.fcVariety})
+        </foreach>
+        on duplicate key update
+        f_id = values(f_id) , fc_color = values(fc_color) , fc_implication = values(fc_implication) , fc_variety =
+        values(fc_variety)
+    </insert>
+
+</mapper>
+

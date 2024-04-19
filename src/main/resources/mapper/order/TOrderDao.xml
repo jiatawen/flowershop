@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.order.TOrderDao">
+
+    <resultMap type="com.flowershop.entity.order.TOrder" id="TOrderMap">
+        <result property="oId" column="o_id" jdbcType="VARCHAR"/>
+        <result property="uId" column="u_id" jdbcType="INTEGER"/>
+        <result property="oName" column="o_name" jdbcType="VARCHAR"/>
+        <result property="oTel" column="o_tel" jdbcType="VARCHAR"/>
+        <result property="oAddress" column="o_address" jdbcType="VARCHAR"/>
+        <result property="oNotes" column="o_notes" jdbcType="VARCHAR"/>
+        <result property="oCreateTime" column="o_create_time" jdbcType="TIMESTAMP"/>
+        <result property="oSumPrice" column="o_sum_price" jdbcType="VARCHAR"/>
+        <result property="oStatus" column="o_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="oId" useGeneratedKeys="true">
+        insert into flower_shop.t_order(u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uId}, #{entity.oName}, #{entity.oTel}, #{entity.oAddress}, #{entity.oNotes},
+            #{entity.oCreateTime}, #{entity.oSumPrice}, #{entity.oStatus})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="oId" useGeneratedKeys="true">
+        insert into flower_shop.t_order(u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uId}, #{entity.oName}, #{entity.oTel}, #{entity.oAddress}, #{entity.oNotes},
+            #{entity.oCreateTime}, #{entity.oSumPrice}, #{entity.oStatus})
+        </foreach>
+        on duplicate key update
+        u_id = values(u_id) , o_name = values(o_name) , o_tel = values(o_tel) , o_address = values(o_address) , o_notes
+        = values(o_notes) , o_create_time = values(o_create_time) , o_sum_price = values(o_sum_price) , o_status =
+        values(o_status)
+    </insert>
+
+</mapper>
+

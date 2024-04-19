@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.order.TCartDao">
+
+    <resultMap type="com.flowershop.entity.order.TCart" id="TCartMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="uId" column="u_id" jdbcType="INTEGER"/>
+        <result property="fId" column="f_id" jdbcType="INTEGER"/>
+        <result property="cCount" column="c_count" jdbcType="INTEGER"/>
+        <result property="cStatus" column="c_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into flower_shop.t_cart(u_id, f_id, c_count, c_status)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uId}, #{entity.fId}, #{entity.cCount}, #{entity.cStatus})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into flower_shop.t_cart(u_id, f_id, c_count, c_status)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uId}, #{entity.fId}, #{entity.cCount}, #{entity.cStatus})
+        </foreach>
+        on duplicate key update
+        u_id = values(u_id) , f_id = values(f_id) , c_count = values(c_count) , c_status = values(c_status)
+    </insert>
+
+</mapper>
+

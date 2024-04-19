@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.order.TOrderDetailsDao">
+
+    <resultMap type="com.flowershop.entity.order.TOrderDetails" id="TOrderDetailsMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="oId" column="o_id" jdbcType="VARCHAR"/>
+        <result property="fId" column="f_id" jdbcType="INTEGER"/>
+        <result property="odCount" column="od_count" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into flower_shop.t_order_details(o_id, f_id, od_count)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.oId}, #{entity.fId}, #{entity.odCount})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into flower_shop.t_order_details(o_id, f_id, od_count)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.oId}, #{entity.fId}, #{entity.odCount})
+        </foreach>
+        on duplicate key update
+        o_id = values(o_id) , f_id = values(f_id) , od_count = values(od_count)
+    </insert>
+
+</mapper>
+

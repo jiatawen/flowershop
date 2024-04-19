@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.flower.TPublicNoticeDao">
+
+    <resultMap type="com.flowershop.entity.flower.TPublicNotice" id="TPublicNoticeMap">
+        <result property="pnId" column="pn_id" jdbcType="INTEGER"/>
+        <result property="pnNumber" column="pn_number" jdbcType="INTEGER"/>
+        <result property="pnPrice" column="pn_price" jdbcType="VARCHAR"/>
+        <result property="pnVariety" column="pn_variety" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="pnId" useGeneratedKeys="true">
+        insert into flower_shop.t_public_notice(pn_number, pn_price, pn_variety)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.pnNumber}, #{entity.pnPrice}, #{entity.pnVariety})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="pnId" useGeneratedKeys="true">
+        insert into flower_shop.t_public_notice(pn_number, pn_price, pn_variety)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.pnNumber}, #{entity.pnPrice}, #{entity.pnVariety})
+        </foreach>
+        on duplicate key update
+        pn_number = values(pn_number) , pn_price = values(pn_price) , pn_variety = values(pn_variety)
+    </insert>
+
+</mapper>
+
