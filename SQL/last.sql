@@ -3,15 +3,33 @@ create database flower_shop;
 USE flower_shop;
 
 # 李华祥开始
+DROP TABLE IF EXISTS t_flower;
+CREATE TABLE t_flower(
+    `f_id` INT NOT NULL  COMMENT '鲜花id' ,
+    `f_color` VARCHAR(255) NOT NULL  COMMENT '鲜花颜色' ,
+    `f_price` double NOT NULL  COMMENT '鲜花价格' ,
+    `f_number` VARCHAR(32) NOT NULL  COMMENT '鲜花数量' ,
+    PRIMARY KEY (f_id)
+)  COMMENT = '鲜花;';
 
-drop table if exists t_flower;
+DROP TABLE IF EXISTS t_public_notice;
+CREATE TABLE t_public_notice(
+    `pn_id` INT NOT NULL  COMMENT '鲜花id' ,
+    `pn_number` INT NOT NULL  COMMENT '鲜花数目' ,
+    `pn_price` double NOT NULL  COMMENT '鲜花价格' ,
+    `pn_variety` VARCHAR(255) NOT NULL  COMMENT '鲜花品种' ,
+    PRIMARY KEY (pn_id)
+)  COMMENT = '公告';
 
-create table t_flower
-(
-    f_id varchar(255) not null comment '鲜花id',
-    primary key (f_id)
-);
-
+DROP TABLE IF EXISTS t_flower_classify;
+CREATE TABLE t_flower_classify(
+    `fc_id` INT AUTO_INCREMENT COMMENT '表id' ,
+    `f_id` INT NOT NULL  COMMENT '鲜花id' ,
+    `fc_color` VARCHAR(32) NOT NULL  COMMENT '鲜花颜色' ,
+    `fc_implication` VARCHAR(255) NOT NULL  COMMENT '鲜花寓意' ,
+    `fc_variety` VARCHAR(255) NOT NULL  COMMENT '品种' ,
+    PRIMARY KEY (fc_id)
+)  COMMENT = '鲜花分类';
 # 李华祥结束
 
 
