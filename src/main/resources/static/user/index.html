@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +9,28 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.tabify.js"></script>
+    <link rel="stylesheet" href="css/user.css">
 </head>
 
 <body>
     <div id="panelwrap">
         <div class="header">
-            <div class="title"><a href="./">
+            <div class="title">
+                <a href="./">
                     <span style="font-weight: bold;">网上花店</span>
-                </a></div>
+                </a>
+            </div>
 
             <div class="header_right">
-                欢迎 xxxx, <a href="passwordupdate.html" class="settings">修改密码</a> <a href=""
-                    class="logout">退出</a>
+                <span class="onlogin">
+                    欢迎 xxxx,
+                    <a href="passwordupdate.html" class="settings">修改密码</a>
+                    <a href="" class="logout">退出</a>
+                </span>
+                <span class="unlogin">
+                    <a href="register.html">用户注册</a>
+                    <a href="login.html">用户登录</a>
+                </span>
             </div>
         </div>
 
@@ -28,10 +39,12 @@
                 <li><a href=".">主页</a></li>
                 <li><a href="register.html">用户注册</a></li>
                 <li><a href="login.html">用户登录</a></li>
-                <li><a href="">我的购物车</a></li>
-                <li><a href="">我的订单</a></li>
-                <li><a href="">个人信息</a></li>
-                <li><a href="">用户退出</a></li>
+                <span class="onlogin">
+                    <li><a href="">我的购物车</a></li>
+                    <li><a href="">我的订单</a></li>
+                    <li><a href="">个人信息</a></li>
+                    <li><a href="">用户退出</a></li>
+                </span>
             </ul>
         </div>
 
@@ -60,7 +73,7 @@
                             <tr class="odd">
                                 <td align="center">xxxx</td>
                                 <td align="center">
-                                    <img src="xxxx" width="100" height="100"  alt=""/>
+                                    <img src="xxxx" width="100" height="100" alt="" />
                                 </td>
                                 <td align="center">xxxx</td>
                                 <td align="center">￥xxxx</td>
@@ -110,11 +123,11 @@
                 <h2>鲜花搜索</h2>
                 <form action="./" method="post">
                     <br />
-                    鲜花名：<input type="text" name="pname" value="xxxx" />
+                    鲜花名：<input type="text" name="pname" value="xxxx" size="10"/>
                     <br /> <br />
-                    价格￥：<input type="text" name="jiage1" size="6" value="xxxx" />--<input type="text" name="jiage2"
-                        size="6" value="xxxx" />
-                    <br />
+                    价格￥：<input type="text" name="jiage1" size="1" value="xxxx" />
+                    -
+                    <input type="text" name="jiage2" size="1" value="xxxx" />
                     <input type="submit" value="搜索" />
 
                 </form>
