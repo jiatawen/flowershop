@@ -10,6 +10,8 @@ import com.flowershop.service.user.TUserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 
@@ -82,6 +84,14 @@ public class TUserController extends ApiController {
     @DeleteMapping
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserService.removeByIds(idList));
+    }
+
+    @GetMapping("demo")
+    public void demo(HttpServletRequest request){
+//        创建session
+        HttpSession session = request.getSession();
+        session.setAttribute("demo","demo");
+        System.out.println(session.getId());
     }
 }
 
