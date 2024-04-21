@@ -3,6 +3,7 @@ package com.flowershop.dao.user;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.flowershop.entity.user.TUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.flowershop.entity.user.TUserLoginBehavior;
@@ -33,5 +34,12 @@ public interface TUserLoginBehaviorDao extends BaseMapper<TUserLoginBehavior> {
      */
     int insertOrUpdateBatch(@Param("entities") List<TUserLoginBehavior> entities);
 
+    /**
+     * 通过邮箱查找数据
+     *
+     * @param email 实例对象列表
+     * @return TUser 实例对象
+     */
+    TUser findByEmail(@Param("email") String email);
 }
 

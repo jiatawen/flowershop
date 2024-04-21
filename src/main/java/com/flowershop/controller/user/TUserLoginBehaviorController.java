@@ -5,11 +5,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.flowershop.entity.user.TUser;
 import com.flowershop.entity.user.TUserLoginBehavior;
 import com.flowershop.service.user.TUserLoginBehaviorService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -82,6 +87,25 @@ public class TUserLoginBehaviorController extends ApiController {
     @DeleteMapping
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserLoginBehaviorService.removeByIds(idList));
+    }
+
+    /**
+     * 登录
+     *
+     * @param email password session 账户 密码 登录信息
+     */
+    @PostMapping("login")
+    public void login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(30*60);
+
+        TUser user = tUserLoginBehaviorService.login(email, password);
+        if (user != null){
+            System.out.println(user);
+            session.setAttribute("user", user);
+//            页面重定向至首页
+            response.sendRedirect("/user/index.html");
+        }
     }
 }
 

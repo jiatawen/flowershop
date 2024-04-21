@@ -6,6 +6,8 @@ import com.flowershop.entity.user.TUser;
 import com.flowershop.service.user.TUserService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * 用户表;(TUser)表服务实现类
  *
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service("tUserService")
 public class TUserServiceImpl extends ServiceImpl<TUserDao, TUser> implements TUserService {
+
 
 }
 

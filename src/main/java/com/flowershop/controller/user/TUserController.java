@@ -86,12 +86,6 @@ public class TUserController extends ApiController {
         return success(this.tUserService.removeByIds(idList));
     }
 
-    @GetMapping("demo")
-    public void demo(HttpServletRequest request){
-//        创建session
-        HttpSession session = request.getSession();
-        session.setAttribute("demo","demo");
-        System.out.println(session.getId());
-    }
+
 }
 

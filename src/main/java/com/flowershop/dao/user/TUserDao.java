@@ -33,5 +33,6 @@ public interface TUserDao extends BaseMapper<TUser> {
      */
     int insertOrUpdateBatch(@Param("entities") List<TUser> entities);
 
+
 }
 

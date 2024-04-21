@@ -27,6 +27,9 @@
         on duplicate key update
         u_id = values(u_id) , ulb_type = values(ulb_type) , ulb_time = values(ulb_time)
     </insert>
+    <select id="findByEmail" resultType="com.flowershop.entity.user.TUser">
+        select * from t_user where u_mail = #{email}
+    </select>
 
 </mapper>
 

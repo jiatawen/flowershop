@@ -13,6 +13,6 @@ public class LoginConfig implements WebMvcConfigurer {
         //所有路径拦截
         registration.addPathPatterns("/**");
         //白名单
-        registration.excludePathPatterns("/login");
+        registration.excludePathPatterns("/login", "static/**", "/user/index.html","/user/login.html","/user/register.html");
     }
 }

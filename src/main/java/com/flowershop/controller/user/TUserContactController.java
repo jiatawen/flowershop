@@ -10,6 +10,8 @@ import com.flowershop.service.user.TUserContactService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 
@@ -83,5 +85,7 @@ public class TUserContactController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserContactService.removeByIds(idList));
     }
+
+
 }
 

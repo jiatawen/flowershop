@@ -1,6 +1,7 @@
 package com.flowershop.service.user;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.flowershop.entity.user.TUser;
 import com.flowershop.entity.user.TUserLoginBehavior;
 
 /**
@@ -10,6 +11,7 @@ import com.flowershop.entity.user.TUserLoginBehavior;
  * @since 2024-04-20 01:43:39
  */
 public interface TUserLoginBehaviorService extends IService<TUserLoginBehavior> {
-
+//    登录实现
+    public TUser login(String uEmail, String uPassword);
 }
 
