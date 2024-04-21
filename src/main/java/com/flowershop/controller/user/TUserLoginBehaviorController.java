@@ -107,5 +107,11 @@ public class TUserLoginBehaviorController extends ApiController {
             response.sendRedirect("/user/index.html");
         }
     }
+
+    @PostMapping("sendEmail")
+    public void sendEmail() throws Exception {
+        System.out.println("sendEmail被调用");
+        tUserLoginBehaviorService.sendEmail("");
+    }
 }
 

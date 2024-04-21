@@ -11,13 +11,14 @@ public class UserLoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("preHandle被调用");
-        HttpSession session = request.getSession();
+        return true;
+        /*HttpSession session = request.getSession();
         if (session.getAttribute("user")!= null){
             return true;
         }else {
             response.sendRedirect("/user/login.html");
             return false;
-        }
+        }*/
     }
 
     @Override
