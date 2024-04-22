@@ -1,191 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>网上花店管理后台</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
-
-<!-- jQuery file -->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-var $ = jQuery.noConflict();
-$(function() {
-$('#tabsmenu').tabify();
-$(".toggle_container").hide(); 
-$(".trigger").click(function(){
-	$(this).toggleClass("active").next().slideToggle("slow");
-	return false;
-});
-});
-</script>
-
-<script language="javascript" type="text/javascript">
-
-function changenum(id){
-		var num = document.getElementById(id+"_num").value;
-		var reg1 =  /^\d+$/;
-	if (num.match(reg1) == null)
-	{
-		alert("购买数量必须为正整数");
-		return false;
-	}
-		if (num == 0 )
-	{
-		alert("购买数量必须大于0的正整数");
-		return false;
-	}
-		var now = new Date(); 
-		var t = now.getTime()+''; 
-		window.location.href="<%=basePath %>indexServlet/gouwucheupdate2?id="+id+"&number="+num+"&t="+t;
-		
-		
-	}
-
-</script>
-
+    <title>网上花店管理后台</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- jQuery file -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/gouwuchelist.js"></script>
 </head>
 <body>
-<div id="panelwrap">
-  	
-	
-	<div class="header">
-        <div class="title"><a href="./">
-        <span style="font-weight: bold;">网上花店</span>
-        </a></div>
-        
-        <div class="header_right">
-        欢迎 xxxx, <a href="passwordupdate.html" class="settings">修改密码</a> <a href="indexServlet/loginout" class="logout">退出</a> 
+    <div id="panelwrap">
+        <div class="header">
+            <div class="title"><a href="./">
+                    <span style="font-weight: bold;">网上花店</span>
+                </a></div>
+            <div class="header_right">
+                欢迎 xxxx, <a href="passwordupdate.html" class="settings">修改密码</a> <a href="indexServlet/loginout"
+                    class="logout">退出</a>
+            </div>
         </div>
-        
-        
-        
-        </div>
-        
         <div class="submenu">
-        <ul>
-        <li><a href=".">主页</a></li>
-        <li><a href="register.html">用户注册</a></li>
-        <li><a href="login.html">用户登录</a></li>
-        <li><a href="indexServlet/gouwuchelist.html">我的购物车</a></li>
-        <li><a href="indexServlet/orderlist.html">我的订单</a></li>
-        <li><a href="indexServlet/userupdate.html">个人信息</a></li>
-        <li><a href="indexServlet/loginout.html">用户退出</a></li>
-        </ul>
-        </div>
-    
-
-    
-    <div class="submenu">
-    
-    </div>          
-                    
-    <div class="center_content">  
- 
-    <div id="right_wrap">
-    <div id="right_content">             
-    
-    <h2>我的购物车</h2> 
-      
-             
-                    
-<table id="rounded-corner">
-    <thead>
-    	<tr>
-        	
-            <th align="left">商品名</th>
-            <th align="left">单价</th>
-            <th align="left">购买数量</th>
-            <th align="left">小计</th>
-            <th align="left">操作</th>
-           
-        </tr>
-    </thead>
-        <tfoot>
-    	<tr>
-        	<td colspan="12">
-        	<span style="font-size: 30px;">
-        	总计：￥${zongjia }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    	<a href="indexServlet/dingdanadd" >结算，生成订单</a>
-    	</span>
-        	</td>
-        </tr>
-    </tfoot>
-    <tbody>
-    	<tr class="odd">
-        	
-            <td>
-            ${bean.pname }&nbsp;
-            </td>
-            <td>
-            ￥${bean.jiage }&nbsp;
-            </td>
-            <td>
-            <input type="text" name="number"  value="${bean.shuliang }" id="${bean.id }_num"  size="5"/>&nbsp;
-    	<a href="javascript:;"  onclick="">变更</a> &nbsp;
-            </td>
-            <td>
-            ￥${bean.jiage *bean.shuliang }&nbsp;
-            </td>
-            <td>
-         <a href="indexServlet/gouwuchedelete?id=${bean.id }" onclick=" return confirm('确定要删除吗?'); ">删除</a>
-             </td>
-           
-        </tr>
-
-    	
-    	
-  
-        
-    </tbody>
-</table>
-
-	
-
-      
-     </div>
-     
-     </div><!-- end of right content-->
-                     
-                    
-     <div class="sidebar" id="sidebar">
-        <h2>鲜花搜索</h2>
-        <form action="./" method="post">
-        <br/>
-        鲜花名：<input type="text" name="pname" value="xxxx" />
-        <br/> <br/>
-         价格￥：<input type="text" name="jiage1" size="6" value="xxxx" />--<input type="text" name="jiage2"  size="6" value="xxxx"/>
-        <br/>
-        <input type="submit" value="搜索" />
-            
-          </form>  
-        <h2>鲜花分类</h2>
-        
             <ul>
-                <li><a href="./?tuijian=1">热门推荐</a></li>
-                <li><a href="./?fenleiid=xxxx">xxxx</a></li>
-            </ul> 
-            
-        <h2>销量排行榜</h2>
-        <ul>
-            <li><a href="indexServlet/productupdate?id=xxxx">xxxx</a></li>
-        </ul>   
-             
-        <h2>花店公告</h2> 
-       <ul>
-            <li><a href="indexServlet/gonggaoupdate?id=xxxx" >xxxx</a></li>
-        </ul>      
-        
-        </div>       
-           
-    
-    
-    <div class="clear"></div>
-    </div> 
+                <li><a href=".">主页</a></li>
+                <li><a href="register.html">用户注册</a></li>
+                <li><a href="login.html">用户登录</a></li>
+                <li><a href="indexServlet/gouwuchelist.html">我的购物车</a></li>
+                <li><a href="indexServlet/orderlist.html">我的订单</a></li>
+                <li><a href="indexServlet/userupdate.html">个人信息</a></li>
+                <li><a href="indexServlet/loginout.html">用户退出</a></li>
+            </ul>
+        </div>
+        <div class="submenu">
+        </div>
+        <div class="center_content">
+            <div id="right_wrap">
+                <div id="right_content">
+                    <h2>我的购物车</h2>
+                    <table id="rounded-corner">
+                        <thead>
+                            <tr>
+                                <th align="left">商品名</th>
+                                <th align="left">单价</th>
+                                <th align="left">购买数量</th>
+                                <th align="left">小计</th>
+                                <th align="left">操作</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td colspan="12">
+                                    <span style="font-size: 30px;">
+                                        总计：￥${zongjia }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input class="form_submit" type="button" value="结算，生成订单">
+                                    </span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr class="odd">
 
-</div>
+                                <td>
+                                    ${bean.pname }&nbsp;
+                                </td>
+                                <td>
+                                    ￥${bean.jiage }&nbsp;
+                                </td>
+                                <td>
+                                    <input type="text" name="number" value="${bean.shuliang }" id="${bean.id }_num"
+                                        size="5" />&nbsp;
+                                    <a href="javascript:;" onclick="">变更</a> &nbsp;
+                                </td>
+                                <td>
+                                    ￥${bean.jiage *bean.shuliang }&nbsp;
+                                </td>
+                                <td>
+                                    <a href="indexServlet/gouwuchedelete?id=${bean.id }"
+                                        onclick=" return confirm('确定要删除吗?'); ">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end of right content-->
+            <div class="sidebar" id="sidebar">
+                <h2>鲜花搜索</h2>
+                <form action="./" method="post">
+                    <br />
+                    鲜花名：<input type="text" name="pname" value="xxxx" />
+                    <br /> <br />
+                    价格￥：<input type="text" name="jiage1" size="6" value="xxxx" />--<input type="text" name="jiage2"
+                        size="6" value="xxxx" />
+                    <br />
+                    <input type="submit" value="搜索" />
+                </form>
+                <h2>鲜花分类</h2>
+                <ul>
+                    <li><a href="./?tuijian=1">热门推荐</a></li>
+                    <li><a href="./?fenleiid=xxxx">xxxx</a></li>
+                </ul>
+                <h2>销量排行榜</h2>
+                <ul>
+                    <li><a href="indexServlet/productupdate?id=xxxx">xxxx</a></li>
+                </ul>
+                <h2>花店公告</h2>
+                <ul>
+                    <li><a href="indexServlet/gonggaoupdate?id=xxxx">xxxx</a></li>
+                </ul>
+            </div>
 
-    	
+            <div class="clear"></div>
+        </div>
+    </div>
 </body>
+
 </html>
