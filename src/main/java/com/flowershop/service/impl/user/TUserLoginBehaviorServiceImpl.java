@@ -50,7 +50,7 @@ public class TUserLoginBehaviorServiceImpl extends ServiceImpl<TUserLoginBehavio
         helper.setTo("lchenjianwenh@163.com");
         helper.setSubject("Hello");
 //      读文件
-        ClassPathResource resource = new ClassPathResource("static/user/index.html");
+        ClassPathResource resource = new ClassPathResource("static/user/index/index.html");
         InputStream inputStream = resource.getInputStream();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

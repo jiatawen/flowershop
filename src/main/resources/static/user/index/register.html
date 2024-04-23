@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网上花店</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" type="text/css" href="../rely/css/style.css" />
+    <link rel="stylesheet" href="../rely/css/user.css">
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.tabify.js"></script>
-    <script src="js/register.js"></script>
+    <script src="../rely/js/jquery.min.js"></script>
+    <script src="../rely/js/jquery.tabify.js"></script>
+    <script src="../rely/js/register.js"></script>
+    <script src="../rely/js/logout.js"></script>
     <style>
         #right_content {
             margin-left: 150px;
@@ -24,7 +25,7 @@
     <div id="panelwrap">
         <div class="header">
             <div class="title">
-                <a href="./">
+                <a href="index.html">
                     <span style="font-weight: bold;">网上花店</span>
                 </a>
             </div>
@@ -32,8 +33,8 @@
             <div class="header_right">
                 <span class="onlogin">
                     欢迎 xxxx,
-                    <a href="passwordupdate.html" class="settings">修改密码</a>
-                    <a href="" class="logout">退出</a>
+                    <a href="../controller/passwordupdate.html" class="settings">修改密码</a>
+                    <a href="javascript:logout();" class="logout">退出</a>
                 </span>
                 <span class="unlogin">
                     <a href="register.html">用户注册</a>
@@ -44,14 +45,16 @@
 
         <div class="submenu">
             <ul>
-                <li><a href="./index.html">主页</a></li>
-                <li><a href="./register.html">用户注册</a></li>
-                <li><a href="./login.html">用户登录</a></li>
+                <li><a href="index.html">主页</a></li>
+                <span class="unlogin">
+                    <li><a href="register.html">用户注册</a></li>
+                    <li><a href="login.html">用户登录</a></li>
+                </span>
                 <span class="onlogin">
                     <li><a href="">我的购物车</a></li>
                     <li><a href="">我的订单</a></li>
-                    <li><a href="">个人信息</a></li>
-                    <li><a href="">用户退出</a></li>
+                    <li><a href="../controller/userupdatelist.html">个人信息</a></li>
+                    <li><a href="javascript:logout();">用户退出</a></li>
                 </span>
             </ul>
         </div>
@@ -106,7 +109,9 @@
             <div class="clear"></div>
         </div>
         <div class="footer">
-            <a href="manage/login.html">管理后台</a>
+            <span class="onlogin">
+                <a href="../controller/userlist.html">管理后台</a>
+            </span>
         </div>
     </div>
 

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网上花店</title>
+    <link rel="stylesheet" type="text/css" href="../rely/css/style.css" />
+    <link rel="stylesheet" href="../rely/css/user.css">
+
+    <script src="../rely/js/jquery.min.js"></script>
+    <script src="../rely/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../rely/js/userupdate.js"></script>
+    <script src="../rely/js/logout.js"></script>
+</head>
+
+<body>
+    <div id="panelwrap">
+        <div class="header">
+            <div class="title">
+                <a href="./index.html">
+                    <span style="font-weight: bold;">网上花店</span>
+                </a>
+            </div>
+            <div class="header_right">
+                <span class="onlogin">
+                    欢迎 xxxx,
+                    <a href="passwordupdate.html" class="settings">修改密码</a>
+                    <a href="javascript:logout();" class="logout">退出</a>
+                </span>
+                <span class="unlogin">
+                    <a href="register.html">用户注册</a>
+                    <a href="login.html">用户登录</a>
+                </span>
+            </div>
+        </div>
+        <div class="submenu">
+            <ul>
+                <li><a href="./index.html">主页</a></li>
+                <span class="unlogin">
+                    <li><a href="register.html">用户注册</a></li>
+                    <li><a href="../index/login.html">用户登录</a></li>
+                </span>
+                <span class="onlogin">
+                    <li><a href="">我的购物车</a></li>
+                    <li><a href="">我的订单</a></li>
+                    <li><a href="./userupdatelist.html">个人信息</a></li>
+                    <li><a href="javascript:logout();">用户退出</a></li>
+                </span>
+            </ul>
+        </div>
+        <div class="center_content">
+            <div id="right_wrap">
+                <div id="right_content">
+                    <h2>
+                        xxxx个人信息
+                    </h2>
+                    <div id="tab1" class="tabcontent">
+                        <form action="" method="post" onsubmit="return checkform()">
+                            <div class="form">
+                                <div class="form_row">
+                                    <label>姓名:</label>
+                                    <input type="text" class="form_input" name="xingming" id="xingmingid" value="" />
+                                </div>
+
+                                <div class="form_row">
+                                    <label>收货地址:</label>
+                                    <input type="text" class="form_input" name="dizhi" id="dizhiid" value="" />
+                                </div>
+
+                                <div class="form_row">
+                                    <label>手机:</label>
+                                    <input type="text" class="form_input" name="dianhua" id="dianhuaid" value="" />
+                                </div>
+
+
+                                <div class="form_row">
+                                    <input type="submit" class="form_submit" value="提交" />
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div><!-- end of right content-->
+
+
+            <div class="sidebar" id="sidebar">
+                <h2>鲜花搜索</h2>
+                <form action=".." method="post">
+                    <br />
+                    鲜花名：<input type="text" name="pname" value="" size="10" />
+                    <br /> <br />
+                    价格￥：<input type="text" name="jiage1" size="1" value="" />
+                    -
+                    <input type="text" name="jiage2" size="1" value="" />
+                    <input type="submit" value="搜索" />
+
+                </form>
+                <h2>鲜花分类</h2>
+
+                <ul>
+                    <li><a href="">热门推荐</a></li>
+                    <li><a href="">xxxx</a></li>
+                </ul>
+
+                <h2>销量排行榜</h2>
+                <ul>
+                    <li><a href="">xxxx</a></li>
+                </ul>
+
+                <h2>花店公告</h2>
+                <ul>
+                    <li><a href="">xxxx</a></li>
+                </ul>
+
+            </div>
+
+
+
+            <div class="clear"></div>
+        </div> <!--end of center_content-->
+
+        <div class="footer">
+            <span class="onlogin">
+                <a href="./userlist.html">管理后台</a>
+            </span>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+```

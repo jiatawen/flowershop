@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网上花店</title>
+    <link rel="stylesheet" type="text/css" href="../rely/css/style.css" />
+    <link rel="stylesheet" href="../rely/css/user.css">
+    <script src="../rely/js/jquery.min.js"></script>
+    <script src="../rely/js/jquery.tabify.js"></script>
+    <script src="../rely/js/logout.js"></script>
+</head>
+
+<body>
+    <div id="panelwrap">
+        <div class="header">
+            <div class="title">
+                <a href="./index.html">
+                    <span style="font-weight: bold;">网上花店</span>
+                </a>
+            </div>
+
+            <div class="header_right">
+                <span class="onlogin">
+                    欢迎 xxxx,
+                    <a href="../controller/passwordupdate.html" class="settings">修改密码</a>
+                    <a href="javascript:logout()" class="logout">退出</a>
+                </span>
+                <span class="unlogin">
+                    <a href="register.html">用户注册</a>
+                    <a href="login.html">用户登录</a>
+                </span>
+            </div>
+        </div>
+
+        <div class="submenu">
+            <ul>
+                <li><a href="./index.html">主页</a></li>
+                <span class="unlogin">
+                    <li><a href="register.html">用户注册</a></li>
+                    <li><a href="login.html">用户登录</a></li>
+                </span>
+                <span class="onlogin">
+                    <li><a href="">我的购物车</a></li>
+                    <li><a href="">我的订单</a></li>
+                    <li><a href="../controller/userupdatelist.html">个人信息</a></li>
+                    <li><a href="javascript:logout()">用户退出</a></li>
+                </span>
+            </ul>
+        </div>
+
+        <div class="center_content" style="padding-bottom: 0px;">
+            <div id="right_wrap">
+                <div id="right_content">
+                    <h2>鲜花列表</h2>
+                    <table id="rounded-corner">
+                        <thead>
+                            <tr>
+                                <th>鲜花名</th>
+                                <th>图片</th>
+                                <th>分类名</th>
+                                <th>鲜花价格</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td colspan="12">xxxx</td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr class="odd">
+                                <td>xxxx</td>
+                                <td>
+                                    <img src="../../images/uploadfile/20170502221745.jpg" width="100" height="100"
+                                         alt="" />
+                                </td>
+                                <td>xxxx</td>
+                                <td>￥xxxx</td>
+                                <td>
+                                    <a href="">查看详情</a> &nbsp;
+
+                                    <a href="" onclick="return confirm('确定要加入购物车吗?'); ">加入购物车</a>
+                                </td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>xxxx</td>
+                                <td>
+                                    <img src="../../images/uploadfile/20170502221745.jpg" width="100" height="100" />
+                                </td>
+                                <td>xxxx</td>
+                                <td>￥xxxx</td>
+                                <td>
+                                    <a href="">查看详情</a> &nbsp;
+
+                                    <a href="" onclick="return confirm('确定要加入购物车吗?'); ">加入购物车</a>
+                                </td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>xxxx</td>
+                                <td>
+                                    <img src="../../images/uploadfile/20170502223117.jpg" width="100" height="100" />
+                                </td>
+                                <td>xxxx</td>
+                                <td>￥xxxx</td>
+                                <td>
+                                    <a href="">查看详情</a> &nbsp;
+
+                                    <a href="" onclick="return confirm('确定要加入购物车吗?'); ">加入购物车</a>
+                                </td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>xxxx</td>
+                                <td>
+                                    <img src="../../images/uploadfile/20170502223117.jpg" width="100" height="100" />
+                                </td>
+                                <td>xxxx</td>
+                                <td>￥xxxx</td>
+                                <td>
+                                    <a href="">查看详情</a> &nbsp;
+
+                                    <a href="" onclick="return confirm('确定要加入购物车吗?'); ">加入购物车</a>
+                                </td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>xxxx</td>
+                                <td>
+                                    <img src="../../images/uploadfile/20170502223117.jpg" width="100" height="100" />
+                                </td>
+                                <td>xxxx</td>
+                                <td>￥xxxx</td>
+                                <td>
+                                    <a href="">查看详情</a> &nbsp;
+
+                                    <a href="" onclick="return confirm('确定要加入购物车吗?'); ">加入购物车</a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <h2>鲜花搜索</h2>
+                <form action=".." method="post">
+                    <br />
+                    鲜花名：<input type="text" name="pname" value="" size="10" />
+                    <br /> <br />
+                    价格￥：<input type="text" name="jiage1" size="1" value="" />
+                    -
+                    <input type="text" name="jiage2" size="1" value="" />
+                    <input type="submit" value="搜索" />
+
+                </form>
+                <h2>鲜花分类</h2>
+
+                <ul>
+                    <li><a href="">热门推荐</a></li>
+                    <li><a href="">xxxx</a></li>
+                </ul>
+
+                <h2>销量排行榜</h2>
+                <ul>
+                    <li><a href="">xxxx</a></li>
+                </ul>
+
+                <h2>花店公告</h2>
+                <ul>
+                    <li><a href="">xxxx</a></li>
+                </ul>
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+        <div class="footer">
+            <span class="onlogin">
+                <a href="../controller/userlist.html">管理后台</a>
+            </span>
+        </div>
+    </div>
+
+</body>
+
+</html>
