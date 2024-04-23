@@ -6,12 +6,11 @@ import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.flowershop.entity.user.TUser;
+import com.flowershop.service.user.EmailService;
 import com.flowershop.service.user.TUserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,6 +28,9 @@ public class TUserController extends ApiController {
      */
     @Resource
     private TUserService tUserService;
+
+    @Resource
+    private EmailService emailService;
 
     /**
      * 分页查询所有数据
@@ -86,6 +88,13 @@ public class TUserController extends ApiController {
         return success(this.tUserService.removeByIds(idList));
     }
 
-
+    @PostMapping("/register")
+    public Integer register(@RequestParam String code){
+        if (emailService.register(code)){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 }
 

@@ -15,7 +15,6 @@ import javax.mail.MessagingException;
 public interface TUserLoginBehaviorService extends IService<TUserLoginBehavior> {
 //    登录实现
     public TUser login(String uEmail, String uPassword);
-//    发送邮件
-    public void sendEmail(String email) throws MessagingException, Exception;
+
 }
 
