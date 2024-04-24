@@ -60,3 +60,8 @@ a:hover {
 .main_right {
     width: 50%;
 }
+
+#wrong {
+    display: none;
+    color: red;
+}

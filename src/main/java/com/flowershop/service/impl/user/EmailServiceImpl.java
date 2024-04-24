@@ -41,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
        helper.setSubject("欢迎访问鲜花店");
 
         String code = RandomUtil.randomNumbers(6);
-        saveCode(code);
+        saveCode(code,email);
         String content = "<!DOCTYPE html>\n" +
                 "<html xmlns:th=\"http://www.thymeleaf.org\">\n" +
                 "<head>\n" +
@@ -112,35 +112,37 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public boolean register(String code) {
+    public boolean register(String code,String email) {
         System.out.println(resultMap);
         if  (resultMap.size()==0){
             return false;
         }
         String request = resultMap.get("code").toString();
         String tamp = resultMap.get("tamp").toString();
+        String checkEmail = resultMap.get("email").toString();
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
         Calendar c = Calendar.getInstance();
         String currentTime = sf.format(c.getTime());
         System.out.println(request);
         System.out.println(tamp);
+        System.out.println(email);
         if (tamp.compareTo(currentTime)>0){
-            if(code.equalsIgnoreCase(request)){
+            if(code.equalsIgnoreCase(request)&&email.equals(checkEmail)){
                 return true;
             }
         }
-
         return false;
     }
 
     //保存验证码和时间
-    private void saveCode(String code){
+    private void saveCode(String code,String email){
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
         Calendar c = Calendar.getInstance();
         c.add(Calendar.MINUTE,5);
         String currentTime = sf.format(c.getTime());
         resultMap.put("code",code);
         resultMap.put("tamp",currentTime);
+        resultMap.put("email",email);
         System.out.println(resultMap);
     }
 }

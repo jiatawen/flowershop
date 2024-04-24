@@ -1,11 +1,10 @@
-
-var $ = jQuery.noConflict();
 function checkform() {
+    event.preventDefault();
     var flag = true;
     var txt = "";
 
-    if($("#username").val() == "") {
-        txt += "用户名不能为空！\n";
+    if($("#email").val() == "") {
+        txt += "邮箱不能为空！\n";
         flag = false;
     }
 
@@ -18,6 +17,19 @@ function checkform() {
         alert(txt);
         return false;
     } else {
-        return true;
+        update();
     }
+}
+
+function update(){
+    $.ajax({
+        url: "../../tUserLoginBehavior/login",
+        type: "POST",
+        data: $("#formid").serialize(),
+        success: function (data) {
+            if (data == 0) {
+                $("#wrong").css("display", "block");
+            } 
+        }
+    });
 }

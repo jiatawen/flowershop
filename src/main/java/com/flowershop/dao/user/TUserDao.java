@@ -1,11 +1,11 @@
 package com.flowershop.dao.user;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.flowershop.entity.user.TUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.flowershop.entity.user.TUser;
+
+import java.util.List;
 
 /**
  * 用户表;(TUser)表数据库访问层
@@ -33,6 +33,19 @@ public interface TUserDao extends BaseMapper<TUser> {
      */
     int insertOrUpdateBatch(@Param("entities") List<TUser> entities);
 
+    /**
+     * 通过email查找数据
+     * @param email String 邮件地址
+     * @return 实例对象
+     */
+    TUser selectByEmail(@Param("email") String email);
 
+    /**
+     * 插入数据
+     *
+     * @param user TUser 实例对象列表
+     * @return 影响行数
+     */
+    int insertUser(@Param("user") TUser user);
 }
 

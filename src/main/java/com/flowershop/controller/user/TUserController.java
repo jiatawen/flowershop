@@ -87,14 +87,5 @@ public class TUserController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserService.removeByIds(idList));
     }
-
-    @PostMapping("/register")
-    public Integer register(@RequestParam String code){
-        if (emailService.register(code)){
-            return 1;
-        }else {
-            return 0;
-        }
-    }
 }
 
