@@ -47,5 +47,7 @@ public interface TUserDao extends BaseMapper<TUser> {
      * @return 影响行数
      */
     int insertUser(@Param("user") TUser user);
+
+    Integer resetPassword(Integer uId, String password);
 }
 
