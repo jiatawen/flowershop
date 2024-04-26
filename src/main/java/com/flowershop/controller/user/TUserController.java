@@ -90,12 +90,18 @@ public class TUserController extends ApiController {
 
     /**
      * 通过邮箱查找数据
+     *
      * @param email 邮箱
      * @return 单条数据
      */
     @GetMapping("email")
     public R selectByEmail(@RequestParam("email") String email) {
         return success(this.tUserService.getOne(new QueryWrapper<TUser>().lambda().eq(TUser::getUMail, email)));
+    }
+
+    @PostMapping("resetPassword")
+    public Integer ResetPassword(@RequestParam("code") String code, @RequestParam("password") String password, @RequestParam("email") String email) {
+        return tUserService.ResetPassword(email, code, password);
     }
 }
 

@@ -1,5 +1,6 @@
 $(document).ready(function () { Start(); });
 
+var _user = null;
 function Start() {
     $.ajax({
         url: "/getSession",
@@ -9,9 +10,13 @@ function Start() {
             if (data == null) {
                 offline();
             } else {
+                _user = data;
                 $("#welcome").text("欢迎您，" + data.uname);
                 online();
             }
+        },
+        error: function () {
+            offline();
         }
     })
 }
