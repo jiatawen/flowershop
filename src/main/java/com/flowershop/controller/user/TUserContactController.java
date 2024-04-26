@@ -1,45 +1,40 @@
 package com.flowershop.controller.user;
 
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.api.ApiController;
-import com.baomidou.mybatisplus.extension.api.R;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.flowershop.entity.user.TUserContact;
 import com.flowershop.service.user.TUserContactService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.Serializable;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 收货联系方式表;(TUserContact)表控制层
  *
  * @author makejava
- * @since 2024-04-20 01:43:39
+ * @since 2024-04-26 13:01:52
  */
 @RestController
 @RequestMapping("tUserContact")
-public class TUserContactController extends ApiController {
+public class TUserContactController {
     /**
      * 服务对象
      */
-    @Resource
+    @Autowired
     private TUserContactService tUserContactService;
 
     /**
-     * 分页查询所有数据
+     * 分页查询
      *
-     * @param page         分页对象
-     * @param tUserContact 查询实体
-     * @return 所有数据
+     * @param tUserContact 筛选条件
+     * @param pageRequest  分页对象
+     * @return 查询结果
      */
     @GetMapping
-    public R selectAll(Page<TUserContact> page, TUserContact tUserContact) {
-        return success(this.tUserContactService.page(page, new QueryWrapper<>(tUserContact)));
+    public ResponseEntity<Page<TUserContact>> queryByPage(TUserContact tUserContact, PageRequest pageRequest) {
+        System.out.println("cjw");
+        return ResponseEntity.ok(this.tUserContactService.queryByPage(tUserContact, pageRequest));
     }
 
     /**
@@ -49,43 +44,42 @@ public class TUserContactController extends ApiController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public R selectOne(@PathVariable Serializable id) {
-        return success(this.tUserContactService.getById(id));
+    public ResponseEntity<TUserContact> queryById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(this.tUserContactService.queryById(id));
     }
 
     /**
      * 新增数据
      *
-     * @param tUserContact 实体对象
+     * @param tUserContact 实体
      * @return 新增结果
      */
     @PostMapping
-    public R insert(@RequestBody TUserContact tUserContact) {
-        return success(this.tUserContactService.save(tUserContact));
+    public ResponseEntity<TUserContact> add(TUserContact tUserContact) {
+        return ResponseEntity.ok(this.tUserContactService.insert(tUserContact));
     }
 
     /**
-     * 修改数据
+     * 编辑数据
      *
-     * @param tUserContact 实体对象
-     * @return 修改结果
+     * @param tUserContact 实体
+     * @return 编辑结果
      */
     @PutMapping
-    public R update(@RequestBody TUserContact tUserContact) {
-        return success(this.tUserContactService.updateById(tUserContact));
+    public ResponseEntity<TUserContact> edit(TUserContact tUserContact) {
+        return ResponseEntity.ok(this.tUserContactService.update(tUserContact));
     }
 
     /**
      * 删除数据
      *
-     * @param idList 主键结合
-     * @return 删除结果
+     * @param id 主键
+     * @return 删除是否成功
      */
     @DeleteMapping
-    public R delete(@RequestParam("idList") List<Long> idList) {
-        return success(this.tUserContactService.removeByIds(idList));
+    public ResponseEntity<Boolean> deleteById(Integer id) {
+        return ResponseEntity.ok(this.tUserContactService.deleteById(id));
     }
-
 
 }
 

@@ -13,22 +13,24 @@ import javax.annotation.Resource;
 public class registerServiceImpl implements RegisterService {
 
     @Resource
-    private TUserDao  userDao;
+    private TUserDao userDao;
     @Resource
     private EmailService emailService;
     @Resource
     private GetHexService getHexService;
+
+
     @Override
-    public Integer register(TUser user,String code) {
-        System.out.println(user.getUMail());
-        if (userDao.selectByEmail(user.getUMail())!=null) {
+    public Integer register(TUser user, String code) {
+        if (!emailService.register(code, user.getUMail())) {
             return 1;
-        }
-        if (!emailService.register(code,user.getUMail())) {
-            return 2;
         } else {
-            user.setUPassword(getHexService.getHex(user.getUPassword()));
-            userDao.insertUser(user);
+            try {
+                user.setUPassword(getHexService.getHex(user.getUPassword()));
+                userDao.insertUser(user);
+            } catch (Exception e) {
+                return 1;
+            }
         }
         return 0;
     }

@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网上花店</title>
+    <title>绿意花居</title>
     <link rel="stylesheet" type="text/css" href="../rely/css/style.css" />
     <link rel="stylesheet" href="../rely/css/user.css">
 
     <script src="../rely/js/jquery.min.js"></script>
     <script src="../rely/js/jquery.tabify.js"></script>
-    <script src="../rely/js/register.js"></script>
+    <script src="../rely/js/onlinestatus.js"></script>
     <script src="../rely/js/logout.js"></script>
     <style>
         #right_content {
@@ -26,7 +26,7 @@
         <div class="header">
             <div class="title">
                 <a href="index.html">
-                    <span style="font-weight: bold;">网上花店</span>
+                    <span style="font-weight: bold;">绿意花居</span>
                 </a>
             </div>
 
@@ -68,7 +68,7 @@
                             <div class="form">
                                 <div class="form_row">
                                     <label>用户名:</label>
-                                    <input type="text" class="form_input" name="username" id="username" />
+                                    <input type="text" class="form_input" name="name" id="name" />
                                 </div>
                                 <div class="form_row">
                                     <label>密码:</label>
@@ -78,27 +78,20 @@
                                     <label>确认密码:</label>
                                     <input type="password" class="form_input" name="password2" id="password2" />
                                 </div>
-                                <div class="form_row">
-                                    <label>姓名:</label>
-                                    <input type="text" class="form_input" name="xingming" id="xingming" />
-                                </div>
-                                <div class="form_row">
-                                    <label>收货地址:</label>
-                                    <input type="text" class="form_input" name="dizhi" id="dizhi" />
-                                </div>
+                                
                                 <div class="form_row">
                                     <label>邮箱:</label>
-                                    <input type="text" class="form_input" name="dianhua" id="dianhua" />
+                                    <input type="text" class="form_input" name="email" id="email" />
                                 </div>
                                 <div class="form_row">
                                     <label>验证码：</label>
                                     <div>
-                                        <input type="number" name="yanzhenma" id="yanzhenma">
-                                        <input type="button" value="获取验证码">
+                                        <input type="text" name="code" id="code">
+                                        <input type="button" value="获取验证码" id="codebutton">
                                     </div>
                                 </div>
                                 <div class="form_row">
-                                    <input type="submit" class="form_submit" value="注册" />
+                                    <input type="button" class="form_submit" value="注册" id="sub"/>
                                 </div>
                                 <div class="clear"></div>
                             </div>
@@ -116,5 +109,5 @@
     </div>
 
 </body>
-
 </html>
+<script src="../rely/js/register.js"></script>

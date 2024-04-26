@@ -87,5 +87,15 @@ public class TUserController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserService.removeByIds(idList));
     }
+
+    /**
+     * 通过邮箱查找数据
+     * @param email 邮箱
+     * @return 单条数据
+     */
+    @GetMapping("email")
+    public R selectByEmail(@RequestParam("email") String email) {
+        return success(this.tUserService.getOne(new QueryWrapper<TUser>().lambda().eq(TUser::getUMail, email)));
+    }
 }
 

@@ -21,7 +21,6 @@ public class LoginController {
 
     @GetMapping
     public TUser login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletResponse response, HttpServletRequest request) {
-        System.out.println("controller层login被调用");
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(30 * 60);
         TUser user = loginService.login(email, password);
@@ -29,7 +28,6 @@ public class LoginController {
         try {
             if (user != null) {
                 session.setAttribute("user", user);
-                response.sendRedirect("/user/index/index.html");
             }
         }catch (Exception e) {
             e.printStackTrace();

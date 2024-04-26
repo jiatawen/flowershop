@@ -1,5 +1,14 @@
 $("#logout").click(function() {logout();})
 
 function logout() {
-    alert("请完成登出操作");
+    $.ajax({
+        type: "get",
+        url: "/logout",
+        dataType: "json",
+        success: function (data) {
+            if (data == 0) {
+                window.location.href = "/user/index/index.html";
+            }
+        },
+    });
 }

@@ -8,7 +8,7 @@ spring:
     # 登录账户
     username: lchenjianwenh@qq.com
     # 昵称
-    nickname: 花店老板
+    nickname: 绿意花居
     # 登录密码
     password: dwpjreuegzohdedi
     # 端口

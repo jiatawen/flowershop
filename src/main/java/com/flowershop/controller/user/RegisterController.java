@@ -15,14 +15,11 @@ public class RegisterController {
 
 
     @PostMapping
-    public Integer register(String email, String name, String password, String code) {
+    public Integer register(@RequestParam("name") String name, @RequestParam("password") String password,@RequestParam("email") String email, @RequestParam("code") String code){
         TUser user = new TUser();
-        System.out.println(email);
-        System.out.println("register c层被调用");
         user.setUName(name);
         user.setUPassword(password);
         user.setUMail(email);
-        System.out.println(user.getUMail());
         return registerService.register(user, code);
     }
 }
