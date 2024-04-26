@@ -38,4 +38,4 @@ build/
 .idea
 *.iml
 out
-gen
+gen!/src/main/resources/application.properties
