@@ -150,6 +150,8 @@ $("#codebutton").click(function () {
                             $("#codebutton").val("按钮");
                         }
                     }, 1000);
+
+                    
                     $.ajax({
                         type: "get",
                         url: "/email/code",

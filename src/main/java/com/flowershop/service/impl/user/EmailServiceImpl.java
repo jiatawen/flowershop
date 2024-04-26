@@ -117,19 +117,24 @@ public class EmailServiceImpl implements EmailService {
         if  (resultMap.size()==0){
             return false;
         }
-        String request = resultMap.get("code").toString();
         String tamp = resultMap.get("tamp").toString();
         String checkEmail = resultMap.get("email").toString();
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
         Calendar c = Calendar.getInstance();
         String currentTime = sf.format(c.getTime());
-        System.out.println(request);
-        System.out.println(tamp);
-        System.out.println(email);
         if (tamp.compareTo(currentTime)>0){
-            if(code.equalsIgnoreCase(request)&&email.equals(checkEmail)){
+            if(checkCode(code)&&email.equals(checkEmail)){
                 return true;
             }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkCode(String code) {
+        String request = resultMap.get("code").toString();
+        if (code.equalsIgnoreCase(request)){
+            return true;
         }
         return false;
     }

@@ -37,6 +37,11 @@
         insert into t_user (u_name, u_password, u_mail)
         values (#{user.uName}, #{user.uPassword}, #{user.uMail})
     </insert>
+    <update id="resetPassword">
+        update t_user
+        set u_password = #{password}
+        where u_id = #{uId};
+    </update>
     <select id="selectByEmail" resultType="com.flowershop.entity.user.TUser">
         select * from t_user where u_mail = #{email};
     </select>
