@@ -16,7 +16,7 @@
 
 tbody {
     display: block;
-    height: 400px;
+    height: 460px;
     overflow: auto;
     text-align: center;
 }
@@ -33,7 +33,7 @@ tbody tr {
 }
 
 .center_content {
-    height: 514px;
+    height: 600px;
     padding-bottom: 0px;
 }
 
