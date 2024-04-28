@@ -1,8 +1,8 @@
 $("#sub").click(function () {
-    var id = $("#id").val();
+    var a = $("#id").val();
     $.ajax({
     type: "GET",
-    url: "../tUser/"+id,
+    url: "../tUser/"+a,
     dataType: "json",
     success: function (data) {
        //将data数据中的name添加至id为name的标签中
