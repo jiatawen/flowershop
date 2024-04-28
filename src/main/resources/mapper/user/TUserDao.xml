@@ -34,8 +34,8 @@
         values(u_mail) , u_expect = values(u_expect) , u_creat_time = values(u_creat_time)
     </insert>
     <insert id="insertUser">
-        insert into t_user (u_name, u_password, u_mail)
-        values (#{user.uName}, #{user.uPassword}, #{user.uMail})
+        insert into t_user (u_name, u_password, u_mail,u_status)
+        values (#{user.uName}, #{user.uPassword}, #{user.uMail},#{user.uStatus})
     </insert>
     <update id="resetPassword">
         update t_user
