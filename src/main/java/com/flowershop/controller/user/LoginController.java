@@ -2,6 +2,7 @@ package com.flowershop.controller.user;
 
 import com.flowershop.entity.user.TUser;
 import com.flowershop.service.user.LoginService;
+import com.flowershop.service.user.TUserLoginBehaviorService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,8 @@ public class LoginController {
 
     @Resource
     private LoginService loginService;
+    @Resource
+    private TUserLoginBehaviorService tUserLoginBehaviorService;
 
     @GetMapping
     public TUser login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletResponse response, HttpServletRequest request) {
@@ -27,6 +30,7 @@ public class LoginController {
 
         try {
             if (user != null) {
+                tUserLoginBehaviorService.insert(user,0);
                 session.setAttribute("user", user);
             }
         }catch (Exception e) {

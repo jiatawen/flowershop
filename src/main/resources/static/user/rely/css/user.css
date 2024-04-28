@@ -33,12 +33,12 @@ tbody tr {
 }
 
 .center_content {
-    height: 600px;
+    height: 100%;
     padding-bottom: 0px;
 }
 
 #right_content {
-    height: 414px;
+    height: 100%;
 }
 
 /* a标签鼠标事件 */

@@ -177,6 +177,7 @@ $("#sub").click(function () {
     var password = $("#password").val();
     var email = $("#email").val();
     var code = $("#code").val();
+    var status = $("#status").val();
     $.ajax({
         type: "post",
         url: "/register",
@@ -184,7 +185,8 @@ $("#sub").click(function () {
             name: name,
             password: password,
             email: email,
-            code: code
+            code: code,
+            status: status
         },
         success: function(data) {
            if(data == 1){

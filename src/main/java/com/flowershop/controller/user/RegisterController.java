@@ -15,11 +15,12 @@ public class RegisterController {
 
 
     @PostMapping
-    public Integer register(@RequestParam("name") String name, @RequestParam("password") String password,@RequestParam("email") String email, @RequestParam("code") String code){
+    public Integer register(@RequestParam("name") String name, @RequestParam("password") String password,@RequestParam("email") String email, @RequestParam("code") String code,@RequestParam("status") String status){
         TUser user = new TUser();
         user.setUName(name);
         user.setUPassword(password);
         user.setUMail(email);
+        user.setUStatus(status);
         return registerService.register(user, code);
     }
 }
