@@ -8,11 +8,7 @@ class FlowershopApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println("hello world");
-		System.out.println("hello world");
 
-
-		int a  = 1;
 	}
 
 }
