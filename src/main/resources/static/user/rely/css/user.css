@@ -57,3 +57,126 @@ a:hover {
     display: none;
     color: red;
 }
+
+/* chat聊天 */
+.chat-box {
+    width: 400px;
+    height: 500px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: none;
+    z-index: 9999;
+    /* 设置 z-index 以确保置顶显示 */
+    overflow-y: auto;
+    /* 添加垂直滚动条 */
+}
+
+.chat-box.active {
+    display: block;
+}
+
+
+.chat-button {
+    position: fixed;
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 9999;
+    transition: left 0.3s ease;
+    /* 添加过渡效果 */
+}
+
+.chat-button:hover {
+    left: 5px;
+    /* 鼠标悬停时按钮向右移出 */
+}
+
+.chat-box {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 400px;
+    height: 500px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: none;
+}
+
+.chat-header {
+    background-color: #007bff;
+    color: #fff;
+    height: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.close-button {
+    cursor: pointer;
+}
+
+.chat-content {
+    padding: 10px;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+}
+
+.chat-footer {
+    display: flex;
+    align-items: center;
+    padding: 1px;
+    border-top: 1px solid #ccc;
+}
+
+.chat-footer input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chat-footer button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.message {
+    max-width: 80%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    clear: both;
+    overflow-wrap: break-word;
+}
+
+.sent {
+    background-color: #007bff;
+    color: #fff;
+    float: right;
+    border-top-right-radius: 0;
+}
+
+.received {
+    background-color: #f0f0f0;
+    color: #333;
+    float: left;
+    border-top-left-radius: 0;
+}
+.sender{
+    font-size: 20px;
+}

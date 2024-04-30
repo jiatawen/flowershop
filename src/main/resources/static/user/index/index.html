@@ -16,6 +16,27 @@
 </head>
 
 <body>
+    <span class="onlogin">
+        <div class="chat-button" onclick="toggleChat()">Chat</div>
+
+        <div id="chat-box" class="chat-box">
+            <div class="chat-header">
+                <span class="close-button" onclick="toggleChat()">×</span>
+            </div>
+            <div class="chat-content" id="chat-content">
+                <!-- Chat content goes here -->
+                <div class="message received">
+                    <span class="sender">你好欢迎使用绿意花居，请问有什么可以帮您?</span>
+                </div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </span>
+
+
     <div id="panelwrap">
         <div class="header">
             <div class="title">
@@ -184,5 +205,6 @@
     </div>
 
 </body>
+<script src="../rely/js/chat.js"></script>
 
 </html>

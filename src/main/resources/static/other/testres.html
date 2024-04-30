@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../user/rely/js/jquery.min.js"></script>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+    var data = {
+        "id": "chatcmpl-5smYWW8bcCWEPL4AHoG0MnvE4kwkn",
+        "object": "chat.completion",
+        "created": 1714467032,
+        "model": "gpt-3.5-turbo",
+        "choices": [
+            {
+                "index": 0,
+                "message": {
+                    "role": "assistant",
+                    "content": "你好！有什么可以帮到你的吗？"
+                },
+                "logprobs": null,
+                "finish_reason": "stop"
+            }
+        ],
+        "usage": {
+            "prompt_tokens": 3,
+            "completion_tokens": 16,
+            "total_tokens": 19
+        },
+        "system_fingerprint": null
+    };
+
+    alert(data.choices[0].message.content);
+</script>
