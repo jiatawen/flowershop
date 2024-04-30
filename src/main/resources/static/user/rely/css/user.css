@@ -82,8 +82,8 @@ a:hover {
     left: -50px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #007bff;
-    color: #fff;
+    background-color: #bad7e6;
+    color: #22425e;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -110,8 +110,8 @@ a:hover {
 }
 
 .chat-header {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #bad7e6;
+    color: #22425e;
     height: 25px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -147,8 +147,8 @@ a:hover {
 
 .chat-footer button {
     padding: 8px 15px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #bad7e6;
+    color: #22425e;
     border: none;
     border-radius: 5px;
     margin-left: 10px;
@@ -165,8 +165,8 @@ a:hover {
 }
 
 .sent {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #bad7e6;
+    color: #22425e;
     float: right;
     border-top-right-radius: 0;
 }
@@ -177,6 +177,7 @@ a:hover {
     float: left;
     border-top-left-radius: 0;
 }
-.sender{
+
+.sender {
     font-size: 20px;
 }

@@ -103,5 +103,10 @@ public class TUserController extends ApiController {
     public Integer ResetPassword(@RequestParam("code") String code, @RequestParam("password") String password, @RequestParam("email") String email) {
         return tUserService.ResetPassword(email, code, password);
     }
+
+    @PostMapping("setStatus")
+    public Integer setStatus(@RequestParam("status") String status, @RequestParam("id") String id) {
+        return tUserService.setStatus(status, id);
+    }
 }
 

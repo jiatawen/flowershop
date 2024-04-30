@@ -37,5 +37,10 @@ public class TUserServiceImpl extends ServiceImpl<TUserDao, TUser> implements TU
         }
         return -1;
     }
+
+    @Override
+    public Integer setStatus(String status, String id) {
+        return tUserDao.setStatus(status, id);
+    }
 }
 

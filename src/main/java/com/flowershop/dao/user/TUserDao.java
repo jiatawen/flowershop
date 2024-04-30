@@ -49,5 +49,7 @@ public interface TUserDao extends BaseMapper<TUser> {
     int insertUser(@Param("user") TUser user);
 
     Integer resetPassword(Integer uId, String password);
+
+    Integer setStatus(String status, String id);
 }
 

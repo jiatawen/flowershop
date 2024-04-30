@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网上花店管理后台</title>
+    <title>绿意花居后台</title>
     <link rel="stylesheet" type="text/css" href="../rely/css/style.css" />
     <link rel="stylesheet" href="../rely/css/user.css">
 
@@ -50,15 +50,15 @@
                     <table id="rounded-corner">
                         <thead>
                             <tr>
-                                <th style="width: 30px;">管理</th>
+                                <th>用户id</th>
+                                <th>状态</th>
                                 <th>用户名</th>
-                                <th>姓名</th>
-                                <th>手机</th>
-                                <th>地址</th>
+                                <th>邮件地址</th>
+                                <th>创建时间</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <tr class="odd">
                                 <td style="width: 30px;">
                                     <input type="radio" name="status" id="">
@@ -77,8 +77,6 @@
                                 </td>
                                 <td>
                                     <a href="./message.html">查看用户</a>
-                                    <a href="">重置密码</a>
-                                    <br>
                                     <a href="">删除用户</a>
                                 </td>
                             </tr>
@@ -100,5 +98,5 @@
         </div>
     </div>
 </body>
-
+<script src="../rely/js/userlist.js"></script>
 </html>

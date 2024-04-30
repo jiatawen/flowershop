@@ -44,6 +44,15 @@ function sendMessage() {
                 chatContent.append(message)
                 chatContent.scrollTop(chatContent.prop("scrollHeight")); // 滚动到底部
             },
+            error: function () {
+                $("#send-button").html("Send");
+                // 请求完成后解除发送按钮的禁用状态并恢复点击事件
+                sendButton.prop("disabled", false);
+                sendButton.find(".loading-icon").removeClass("active");
+                var message = $('<div class="message received"><span class="sender" style="color:red;">网络连接错误</span></div>');
+                chatContent.append(message)
+                chatContent.scrollTop(chatContent.prop("scrollHeight")); // 滚动到底部
+            }
         });
     }
 

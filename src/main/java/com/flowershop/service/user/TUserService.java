@@ -12,5 +12,7 @@ import com.flowershop.entity.user.TUser;
 public interface TUserService extends IService<TUser> {
 
     Integer ResetPassword(String email, String code, String password);
+
+    Integer setStatus(String status, String id);
 }
 
