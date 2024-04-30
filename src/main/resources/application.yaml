@@ -22,3 +22,4 @@ spring:
       "mail.smtp.auth": true
       "mail.smtp.starttls.enable": true
       "mail.smtp.starttls.required": true
+# 陈成部分

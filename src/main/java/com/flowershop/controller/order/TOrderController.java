@@ -83,5 +83,15 @@ public class TOrderController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tOrderService.removeByIds(idList));
     }
+
+    /**
+     * 根据uId查询数据
+     * @param uId 用户id
+     * @return 多条数据
+     */
+    @GetMapping("uId/{uId}")
+    public R selectByUId(@PathVariable("uId") Long uId) {
+        return success(this.tOrderService.list(new QueryWrapper<TOrder>().eq("u_id", uId)));
+    }
 }
 

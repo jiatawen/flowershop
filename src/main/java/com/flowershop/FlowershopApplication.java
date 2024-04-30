@@ -7,6 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FlowershopApplication {
 
 	public static void main(String[] args) {
+
+		String proxy = "127.0.0.1";
+        int port = 7890;
+        System.setProperty("proxyType", "4");
+        System.setProperty("proxyPort", Integer.toString(port));
+        System.setProperty("proxyHost", proxy);
+        System.setProperty("proxySet", "true");
+
 		SpringApplication.run(FlowershopApplication.class, args);
 	}
 

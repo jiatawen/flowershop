@@ -1,6 +1,7 @@
 package com.flowershop.entity.flower;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class TFlower extends Model<TFlower> {
     //鲜花id
+    @TableId("f_id")
     private Integer fId;
     //鲜花颜色
     private String fColor;

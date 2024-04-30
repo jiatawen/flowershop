@@ -4,27 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="../user/rely/js/jquery.min.js"></script>
 </head>
+<style>
+    #say2{
+        display: none;
+    }
+</style>
 <body>
-    <input type="button" value="按钮" id="but">
+    <span id="say1">你好xxx</span>
+    <br>
+    <input type="text" name="uid" id="uid" value="1002">
+    <input id="aaa" type="button" value="登录">
 </body>
 </html>
-<script src="./js/jquery.min.js"></script>
-<script>
-    // 在按钮被点击后，将内容换为30s后可再次点击，且随时间递减
-    $("#but").click(function(){
-        $(this).val("30s后可再次点击");
-        $(this).attr("disabled","disabled");
-        var time = 30;
-        var timer = setInterval(function(){
-            time--;
-            $("#but").val(time+"s后可再次点击");
-            if(time == 0){
-                clearInterval(timer);
-                $("#but").removeAttr("disabled");
-                $("#but").val("按钮");
-            }
-        },1000);
-    });
-
-</script>
+<script src="./js/test.js"></script>
