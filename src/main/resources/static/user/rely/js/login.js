@@ -74,6 +74,10 @@ $("#sub").click(function () {
             } else {
                 window.location.href = "./index.html";
             }
+        },
+        error: function(message){
+            alert("用户名或密码错误");
+            removeload();
         }
     });
 });

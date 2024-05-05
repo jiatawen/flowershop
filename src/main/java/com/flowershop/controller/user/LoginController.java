@@ -36,11 +36,14 @@ public class LoginController {
             if (user != null) {
                 tUserLoginBehaviorService.insert(user, 0);
                 session.setAttribute("user", user);
+            }else {
+                //向浏览器抛出404异常
+                response.sendError(404);
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return user;
-
     }
 }

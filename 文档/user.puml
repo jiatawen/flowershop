@@ -12,7 +12,11 @@ package "Service Implementation Layer" {
 }
 
 package "DAO Layer" {
-    interface UserDao
+    interface UserDao{
+        +int u_id
+        +String u_name
+        +char u_status
+    }
 }
 
 package "Entity Layer" {

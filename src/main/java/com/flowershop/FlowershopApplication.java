@@ -9,7 +9,7 @@ public class FlowershopApplication {
 	public static void main(String[] args) {
 
 		String proxy = "127.0.0.1";
-        int port = 7890;
+        int port = 7897;
         System.setProperty("proxyType", "4");
         System.setProperty("proxyPort", Integer.toString(port));
         System.setProperty("proxyHost", proxy);

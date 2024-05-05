@@ -19,6 +19,9 @@ function Start() {
                 }
                 $("#welcome").html(text);
                 online(data);
+
+                // 其他js文件中的函数
+                userupdatelist();
             }
         },
         error: function () {

@@ -10,9 +10,9 @@
 
     <script src="../rely/js/jquery.min.js"></script>
     <script src="../rely/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../rely/js/userupdate.js"></script>
     <script src="../rely/js/logout.js"></script>
     <script src="../rely/js/onlinestatus.js"></script>
+    <script src="../rely/js/userupdatelist.js"></script>
 </head>
 
 <body>
@@ -54,7 +54,7 @@
             <div id="right_wrap">
                 <div id="right_content">
                     <h2>
-                        xxxx个人信息
+                        <span id="titlename">xxxx</span>个人信息
                     </h2>
                     <table id="rounded-corner">
                         <thead>
@@ -66,7 +66,7 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <tr class="odd">
                                 <td style="width: 30px;">
                                     <input type="radio" name="default" id="" checked="checked">
@@ -138,4 +138,3 @@
 </body>
 
 </html>
-```
