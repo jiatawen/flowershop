@@ -4,7 +4,7 @@ $(document).ready(function () {
     $("#sub").css("background-color", "gray");
 });
 
-let arr = [0,0];
+let arr = [0, 0];
 function checkEmail() {
     var email = $("#email").val();
     //验证邮箱格式是否正确
@@ -57,6 +57,7 @@ $("#password").blur(function () { checkPassword() });
 $("#email").blur(function () { checkEmail() });
 
 $("#sub").click(function () {
+    onloading();
     var email = $("#email").val();
     var password = $("#password").val();
     $.ajax({
@@ -64,14 +65,24 @@ $("#sub").click(function () {
         url: "/login",
         data: {
             email: email,
-            password:password
+            password: password
         },
         success: function (data) {
-            if(data == null){
+            removeload();
+            if (data == null) {
                 alert("用户名或密码错误");
-            }else{
+            } else {
                 window.location.href = "./index.html";
             }
         }
     });
 });
+
+function onloading() {
+    $("#overlay").show(); // 显示遮罩层
+    $("#loading-text").show(); // 显示加载文本
+}
+function removeload() {
+    $("#overlay").hide();
+    $("#loading-text").hide(); // 隐藏加载文本
+}

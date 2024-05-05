@@ -34,11 +34,10 @@ public class LoginController {
 
         try {
             if (user != null) {
-                tUserLoginBehaviorService.insert(user,0);
+                tUserLoginBehaviorService.insert(user, 0);
                 session.setAttribute("user", user);
-                System.out.println(chatService.sendChatCompletionRequest("现在开始情景模拟，你是一个名为《绿意花居》的线上花店的小助手，现在有这个用户登录了该系统" + user + "接下来他会问你一些问题，请你为其答疑解惑"));
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return user;

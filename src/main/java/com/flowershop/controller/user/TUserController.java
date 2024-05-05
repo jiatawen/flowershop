@@ -99,10 +99,25 @@ public class TUserController extends ApiController {
         return success(this.tUserService.getOne(new QueryWrapper<TUser>().lambda().eq(TUser::getUMail, email)));
     }
 
+    /**
+     * 重置密码
+     *
+     * @param code     邮箱验证码
+     * @param password 新密码
+     * @param email    邮箱
+     * @return 修改结果
+     */
     @PostMapping("resetPassword")
     public Integer ResetPassword(@RequestParam("code") String code, @RequestParam("password") String password, @RequestParam("email") String email) {
         return tUserService.ResetPassword(email, code, password);
     }
+
+    /**
+     * 修改用户权限
+     * @param status 修改状态
+     * @param id 主键
+     * @return 修改结果
+     */
 
     @PostMapping("setStatus")
     public Integer setStatus(@RequestParam("status") String status, @RequestParam("id") String id) {
