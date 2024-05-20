@@ -35,7 +35,7 @@ drop table if exists t_flower_classify;
 create table t_flower_classify(
     `id` int not null auto_increment comment '表id',
     `f_id` INT NOT NULL  COMMENT '鲜花id' ,
-    `c_id` INT AUTO_INCREMENT COMMENT '公告id' ,
+    `c_id` INT not null COMMENT '公告id' ,
     primary key (id),
     foreign key (f_id) references t_flower (f_id),
     foreign key (c_id) references t_classify (c_id)

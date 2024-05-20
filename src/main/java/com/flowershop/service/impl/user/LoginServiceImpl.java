@@ -22,7 +22,9 @@ public class LoginServiceImpl implements LoginService {
         System.out.println("service层login被调用");
         System.out.println("账户:"+email+"密码:"+password);
 //        TUser tUser = tUserDao.selectByEmail(email);
-        TUser tUser = null;
+        TUser tUser = new TUser();
+        tUser.setUMail(email);
+
         System.out.println(tUser);
         if (tUser == null) {
             return null;
