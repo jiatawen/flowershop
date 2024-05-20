@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Box</title>
+    <style>
+        .chat-button {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-box {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            width: 400px;
+            height: 500px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            height: 25px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .close-button {
+            cursor: pointer;
+        }
+
+        .chat-content {
+            padding: 10px;
+            height: calc(100% - 80px);
+            overflow-y: auto;
+        }
+
+        .chat-footer {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        .chat-footer input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .suggestions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .suggestion {
+            cursor: pointer;
+            background-color: #ccc;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .message {
+            max-width: 80%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            clear: both;
+            overflow-wrap: break-word;
+        }
+
+        .sent {
+            background-color: #007bff;
+            color: #fff;
+            float: right;
+            border-top-right-radius: 0;
+        }
+
+        .received {
+            background-color: #f0f0f0;
+            color: #333;
+            float: left;
+            border-top-left-radius: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-button" onclick="toggleChat()">Chat</div>
+    <div id="chat-box" class="chat-box">
+        <div class="chat-header">
+            <span class="close-button" onclick="toggleChat()">×</span>
+        </div>
+        <div class="chat-content">
+            <!-- Chat content goes here -->
+            <div class="message received">
+                <span class="sender">Friend:</span> Hi there!
+            </div>
+            <div class="message sent">
+                <span class="sender">You:</span> Hello! How are you?
+            </div>
+            <div class="message received">
+                <span class="sender">Friend:</span> I'm doing well, thank you! How about you?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <div class="suggestions">
+                <div class="suggestion" onclick="setSuggestion('Great!')">Great!</div>
+                <div class="suggestion" onclick="setSuggestion('I agree!')">I agree!</div>
+                <div class="suggestion" onclick="setSuggestion('That sounds good!')">That sounds good!</div>
+            </div>
+            <input type="text" id="messageInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        function toggleChat() {
+            var chatBox = document.getElementById("chat-box");
+            if (chatBox.style.display === "none" || chatBox.style.display === "") {
+                chatBox.style.display = "block";
+            } else {
+                chatBox.style.display = "none";
+            }
+        }
+
+        function sendMessage() {
+            var input = document.getElementById("messageInput");
+            var message = input.value.trim();
+            if (message !== "") {
+                // Append sent message to chat content
+                var chatContent = document.querySelector(".chat-content");
+                var messageDiv = document.createElement("div");
+                messageDiv.className = "message sent";
+                messageDiv.innerHTML = '<span class="sender">You:</span> ' + message;
+                chatContent.appendChild(messageDiv);
+                // Clear input field
+                input.value = "";
+                // Scroll to bottom
+                chatContent.scrollTop = chatContent.scrollHeight;
+            }
+        }
+
+        function setSuggestion(suggestion) {
+            var input = document.getElementById("messageInput");
+            input.value = suggestion;
+        }
+
+    </script>
+</body>
+
+</html>
