@@ -1,9 +1,9 @@
 package com.flowershop.service.impl.user;
 
+import com.flowershop.controller.user.TUserController;
 import com.flowershop.dao.user.TUserDao;
 import com.flowershop.entity.user.TUser;
 import com.flowershop.service.user.EmailService;
-import com.flowershop.service.user.GetHexService;
 import com.flowershop.service.user.RegisterService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class registerServiceImpl implements RegisterService {
     @Resource
     private EmailService emailService;
     @Resource
-    private GetHexService getHexService;
+    private TUserController userController;
 
 
     @Override
@@ -25,12 +25,7 @@ public class registerServiceImpl implements RegisterService {
         if (!emailService.register(code, user.getUMail())) {
             return 1;
         } else {
-            try {
-                user.setUPassword(getHexService.getHex(user.getUPassword()));
-//                userDao.insertUser(user);
-            } catch (Exception e) {
-                return 1;
-            }
+            userController.insert(user);
         }
         return 0;
     }

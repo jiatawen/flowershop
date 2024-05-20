@@ -11,10 +11,10 @@
 
     <!-- 批量插入 -->
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into flower_shop.t_user_login_behavior(u_id, ulb_type, ulb_time)
+        insert into flower_shop.t_user_login_behavior(u_id, ulb_type)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.uId}, #{entity.ulbType}, #{entity.ulbTime})
+            (#{entity.uId}, #{entity.ulbType})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->

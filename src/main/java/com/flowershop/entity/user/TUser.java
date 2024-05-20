@@ -1,6 +1,7 @@
 package com.flowershop.entity.user;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.sql.Date;
 @SuppressWarnings("serial")
 public class TUser extends Model<TUser> {
     //用户id
+    @TableId("u_id")
     private Integer uId;
     //用户名
     private String uName;

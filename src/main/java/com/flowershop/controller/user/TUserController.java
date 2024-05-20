@@ -41,6 +41,18 @@ public class TUserController extends ApiController {
     }
 
     /**
+     * 通过邮箱查找数据
+     *
+     * @param email 邮箱地址
+     * @return 单条数据
+     */
+    @GetMapping("/email/{email}")
+    public R selectByEmail(@PathVariable String email) {
+        return success(this.tUserService.getOne(new QueryWrapper<TUser>().eq("u_mail", email)));
+    }
+
+
+    /**
      * 通过主键查询单条数据
      *
      * @param id 主键

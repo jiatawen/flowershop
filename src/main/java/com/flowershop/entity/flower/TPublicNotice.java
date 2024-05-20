@@ -1,6 +1,7 @@
 package com.flowershop.entity.flower;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.sql.Date;
 @SuppressWarnings("serial")
 public class TPublicNotice extends Model<TPublicNotice> {
     //公告id
+    @TableId("pn_id")
     private Integer pnId;
     //公告内容
     private String pnContent;

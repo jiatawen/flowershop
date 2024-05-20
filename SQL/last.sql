@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS t_user;
 
 CREATE TABLE t_user
 (
-    u_id         int NOT NULL COMMENT '用户id',
+    u_id         int NOT NULL auto_increment COMMENT '用户id',
     u_name       VARCHAR(255) NOT NULL COMMENT '用户名',
     u_status     CHAR(1)      NOT NULL DEFAULT 1 COMMENT '身份标识;管理员0/普通买家1',
     u_password   VARCHAR(255) NOT NULL COMMENT '用户密码',
