@@ -15,6 +15,7 @@ public class ChatController {
     @PostMapping
     @ResponseBody
     public ResponseEntity<String> chat(@RequestParam("message") String message) {
+
         return chatService.sendChatCompletionRequest(message);
     }
 }

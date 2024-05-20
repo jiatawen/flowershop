@@ -1,0 +1,109 @@
+@startuml
+package "Controller Layer" {
+    class UserController
+}
+
+package "Service Layer" {
+    interface UserService
+}
+
+package "Service Implementation Layer" {
+    class UserServiceImpl
+}
+
+package "DAO Layer" {
+    interface UserDao
+}
+
+package "Entity Layer" {
+    class User {
+        +int u_id
+        +String u_name
+        +char u_status
+        +String u_password
+        +String u_mail
+        +double u_expect
+        +Date u_creat_time
+    }
+    class UserContact {
+        +int id
+        +int u_id
+        +String uc_name
+        +String uc_address
+        +String uc_tel
+        +char uc_status
+    }
+    class UserSettings {
+        +int id
+        +int u_id
+        +int f_id
+        +double us_expect
+    }
+    class UserLoginBehavior {
+        +int id
+        +int u_id
+        +char ulb_type
+        +Date ulb_time
+    }
+    class UserSearchBehavior {
+        +int id
+        +int u_id
+        +Date usb_time
+        +String usb_content
+    }
+    class Flower {
+        +int f_id
+        +String f_color
+        +String f_name
+        +String f_variety
+        +String f_implication
+        +decimal f_price
+        +String f_number
+    }
+    class PublicNotice {
+        +int pn_id
+        +String pn_notice
+        +Timestamp pn_start_time
+        +Timestamp pn_end_time
+    }
+    class Classify {
+        +int c_id
+        +String c_name
+    }
+    class FlowerClassify {
+        +int id
+        +int fc_id
+        +int f_id
+    }
+    class Cart {
+        +int id
+        +int u_id
+        +int f_id
+        +int c_count
+        +char c_status
+    }
+    class Order {
+        +int o_id
+        +int u_id
+        +String o_name
+        +char o_tel
+        +String o_address
+        +String o_notes
+        +Date o_create_time
+        +decimal o_sum_price
+        +char o_status
+    }
+    class OrderDetails {
+        +int id
+        +int o_id
+        +int f_id
+        +int od_count
+    }
+}
+
+UserController --> UserService : uses
+UserService <|.. UserServiceImpl : implements
+UserServiceImpl --> UserDao : uses
+UserDao --> User : operates on
+
+@enduml
