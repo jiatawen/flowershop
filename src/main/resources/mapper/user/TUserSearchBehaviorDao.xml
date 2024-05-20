@@ -6,7 +6,7 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="uId" column="u_id" jdbcType="INTEGER"/>
         <result property="usbTime" column="usb_time" jdbcType="TIMESTAMP"/>
-        <result property="ftId" column="ft_id" jdbcType="VARCHAR"/>
+        <result property="ftId" column="ft_id" jdbcType="INTEGER"/>
         <result property="usbContent" column="usb_content" jdbcType="VARCHAR"/>
     </resultMap>
 

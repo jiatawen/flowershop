@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.flowershop.entity.user.TUser;
-import com.flowershop.service.user.EmailService;
 import com.flowershop.service.user.TUserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ import java.util.List;
  * 用户表;(TUser)表控制层
  *
  * @author makejava
- * @since 2024-04-20 01:43:38
+ * @since 2024-05-20 19:54:58
  */
 @RestController
 @RequestMapping("tUser")
@@ -28,9 +27,6 @@ public class TUserController extends ApiController {
      */
     @Resource
     private TUserService tUserService;
-
-    @Resource
-    private EmailService emailService;
 
     /**
      * 分页查询所有数据
@@ -86,42 +82,6 @@ public class TUserController extends ApiController {
     @DeleteMapping
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserService.removeByIds(idList));
-    }
-
-    /**
-     * 通过邮箱查找数据
-     *
-     * @param email 邮箱
-     * @return 单条数据
-     */
-    @GetMapping("email")
-    public R selectByEmail(@RequestParam("email") String email) {
-        return success(this.tUserService.getOne(new QueryWrapper<TUser>().lambda().eq(TUser::getUMail, email)));
-    }
-
-    /**
-     * 重置密码
-     *
-     * @param code     邮箱验证码
-     * @param password 新密码
-     * @param email    邮箱
-     * @return 修改结果
-     */
-    @PostMapping("resetPassword")
-    public Integer ResetPassword(@RequestParam("code") String code, @RequestParam("password") String password, @RequestParam("email") String email) {
-        return tUserService.ResetPassword(email, code, password);
-    }
-
-    /**
-     * 修改用户权限
-     * @param status 修改状态
-     * @param id 主键
-     * @return 修改结果
-     */
-
-    @PostMapping("setStatus")
-    public Integer setStatus(@RequestParam("status") String status, @RequestParam("id") String id) {
-        return tUserService.setStatus(status, id);
     }
 }
 

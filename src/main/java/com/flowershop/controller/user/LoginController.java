@@ -34,7 +34,7 @@ public class LoginController {
 
         try {
             if (user != null) {
-                tUserLoginBehaviorService.insert(user, 0);
+//                tUserLoginBehaviorService.(user, 0);
                 session.setAttribute("user", user);
             }else {
                 //向浏览器抛出404异常

@@ -1,7 +1,6 @@
 package com.flowershop.dao.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.flowershop.entity.user.TUser;
 import com.flowershop.entity.user.TUserLoginBehavior;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +11,7 @@ import java.util.List;
  * 用户登录行为记录表;(TUserLoginBehavior)表数据库访问层
  *
  * @author makejava
- * @since 2024-04-20 01:43:39
+ * @since 2024-05-20 19:54:59
  */
 @Mapper
 public interface TUserLoginBehaviorDao extends BaseMapper<TUserLoginBehavior> {
@@ -34,6 +33,5 @@ public interface TUserLoginBehaviorDao extends BaseMapper<TUserLoginBehavior> {
      */
     int insertOrUpdateBatch(@Param("entities") List<TUserLoginBehavior> entities);
 
-    void insert(TUser user, int status);
 }
 

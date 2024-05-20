@@ -5,27 +5,27 @@
     <resultMap type="com.flowershop.entity.user.TUserSettings" id="TUserSettingsMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="uId" column="u_id" jdbcType="INTEGER"/>
-        <result property="fId" column="f_id" jdbcType="INTEGER"/>
-        <result property="usExpect" column="us_expect" jdbcType="VARCHAR"/>
+        <result property="cId" column="c_id" jdbcType="INTEGER"/>
+        <result property="usExpect" column="us_expect" jdbcType="NUMERIC"/>
     </resultMap>
 
     <!-- 批量插入 -->
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into flower_shop.t_user_settings(u_id, f_id, us_expect)
+        insert into flower_shop.t_user_settings(u_id, c_id, us_expect)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.uId}, #{entity.fId}, #{entity.usExpect})
+            (#{entity.uId}, #{entity.cId}, #{entity.usExpect})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into flower_shop.t_user_settings(u_id, f_id, us_expect)
+        insert into flower_shop.t_user_settings(u_id, c_id, us_expect)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.uId}, #{entity.fId}, #{entity.usExpect})
+            (#{entity.uId}, #{entity.cId}, #{entity.usExpect})
         </foreach>
         on duplicate key update
-        u_id = values(u_id) , f_id = values(f_id) , us_expect = values(us_expect)
+        u_id = values(u_id) , c_id = values(c_id) , us_expect = values(us_expect)
     </insert>
 
 </mapper>

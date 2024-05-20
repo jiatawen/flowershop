@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 购物车;(TCart)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:35
+ * @since 2024-05-20 19:31:41
  */
 @SuppressWarnings("serial")
 public class TCart extends Model<TCart> {

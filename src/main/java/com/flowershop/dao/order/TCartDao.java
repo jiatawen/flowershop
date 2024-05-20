@@ -1,17 +1,17 @@
 package com.flowershop.dao.order;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.flowershop.entity.order.TCart;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.flowershop.entity.order.TCart;
+
+import java.util.List;
 
 /**
  * 购物车;(TCart)表数据库访问层
  *
  * @author makejava
- * @since 2024-04-20 01:43:35
+ * @since 2024-05-20 19:31:41
  */
 @Mapper
 public interface TCartDao extends BaseMapper<TCart> {

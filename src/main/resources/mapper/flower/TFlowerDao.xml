@@ -4,28 +4,34 @@
 
     <resultMap type="com.flowershop.entity.flower.TFlower" id="TFlowerMap">
         <result property="fId" column="f_id" jdbcType="INTEGER"/>
+        <result property="fName" column="f_name" jdbcType="VARCHAR"/>
+        <result property="fImplication" column="f_implication" jdbcType="VARCHAR"/>
         <result property="fColor" column="f_color" jdbcType="VARCHAR"/>
+        <result property="fImg" column="f_img" jdbcType="VARCHAR"/>
         <result property="fPrice" column="f_price" jdbcType="VARCHAR"/>
         <result property="fNumber" column="f_number" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!-- 批量插入 -->
     <insert id="insertBatch" keyProperty="fId" useGeneratedKeys="true">
-        insert into flower_shop.t_flower(f_color, f_price, f_number)
+        insert into flower_shop.t_flower(f_name, f_implication, f_color, f_img, f_price, f_number)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.fColor}, #{entity.fPrice}, #{entity.fNumber})
+            (#{entity.fName}, #{entity.fImplication}, #{entity.fColor}, #{entity.fImg}, #{entity.fPrice},
+            #{entity.fNumber})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
     <insert id="insertOrUpdateBatch" keyProperty="fId" useGeneratedKeys="true">
-        insert into flower_shop.t_flower(f_color, f_price, f_number)
+        insert into flower_shop.t_flower(f_name, f_implication, f_color, f_img, f_price, f_number)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.fColor}, #{entity.fPrice}, #{entity.fNumber})
+            (#{entity.fName}, #{entity.fImplication}, #{entity.fColor}, #{entity.fImg}, #{entity.fPrice},
+            #{entity.fNumber})
         </foreach>
         on duplicate key update
-        f_color = values(f_color) , f_price = values(f_price) , f_number = values(f_number)
+        f_name = values(f_name) , f_implication = values(f_implication) , f_color = values(f_color) , f_img =
+        values(f_img) , f_price = values(f_price) , f_number = values(f_number)
     </insert>
 
 </mapper>

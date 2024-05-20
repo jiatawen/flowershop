@@ -1,17 +1,17 @@
 package com.flowershop.dao.flower;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.flowershop.entity.flower.TFlower;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.flowershop.entity.flower.TFlower;
+
+import java.util.List;
 
 /**
  * 鲜花;(TFlower)表数据库访问层
  *
  * @author makejava
- * @since 2024-04-20 01:43:35
+ * @since 2024-05-20 19:31:43
  */
 @Mapper
 public interface TFlowerDao extends BaseMapper<TFlower> {

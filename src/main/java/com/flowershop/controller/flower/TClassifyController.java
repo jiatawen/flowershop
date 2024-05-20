@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.flowershop.entity.flower.TFlower;
-import com.flowershop.service.flower.TFlowerService;
+import com.flowershop.entity.flower.TClassify;
+import com.flowershop.service.flower.TClassifyService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,30 +14,30 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 鲜花;(TFlower)表控制层
+ * 鲜花分类(TClassify)表控制层
  *
  * @author makejava
- * @since 2024-05-20 19:31:43
+ * @since 2024-05-20 19:31:42
  */
 @RestController
-@RequestMapping("tFlower")
-public class TFlowerController extends ApiController {
+@RequestMapping("tClassify")
+public class TClassifyController extends ApiController {
     /**
      * 服务对象
      */
     @Resource
-    private TFlowerService tFlowerService;
+    private TClassifyService tClassifyService;
 
     /**
      * 分页查询所有数据
      *
-     * @param page    分页对象
-     * @param tFlower 查询实体
+     * @param page      分页对象
+     * @param tClassify 查询实体
      * @return 所有数据
      */
     @GetMapping
-    public R selectAll(Page<TFlower> page, TFlower tFlower) {
-        return success(this.tFlowerService.page(page, new QueryWrapper<>(tFlower)));
+    public R selectAll(Page<TClassify> page, TClassify tClassify) {
+        return success(this.tClassifyService.page(page, new QueryWrapper<>(tClassify)));
     }
 
     /**
@@ -48,29 +48,29 @@ public class TFlowerController extends ApiController {
      */
     @GetMapping("{id}")
     public R selectOne(@PathVariable Serializable id) {
-        return success(this.tFlowerService.getById(id));
+        return success(this.tClassifyService.getById(id));
     }
 
     /**
      * 新增数据
      *
-     * @param tFlower 实体对象
+     * @param tClassify 实体对象
      * @return 新增结果
      */
     @PostMapping
-    public R insert(@RequestBody TFlower tFlower) {
-        return success(this.tFlowerService.save(tFlower));
+    public R insert(@RequestBody TClassify tClassify) {
+        return success(this.tClassifyService.save(tClassify));
     }
 
     /**
      * 修改数据
      *
-     * @param tFlower 实体对象
+     * @param tClassify 实体对象
      * @return 修改结果
      */
     @PutMapping
-    public R update(@RequestBody TFlower tFlower) {
-        return success(this.tFlowerService.updateById(tFlower));
+    public R update(@RequestBody TClassify tClassify) {
+        return success(this.tClassifyService.updateById(tClassify));
     }
 
     /**
@@ -81,7 +81,7 @@ public class TFlowerController extends ApiController {
      */
     @DeleteMapping
     public R delete(@RequestParam("idList") List<Long> idList) {
-        return success(this.tFlowerService.removeByIds(idList));
+        return success(this.tClassifyService.removeByIds(idList));
     }
 }
 

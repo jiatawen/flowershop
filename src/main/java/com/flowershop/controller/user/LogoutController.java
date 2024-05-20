@@ -19,7 +19,7 @@ public class LogoutController {
     @GetMapping
     public Integer logout(HttpServletRequest request) {
         TUser user = (TUser)request.getSession().getAttribute("user");
-        tUserLoginBehaviorService.insert(user, 1);
+//        tUserLoginBehaviorService.insert(user, 1);
         //清空session
         request.getSession().removeAttribute("user");
 

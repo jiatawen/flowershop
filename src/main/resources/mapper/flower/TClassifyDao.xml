@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flowershop.dao.flower.TClassifyDao">
+
+    <resultMap type="com.flowershop.entity.flower.TClassify" id="TClassifyMap">
+        <result property="cId" column="c_id" jdbcType="INTEGER"/>
+        <result property="cVariety" column="c_variety" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 批量插入 -->
+    <insert id="insertBatch" keyProperty="cId" useGeneratedKeys="true">
+        insert into flower_shop.t_classify(c_variety)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.cVariety})
+        </foreach>
+    </insert>
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="cId" useGeneratedKeys="true">
+        insert into flower_shop.t_classify(c_variety)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.cVariety})
+        </foreach>
+        on duplicate key update
+        c_variety = values(c_variety)
+    </insert>
+
+</mapper>
+

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * 订单详情表;(TOrderDetails)表服务实现类
  *
  * @author makejava
- * @since 2024-04-20 01:43:37
+ * @since 2024-05-20 19:31:46
  */
 @Service("tOrderDetailsService")
 public class TOrderDetailsServiceImpl extends ServiceImpl<TOrderDetailsDao, TOrderDetails> implements TOrderDetailsService {

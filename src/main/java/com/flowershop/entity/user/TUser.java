@@ -1,22 +1,20 @@
 package com.flowershop.entity.user;
 
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.sql.Date;
+
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * 用户表;(TUser)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:38
+ * @since 2024-05-20 19:54:58
  */
 @SuppressWarnings("serial")
 public class TUser extends Model<TUser> {
     //用户id
-    @TableId("u_id")
     private Integer uId;
     //用户名
     private String uName;
@@ -27,7 +25,7 @@ public class TUser extends Model<TUser> {
     //用户邮箱
     private String uMail;
     //用户期望
-    private Object uExpect;
+    private Double uExpect;
     //创建时间
     private Date uCreatTime;
 
@@ -72,11 +70,11 @@ public class TUser extends Model<TUser> {
         this.uMail = uMail;
     }
 
-    public Object getUExpect() {
+    public Double getUExpect() {
         return uExpect;
     }
 
-    public void setUExpect(Object uExpect) {
+    public void setUExpect(Double uExpect) {
         this.uExpect = uExpect;
     }
 

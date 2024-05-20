@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 用户鲜花期望表;(TUserSettings)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:40
+ * @since 2024-05-20 19:55:00
  */
 @SuppressWarnings("serial")
 public class TUserSettings extends Model<TUserSettings> {
@@ -17,10 +17,10 @@ public class TUserSettings extends Model<TUserSettings> {
     private Integer id;
     //用户id
     private Integer uId;
-    //鲜花id
-    private Integer fId;
+    //鲜花分类id
+    private Integer cId;
     //该品种鲜花期望
-    private Object usExpect;
+    private Double usExpect;
 
 
     public Integer getId() {
@@ -39,19 +39,19 @@ public class TUserSettings extends Model<TUserSettings> {
         this.uId = uId;
     }
 
-    public Integer getFId() {
-        return fId;
+    public Integer getCId() {
+        return cId;
     }
 
-    public void setFId(Integer fId) {
-        this.fId = fId;
+    public void setCId(Integer cId) {
+        this.cId = cId;
     }
 
-    public Object getUsExpect() {
+    public Double getUsExpect() {
         return usExpect;
     }
 
-    public void setUsExpect(Object usExpect) {
+    public void setUsExpect(Double usExpect) {
         this.usExpect = usExpect;
     }
 

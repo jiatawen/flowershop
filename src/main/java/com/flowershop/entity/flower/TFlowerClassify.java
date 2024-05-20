@@ -6,31 +6,27 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
 
 /**
- * 鲜花分类(TFlowerClassify)表实体类
+ * 鲜花分类，鲜花连理表(TFlowerClassify)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:36
+ * @since 2024-05-20 19:31:44
  */
 @SuppressWarnings("serial")
 public class TFlowerClassify extends Model<TFlowerClassify> {
     //表id
-    private Integer fcId;
+    private Integer id;
     //鲜花id
     private Integer fId;
-    //鲜花颜色
-    private String fcColor;
-    //鲜花寓意
-    private String fcImplication;
-    //品种
-    private String fcVariety;
+    //公告id
+    private Integer cId;
 
 
-    public Integer getFcId() {
-        return fcId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setFcId(Integer fcId) {
-        this.fcId = fcId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getFId() {
@@ -41,28 +37,12 @@ public class TFlowerClassify extends Model<TFlowerClassify> {
         this.fId = fId;
     }
 
-    public String getFcColor() {
-        return fcColor;
+    public Integer getCId() {
+        return cId;
     }
 
-    public void setFcColor(String fcColor) {
-        this.fcColor = fcColor;
-    }
-
-    public String getFcImplication() {
-        return fcImplication;
-    }
-
-    public void setFcImplication(String fcImplication) {
-        this.fcImplication = fcImplication;
-    }
-
-    public String getFcVariety() {
-        return fcVariety;
-    }
-
-    public void setFcVariety(String fcVariety) {
-        this.fcVariety = fcVariety;
+    public void setCId(Integer cId) {
+        this.cId = cId;
     }
 
     /**
@@ -72,7 +52,7 @@ public class TFlowerClassify extends Model<TFlowerClassify> {
      */
     @Override
     protected Serializable pkVal() {
-        return this.fcId;
+        return this.id;
     }
 }
 

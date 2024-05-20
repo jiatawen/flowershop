@@ -1,17 +1,17 @@
 package com.flowershop.dao.order;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.flowershop.entity.order.TOrder;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.flowershop.entity.order.TOrder;
+
+import java.util.List;
 
 /**
  * 订单表;(TOrder)表数据库访问层
  *
  * @author makejava
- * @since 2024-04-20 01:43:36
+ * @since 2024-05-20 19:31:44
  */
 @Mapper
 public interface TOrderDao extends BaseMapper<TOrder> {

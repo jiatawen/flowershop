@@ -1,17 +1,17 @@
 package com.flowershop.dao.flower;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.flowershop.entity.flower.TFlowerClassify;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.flowershop.entity.flower.TFlowerClassify;
+
+import java.util.List;
 
 /**
- * 鲜花分类(TFlowerClassify)表数据库访问层
+ * 鲜花分类，鲜花连理表(TFlowerClassify)表数据库访问层
  *
  * @author makejava
- * @since 2024-04-20 01:43:36
+ * @since 2024-05-20 19:31:44
  */
 @Mapper
 public interface TFlowerClassifyDao extends BaseMapper<TFlowerClassify> {

@@ -4,28 +4,28 @@
 
     <resultMap type="com.flowershop.entity.flower.TPublicNotice" id="TPublicNoticeMap">
         <result property="pnId" column="pn_id" jdbcType="INTEGER"/>
-        <result property="pnNumber" column="pn_number" jdbcType="INTEGER"/>
-        <result property="pnPrice" column="pn_price" jdbcType="VARCHAR"/>
-        <result property="pnVariety" column="pn_variety" jdbcType="VARCHAR"/>
+        <result property="pnContent" column="pn_content" jdbcType="VARCHAR"/>
+        <result property="pnStartTime" column="pn_start_time" jdbcType="TIMESTAMP"/>
+        <result property="pnEndTime" column="pn_end_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!-- 批量插入 -->
     <insert id="insertBatch" keyProperty="pnId" useGeneratedKeys="true">
-        insert into flower_shop.t_public_notice(pn_number, pn_price, pn_variety)
+        insert into flower_shop.t_public_notice(pn_content, pn_start_time, pn_end_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.pnNumber}, #{entity.pnPrice}, #{entity.pnVariety})
+            (#{entity.pnContent}, #{entity.pnStartTime}, #{entity.pnEndTime})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
     <insert id="insertOrUpdateBatch" keyProperty="pnId" useGeneratedKeys="true">
-        insert into flower_shop.t_public_notice(pn_number, pn_price, pn_variety)
+        insert into flower_shop.t_public_notice(pn_content, pn_start_time, pn_end_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.pnNumber}, #{entity.pnPrice}, #{entity.pnVariety})
+            (#{entity.pnContent}, #{entity.pnStartTime}, #{entity.pnEndTime})
         </foreach>
         on duplicate key update
-        pn_number = values(pn_number) , pn_price = values(pn_price) , pn_variety = values(pn_variety)
+        pn_content = values(pn_content) , pn_start_time = values(pn_start_time) , pn_end_time = values(pn_end_time)
     </insert>
 
 </mapper>

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * 公告(TPublicNotice)表服务实现类
  *
  * @author makejava
- * @since 2024-04-20 01:43:38
+ * @since 2024-05-20 19:31:47
  */
 @Service("tPublicNoticeService")
 public class TPublicNoticeServiceImpl extends ServiceImpl<TPublicNoticeDao, TPublicNotice> implements TPublicNoticeService {

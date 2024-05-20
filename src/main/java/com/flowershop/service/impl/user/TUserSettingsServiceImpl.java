@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * 用户鲜花期望表;(TUserSettings)表服务实现类
  *
  * @author makejava
- * @since 2024-04-20 01:43:41
+ * @since 2024-05-20 19:55:01
  */
 @Service("tUserSettingsService")
 public class TUserSettingsServiceImpl extends ServiceImpl<TUserSettingsDao, TUserSettings> implements TUserSettingsService {

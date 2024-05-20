@@ -17,7 +17,7 @@ import java.util.List;
  * 用户搜索行为记录表;(TUserSearchBehavior)表控制层
  *
  * @author makejava
- * @since 2024-04-20 01:43:40
+ * @since 2024-05-20 19:55:00
  */
 @RestController
 @RequestMapping("tUserSearchBehavior")

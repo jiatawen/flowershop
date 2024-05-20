@@ -17,7 +17,7 @@ import java.util.List;
  * 用户登录行为记录表;(TUserLoginBehavior)表控制层
  *
  * @author makejava
- * @since 2024-04-20 01:43:39
+ * @since 2024-05-20 19:54:59
  */
 @RestController
 @RequestMapping("tUserLoginBehavior")
@@ -83,27 +83,5 @@ public class TUserLoginBehaviorController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserLoginBehaviorService.removeByIds(idList));
     }
-
-    /**
-     * 登录
-     *
-     * @param email password session 账户 密码 登录信息
-     */
-//    @PostMapping("login")
-//    public Integer login(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        HttpSession session = request.getSession();
-//        session.setMaxInactiveInterval(30*60);
-//
-//        TUser user = tUserLoginBehaviorService.login(email, password);
-//        if (user != null){
-//            System.out.println(user);
-//            session.setAttribute("user", user);
-////            页面重定向至首页
-//            response.sendRedirect("/user/index/index.html");
-//            return 1;
-//        }else {
-//            return 0;
-//        }
-//    }
 }
 

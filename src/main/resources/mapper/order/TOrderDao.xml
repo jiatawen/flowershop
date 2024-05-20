@@ -3,7 +3,7 @@
 <mapper namespace="com.flowershop.dao.order.TOrderDao">
 
     <resultMap type="com.flowershop.entity.order.TOrder" id="TOrderMap">
-        <result property="oId" column="o_id" jdbcType="VARCHAR"/>
+        <result property="oId" column="o_id" jdbcType="INTEGER"/>
         <result property="uId" column="u_id" jdbcType="INTEGER"/>
         <result property="oName" column="o_name" jdbcType="VARCHAR"/>
         <result property="oTel" column="o_tel" jdbcType="VARCHAR"/>

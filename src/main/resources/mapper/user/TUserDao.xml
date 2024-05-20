@@ -8,7 +8,7 @@
         <result property="uStatus" column="u_status" jdbcType="VARCHAR"/>
         <result property="uPassword" column="u_password" jdbcType="VARCHAR"/>
         <result property="uMail" column="u_mail" jdbcType="VARCHAR"/>
-        <result property="uExpect" column="u_expect" jdbcType="VARCHAR"/>
+        <result property="uExpect" column="u_expect" jdbcType="NUMERIC"/>
         <result property="uCreatTime" column="u_creat_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -33,23 +33,6 @@
         u_name = values(u_name) , u_status = values(u_status) , u_password = values(u_password) , u_mail =
         values(u_mail) , u_expect = values(u_expect) , u_creat_time = values(u_creat_time)
     </insert>
-    <insert id="insertUser">
-        insert into t_user (u_name, u_password, u_mail,u_status)
-        values (#{user.uName}, #{user.uPassword}, #{user.uMail},#{user.uStatus})
-    </insert>
-    <update id="resetPassword">
-        update t_user
-        set u_password = #{password}
-        where u_id = #{uId};
-    </update>
-    <update id="setStatus">
-        update t_user
-        set u_status = #{status}
-        where u_id = #{id}
-    </update>
-    <select id="selectByEmail" resultType="com.flowershop.entity.user.TUser">
-        select * from t_user where u_mail = #{email};
-    </select>
 
 </mapper>
 

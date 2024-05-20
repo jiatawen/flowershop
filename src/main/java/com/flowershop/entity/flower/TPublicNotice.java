@@ -4,23 +4,24 @@ package com.flowershop.entity.flower;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * 公告(TPublicNotice)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:38
+ * @since 2024-05-20 19:31:46
  */
 @SuppressWarnings("serial")
 public class TPublicNotice extends Model<TPublicNotice> {
-    //鲜花id
+    //公告id
     private Integer pnId;
-    //鲜花数目
-    private Integer pnNumber;
-    //鲜花价格
-    private Object pnPrice;
-    //鲜花品种
-    private String pnVariety;
+    //公告内容
+    private String pnContent;
+    //开始时间
+    private Date pnStartTime;
+    //结束时间
+    private Date pnEndTime;
 
 
     public Integer getPnId() {
@@ -31,28 +32,28 @@ public class TPublicNotice extends Model<TPublicNotice> {
         this.pnId = pnId;
     }
 
-    public Integer getPnNumber() {
-        return pnNumber;
+    public String getPnContent() {
+        return pnContent;
     }
 
-    public void setPnNumber(Integer pnNumber) {
-        this.pnNumber = pnNumber;
+    public void setPnContent(String pnContent) {
+        this.pnContent = pnContent;
     }
 
-    public Object getPnPrice() {
-        return pnPrice;
+    public Date getPnStartTime() {
+        return pnStartTime;
     }
 
-    public void setPnPrice(Object pnPrice) {
-        this.pnPrice = pnPrice;
+    public void setPnStartTime(Date pnStartTime) {
+        this.pnStartTime = pnStartTime;
     }
 
-    public String getPnVariety() {
-        return pnVariety;
+    public Date getPnEndTime() {
+        return pnEndTime;
     }
 
-    public void setPnVariety(String pnVariety) {
-        this.pnVariety = pnVariety;
+    public void setPnEndTime(Date pnEndTime) {
+        this.pnEndTime = pnEndTime;
     }
 
     /**

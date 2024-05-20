@@ -2,14 +2,15 @@ package com.flowershop.entity.user;
 
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.sql.Date;
+
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * 用户搜索行为记录表;(TUserSearchBehavior)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:40
+ * @since 2024-05-20 19:55:00
  */
 @SuppressWarnings("serial")
 public class TUserSearchBehavior extends Model<TUserSearchBehavior> {
@@ -20,7 +21,7 @@ public class TUserSearchBehavior extends Model<TUserSearchBehavior> {
     //时间
     private Date usbTime;
     //鲜花种类id
-    private String ftId;
+    private Integer ftId;
     //搜索内容
     private String usbContent;
 
@@ -49,11 +50,11 @@ public class TUserSearchBehavior extends Model<TUserSearchBehavior> {
         this.usbTime = usbTime;
     }
 
-    public String getFtId() {
+    public Integer getFtId() {
         return ftId;
     }
 
-    public void setFtId(String ftId) {
+    public void setFtId(Integer ftId) {
         this.ftId = ftId;
     }
 

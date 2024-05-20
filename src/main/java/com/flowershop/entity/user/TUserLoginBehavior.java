@@ -2,14 +2,15 @@ package com.flowershop.entity.user;
 
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.sql.Date;
+
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * 用户登录行为记录表;(TUserLoginBehavior)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:39
+ * @since 2024-05-20 19:54:59
  */
 @SuppressWarnings("serial")
 public class TUserLoginBehavior extends Model<TUserLoginBehavior> {

@@ -2,7 +2,10 @@ package com.flowershop.controller.user;
 
 import com.flowershop.entity.user.TUser;
 import com.flowershop.service.user.RegisterService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 

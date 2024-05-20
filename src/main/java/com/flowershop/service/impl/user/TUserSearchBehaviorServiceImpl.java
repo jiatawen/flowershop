@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * 用户搜索行为记录表;(TUserSearchBehavior)表服务实现类
  *
  * @author makejava
- * @since 2024-04-20 01:43:40
+ * @since 2024-05-20 19:55:00
  */
 @Service("tUserSearchBehaviorService")
 public class TUserSearchBehaviorServiceImpl extends ServiceImpl<TUserSearchBehaviorDao, TUserSearchBehavior> implements TUserSearchBehaviorService {

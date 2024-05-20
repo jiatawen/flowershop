@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * 购物车;(TCart)表服务实现类
  *
  * @author makejava
- * @since 2024-04-20 01:43:35
+ * @since 2024-05-20 19:31:42
  */
 @Service("tCartService")
 public class TCartServiceImpl extends ServiceImpl<TCartDao, TCart> implements TCartService {

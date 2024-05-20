@@ -11,7 +11,7 @@ import java.util.List;
  * 用户表;(TUser)表数据库访问层
  *
  * @author makejava
- * @since 2024-04-20 01:43:38
+ * @since 2024-05-20 19:54:58
  */
 @Mapper
 public interface TUserDao extends BaseMapper<TUser> {
@@ -33,23 +33,5 @@ public interface TUserDao extends BaseMapper<TUser> {
      */
     int insertOrUpdateBatch(@Param("entities") List<TUser> entities);
 
-    /**
-     * 通过email查找数据
-     * @param email String 邮件地址
-     * @return 实例对象
-     */
-    TUser selectByEmail(@Param("email") String email);
-
-    /**
-     * 插入数据
-     *
-     * @param user TUser 实例对象列表
-     * @return 影响行数
-     */
-    int insertUser(@Param("user") TUser user);
-
-    Integer resetPassword(Integer uId, String password);
-
-    Integer setStatus(String status, String id);
 }
 

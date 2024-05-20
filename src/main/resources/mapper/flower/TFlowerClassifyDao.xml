@@ -3,31 +3,28 @@
 <mapper namespace="com.flowershop.dao.flower.TFlowerClassifyDao">
 
     <resultMap type="com.flowershop.entity.flower.TFlowerClassify" id="TFlowerClassifyMap">
-        <result property="fcId" column="fc_id" jdbcType="INTEGER"/>
+        <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="fId" column="f_id" jdbcType="INTEGER"/>
-        <result property="fcColor" column="fc_color" jdbcType="VARCHAR"/>
-        <result property="fcImplication" column="fc_implication" jdbcType="VARCHAR"/>
-        <result property="fcVariety" column="fc_variety" jdbcType="VARCHAR"/>
+        <result property="cId" column="c_id" jdbcType="INTEGER"/>
     </resultMap>
 
     <!-- 批量插入 -->
-    <insert id="insertBatch" keyProperty="fcId" useGeneratedKeys="true">
-        insert into flower_shop.t_flower_classify(f_id, fc_color, fc_implication, fc_variety)
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into flower_shop.t_flower_classify(f_id, c_id)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.fId}, #{entity.fcColor}, #{entity.fcImplication}, #{entity.fcVariety})
+            (#{entity.fId}, #{entity.cId})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
-    <insert id="insertOrUpdateBatch" keyProperty="fcId" useGeneratedKeys="true">
-        insert into flower_shop.t_flower_classify(f_id, fc_color, fc_implication, fc_variety)
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into flower_shop.t_flower_classify(f_id, c_id)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.fId}, #{entity.fcColor}, #{entity.fcImplication}, #{entity.fcVariety})
+            (#{entity.fId}, #{entity.cId})
         </foreach>
         on duplicate key update
-        f_id = values(f_id) , fc_color = values(fc_color) , fc_implication = values(fc_implication) , fc_variety =
-        values(fc_variety)
+        f_id = values(f_id) , c_id = values(c_id)
     </insert>
 
 </mapper>

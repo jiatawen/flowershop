@@ -9,14 +9,14 @@ import java.io.Serializable;
  * 订单详情表;(TOrderDetails)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:37
+ * @since 2024-05-20 19:31:45
  */
 @SuppressWarnings("serial")
 public class TOrderDetails extends Model<TOrderDetails> {
     //表id
     private Integer id;
     //订单号
-    private String oId;
+    private Integer oId;
     //鲜花id
     private Integer fId;
     //鲜花数目
@@ -31,11 +31,11 @@ public class TOrderDetails extends Model<TOrderDetails> {
         this.id = id;
     }
 
-    public String getOId() {
+    public Integer getOId() {
         return oId;
     }
 
-    public void setOId(String oId) {
+    public void setOId(Integer oId) {
         this.oId = oId;
     }
 

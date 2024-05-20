@@ -1,39 +1,28 @@
 package com.flowershop.entity.user;
 
+
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.io.Serializable;
 
 /**
- * 收货联系方式表;(TUserContact)实体类
+ * 收货联系方式表;(TUserContact)表实体类
  *
  * @author makejava
- * @since 2024-04-26 13:01:52
+ * @since 2024-05-20 19:54:59
  */
-public class TUserContact implements Serializable {
-    private static final long serialVersionUID = -73883725986799159L;
-    /**
-     * 表id
-     */
+@SuppressWarnings("serial")
+public class TUserContact extends Model<TUserContact> {
+    //表id
     private Integer id;
-    /**
-     * 用户id
-     */
+    //用户id
     private Integer uId;
-    /**
-     * 收货人
-     */
+    //收货人
     private String ucName;
-    /**
-     * 收货地址信息
-     */
+    //收货地址信息
     private String ucAddress;
-    /**
-     * 收货人联系方式
-     */
+    //收货人联系方式
     private String ucTel;
-    /**
-     * 默认地址为0
-     */
-    private Integer ucStatus;
 
 
     public Integer getId() {
@@ -76,13 +65,14 @@ public class TUserContact implements Serializable {
         this.ucTel = ucTel;
     }
 
-    public Integer getUcStatus() {
-        return ucStatus;
+    /**
+     * 获取主键值
+     *
+     * @return 主键值
+     */
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
     }
-
-    public void setUcStatus(Integer ucStatus) {
-        this.ucStatus = ucStatus;
-    }
-
 }
 

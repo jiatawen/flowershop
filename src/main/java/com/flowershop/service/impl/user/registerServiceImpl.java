@@ -27,7 +27,7 @@ public class registerServiceImpl implements RegisterService {
         } else {
             try {
                 user.setUPassword(getHexService.getHex(user.getUPassword()));
-                userDao.insertUser(user);
+//                userDao.insertUser(user);
             } catch (Exception e) {
                 return 1;
             }

@@ -1,22 +1,22 @@
 package com.flowershop.entity.order;
 
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
  * 订单表;(TOrder)表实体类
  *
  * @author makejava
- * @since 2024-04-20 01:43:36
+ * @since 2024-05-20 19:31:45
  */
 @SuppressWarnings("serial")
 public class TOrder extends Model<TOrder> {
     //订单id
-    @TableId("o_id")
-    private String oId;
+    private Integer oId;
     //用户id
     private Integer uId;
     //收货人姓名
@@ -30,16 +30,16 @@ public class TOrder extends Model<TOrder> {
     //创建时间
     private Date oCreateTime;
     //总价
-    private Object oSumPrice;
+    private BigDecimal oSumPrice;
     //订单状态;0为待付款，1为已付款未发货，2为已发货，3为待评价，4为结单
     private String oStatus;
 
 
-    public String getOId() {
+    public Integer getOId() {
         return oId;
     }
 
-    public void setOId(String oId) {
+    public void setOId(Integer oId) {
         this.oId = oId;
     }
 
@@ -91,11 +91,11 @@ public class TOrder extends Model<TOrder> {
         this.oCreateTime = oCreateTime;
     }
 
-    public Object getOSumPrice() {
+    public BigDecimal getOSumPrice() {
         return oSumPrice;
     }
 
-    public void setOSumPrice(Object oSumPrice) {
+    public void setOSumPrice(BigDecimal oSumPrice) {
         this.oSumPrice = oSumPrice;
     }
 

@@ -17,7 +17,7 @@ import java.util.List;
  * 订单表;(TOrder)表控制层
  *
  * @author makejava
- * @since 2024-04-20 01:43:36
+ * @since 2024-05-20 19:31:44
  */
 @RestController
 @RequestMapping("tOrder")
@@ -82,16 +82,6 @@ public class TOrderController extends ApiController {
     @DeleteMapping
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tOrderService.removeByIds(idList));
-    }
-
-    /**
-     * 根据uId查询数据
-     * @param uId 用户id
-     * @return 多条数据
-     */
-    @GetMapping("uId/{uId}")
-    public R selectByUId(@PathVariable("uId") Long uId) {
-        return success(this.tOrderService.list(new QueryWrapper<TOrder>().eq("u_id", uId)));
     }
 }
 
