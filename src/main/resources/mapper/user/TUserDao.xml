@@ -14,11 +14,10 @@
 
     <!-- 批量插入 -->
     <insert id="insertBatch" keyProperty="uId" useGeneratedKeys="true">
-        insert into flower_shop.t_user(u_name, u_status, u_password, u_mail, u_expect, u_creat_time)
+        insert into flower_shop.t_user(u_name, u_status, u_password, u_mail)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.uName}, #{entity.uStatus}, #{entity.uPassword}, #{entity.uMail}, #{entity.uExpect},
-            #{entity.uCreatTime})
+            (#{entity.uName}, #{entity.uStatus}, #{entity.uPassword}, #{entity.uMail})
         </foreach>
     </insert>
     <!-- 批量插入或按主键更新 -->
@@ -33,6 +32,11 @@
         u_name = values(u_name) , u_status = values(u_status) , u_password = values(u_password) , u_mail =
         values(u_mail) , u_expect = values(u_expect) , u_creat_time = values(u_creat_time)
     </insert>
+    <select id="findByEmail" resultType="com.flowershop.entity.user.TUser">
+        select *
+        from t_user
+        where u_mail = #{email}
+    </select>
 
 </mapper>
 

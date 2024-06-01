@@ -95,5 +95,13 @@ public class TUserController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserService.removeByIds(idList));
     }
+
+    /**
+     * 重置密码
+     */
+    @PostMapping("resetPassword")
+    public Integer resetPassword(@RequestParam("email") String email, @RequestParam("code") String code, @RequestParam("password") String password) {
+        return tUserService.resetPassword(email, code, password);
+    }
 }
 

@@ -8,7 +8,5 @@ import javax.mail.MessagingException;
 public interface EmailService {
     public String sendEmail(String email) throws MessagingException;
 
-    public boolean register(String code, String email);
-
-    public boolean checkCode(String code);
+    public boolean check(String code, String email);
 }

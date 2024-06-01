@@ -112,7 +112,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public boolean register(String code,String email) {
+    public boolean check(String code,String email) {
         System.out.println(resultMap);
         if  (resultMap.size()==0){
             return false;
@@ -130,8 +130,7 @@ public class EmailServiceImpl implements EmailService {
         return false;
     }
 
-    @Override
-    public boolean checkCode(String code) {
+    private boolean checkCode(String code) {
         String request = resultMap.get("code").toString();
         if (code.equalsIgnoreCase(request)){
             return true;

@@ -144,7 +144,7 @@ $("#codebutton").click(function () {
                         if (time == 0) {
                             clearInterval(timer);
                             $("#codebutton").removeAttr("disabled");
-                            $("#codebutton").val("按钮");
+                            $("#codebutton").val("获取验证码");
                         }
                     }, 1000);
 
@@ -186,7 +186,7 @@ $("#sub").click(function () {
             status: status
         },
         success: function (data) {
-            if (data == 1) {
+            if (data == 0) {
                 alert("注册失败");
             } else {
                 //重定向至登录页面

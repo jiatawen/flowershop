@@ -1,6 +1,5 @@
 package com.flowershop.service.impl.user;
 
-import com.flowershop.controller.user.TUserController;
 import com.flowershop.dao.user.TUserDao;
 import com.flowershop.entity.user.TUser;
 import com.flowershop.service.user.EmailService;
@@ -8,6 +7,8 @@ import com.flowershop.service.user.RegisterService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class registerServiceImpl implements RegisterService {
@@ -16,17 +17,18 @@ public class registerServiceImpl implements RegisterService {
     private TUserDao userDao;
     @Resource
     private EmailService emailService;
-    @Resource
-    private TUserController userController;
 
 
     @Override
     public Integer register(TUser user, String code) {
-        if (!emailService.register(code, user.getUMail())) {
-            return 1;
+        if (!emailService.check(code, user.getUMail())) {
+            return 0;
         } else {
-            userController.insert(user);
+            List<TUser> users = new ArrayList<>();
+            users.add(user);
+            userDao.insertBatch(users);
         }
-        return 0;
+        return 1;
     }
+
 }

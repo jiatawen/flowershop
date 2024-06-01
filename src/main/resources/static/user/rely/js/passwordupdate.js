@@ -5,9 +5,13 @@ $(document).ready(function () {
     $("#code").css("border", "1px solid red");
     $("#password").css("border", "1px solid red");
     $("#password2").css("border", "1px solid red");
+    $("#codebutton").attr("disabled", "disabled");
+    $("#codebutton").css("cursor", "not-allowed");
+    $("#codebutton").css("background-color", "gray");
+    $("#email").css("border", "1px solid red");
 });
 
-let arr = [0, 0, 0];
+let arr = [0, 0, 0, 0];
 function checkPassword() {
     var password = $("#password").val();
     if (password == "" || password.length < 6) {
@@ -19,7 +23,7 @@ function checkPassword() {
     } else {
         arr[0] = 1;
         //如果arr数组中的所有值都为1则可以提交
-        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1) {
+        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1 && arr[3] == 1) {
             $("#sub").removeAttr("disabled");
             $("#sub").css("cursor", "pointer");
             $("#sub").css("background-color", "#7dc44e");
@@ -39,7 +43,7 @@ function checkPassword2() {
     } else {
         arr[1] = 1;
         //如果arr数组中的所有值都为1则可以提交
-        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1) {
+        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1 && arr[3] == 1) {
             $("#sub").removeAttr("disabled");
             $("#sub").css("cursor", "pointer");
             $("#sub").css("background-color", "#7dc44e");
@@ -62,7 +66,7 @@ function checkCode() {
         $("#code").css("border", "1px solid #ccc");
         arr[2] = 1;
         //如果arr数组中的所有值都为1则可以提交
-        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1) {
+        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1 && arr[3] == 1) {
             $("#sub").removeAttr("disabled");
             $("#sub").css("cursor", "pointer");
             $("#sub").css("background-color", "#7dc44e");
@@ -70,12 +74,54 @@ function checkCode() {
     }
 }
 
+function checkEmail() {
+    var email = $("#email").val();
+    //验证邮箱格式是否正确
+    var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+    if (!reg.test(email)) {
+        $("#sub").attr("disabled", "disabled");
+        $("#sub").css("cursor", "not-allowed");
+        $("#sub").css("background-color", "gray");
+        $("#codebutton").attr("disabled", "disabled");
+        $("#codebutton").css("cursor", "not-allowed");
+        $("#codebutton").css("background-color", "gray");
+        $("#email").css("border", "1px solid red");
+        arr[3] = 0;
+    } else {
+        arr[3] = 1;
+        $("#codebutton").removeAttr("disabled");
+        $("#codebutton").css("cursor", "pointer");
+        $("#codebutton").css("background-color", "#efefef");
+        //如果arr数组中的所有值都为1则可以提交
+        if (arr[0] == 1 && arr[1] == 1 && arr[2] == 1 && arr[3] == 1) {
+            $("#sub").removeAttr("disabled");
+            $("#sub").css("cursor", "pointer");
+            $("#sub").css("background-color", "#7dc44e");
+        }
+        $("#email").css("border", "1px solid #ccc");
+    }
+}
+
 $("#code").blur(function () { checkCode(); });
 $("#password").blur(function () { checkPassword(); });
 $("#password2").blur(function () { checkPassword2(); });
 
+$("#email").blur(function () { checkEmail(); });
+
 $("#codebutton").click(function () {
-    let email = _user.umail;
+    var email = $("#email").val();
+    $("#codebutton").val("60s后可再次获取");
+    $("#codebutton").attr("disabled", "disabled");
+    var time = 60;
+    var timer = setInterval(function () {
+        time--;
+        $("#codebutton").val(time + "s后可再次获取");
+        if (time == 0) {
+            clearInterval(timer);
+            $("#codebutton").removeAttr("disabled");
+            $("#codebutton").val("获取验证码");
+        }
+    }, 1000);
     $.ajax({
         type: "GET",
         url: "/email/code",
@@ -90,23 +136,24 @@ $("#codebutton").click(function () {
 });
 
 $("#sub").click(function () {
-    let password = $("#password").val();
-    let code = $("#code").val();
-    let email = _user.umail;
     $.ajax({
-        type: "POST",
+        type: "post",
         url: "/tUser/resetPassword",
         data: {
-            password: password,
-            code: code
+            password: $("#password").val(),
+            email: $("#email").val(),
+            code: $("#code").val(),
         },
+        dataType: "json",
         success: function (data) {
             if (data == 1) {
-                //成功
-            } else {
-                //失败
+                alert("修改成功");
+                window.location.href = "/user/index/login.html";
+            } else if(data == 0) {
+                alert("验证码错误");
+            }else if(data == -1) {
+                alert("该邮箱未注册");
             }
         }
-    })
-
+    });
 });

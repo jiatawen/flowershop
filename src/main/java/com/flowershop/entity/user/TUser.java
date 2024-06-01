@@ -97,5 +97,18 @@ public class TUser extends Model<TUser> {
     protected Serializable pkVal() {
         return this.uId;
     }
+
+    @Override
+    public String toString() {
+        return "TUser{" +
+                "uId=" + uId +
+                ", uName='" + uName + '\'' +
+                ", uStatus='" + uStatus + '\'' +
+                ", uPassword='" + uPassword + '\'' +
+                ", uMail='" + uMail + '\'' +
+                ", uExpect=" + uExpect +
+                ", uCreatTime=" + uCreatTime +
+                '}';
+    }
 }
 

@@ -57,6 +57,9 @@ $("#password").blur(function () { checkPassword() });
 $("#email").blur(function () { checkEmail() });
 
 $("#sub").click(function () {
+    login();
+});
+function login() {
     onloading();
     var email = $("#email").val();
     var password = $("#password").val();
@@ -75,12 +78,12 @@ $("#sub").click(function () {
                 window.location.href = "./index.html";
             }
         },
-        error: function(message){
+        error: function (message) {
             alert("用户名或密码错误");
             removeload();
         }
     });
-});
+}
 
 function onloading() {
     $("#overlay").show(); // 显示遮罩层
@@ -90,3 +93,11 @@ function removeload() {
     $("#overlay").hide();
     $("#loading-text").hide(); // 隐藏加载文本
 }
+
+// 回车事件
+
+$(document).keydown(function (event) {
+    if (event.keyCode == 13) {
+        login();
+    }
+});
