@@ -2,72 +2,142 @@ var _user = null;
 var uid = getUrlParam("uid");
 $(document).ready(function () {
     Start();
+    changeButton(1);
+    // 调用函数创建图表
+    createPieChart();
+    createBarChart();
     createLineChart();
     setTbody();
 });
-// 折线图
-function createLineChart() {
-    // ajaxget
-    $.ajax({
-        url: "/userMonthlyActivety?uId=" + uid,
-        type: "get",
-        dataType: "json",
-        success: function (data) {
-            //定义数组
-            let month = [];
-            let loginTimes = [];
-            let orderCount = [];
-            let totalSumPrice = [];
 
-            data.forEach(function (lab) {
-                //如果为null变为0
-                if (lab.loginTimes == null) {
-                    lab.loginTimes = 0;
-                }
-                if (lab.orderCount == null) {
-                    lab.orderCount = 0;
-                }
-                if (lab.totalSumPrice == null) {
-                    lab.totalSumPrice = 0;
-                }
-                if (lab.month == null) {
-                    lab.month = 0;
-                }
+function changeButton(flag){
+    if(flag == 1){
+        //jquery让#but1不能点击
+        $("#but1").attr("disabled",true);
+        $("#but2").attr("disabled",false);
+        $("#but3").attr("disabled",false);
+        $("#but4").attr("disabled",false);
 
-                // 添加进数组
-                month.push(lab.month);
-                loginTimes.push(lab.loginTimes);
-                orderCount.push(lab.orderCount);
-                totalSumPrice.push(lab.totalSumPrice);
-            });
-            var ctx = document.getElementById('lineChart').getContext('2d');
-            var lineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: month,
-                    datasets: [{
-                        label: '登录次数',
-                        data: loginTimes,
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }, {
-                        label: '消费金额',
-                        data: totalSumPrice,
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }, {
-                        label: '消费次数',
-                        data: orderCount,
-                        borderColor: 'rgba(31, 31, 31)',
-                        borderWidth: 1
-                    }],
+        $("#flower").css("display", "flex");
+        $("#login").css("display", "none");
+        $("#money").css("display", "none");
+        $("#adresslist").css("display", "none");
 
+    }else if(flag == 2){
+        //jquery让#but2不能点击
+        $("#but1").attr("disabled",false);
+        $("#but2").attr("disabled",true);
+        $("#but3").attr("disabled",false);
+        $("#but4").attr("disabled",false);
+
+        $("#flower").css("display", "none");
+        $("#login").css("display", "block");
+        $("#money").css("display", "none");
+        $("#adresslist").css("display", "none");
+    }else if(flag == 3){
+        //jquery让#but3不能点击
+        $("#but1").attr("disabled",false);
+        $("#but2").attr("disabled",false);
+        $("#but3").attr("disabled",true);
+        $("#but4").attr("disabled",false);
+
+        $("#flower").css("display", "none");
+        $("#login").css("display", "none");
+        $("#money").css("display", "block");
+        $("#adresslist").css("display", "none");
+    }else if(flag == 4){
+        //jquery让#but4不能点击
+        $("#but1").attr("disabled",false);
+        $("#but2").attr("disabled",false);
+        $("#but3").attr("disabled",false);
+        $("#but4").attr("disabled",true);
+
+        $("#flower").css("display", "none");
+        $("#login").css("display", "none");
+        $("#money").css("display", "none");
+        $("#adresslist").css("display", "block");
+    }
+}
+
+function but1(){
+    changeButton(1);
+}
+
+function but2(){
+    changeButton(2);
+}
+
+function but3(){
+    changeButton(3);
+}
+
+function but4(){
+    changeButton(4);
+}
+
+// 创建柱状图
+function createBarChart() {
+    var ctx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+                datasets: [{
+                    label: 'Example Dataset',
+                    data: [65, 59, 80, 81, 56, 55, 40, 60, 60, 60, 60, 60],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
-            });
+            }
+        });
+}
+
+// 创建饼图
+function createPieChart() {
+    var ctx = document.getElementById('pieChart').getContext('2d');
+    var pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'red',
+                    'blue',
+                    'yellow',
+                    'green',
+                    'purple',
+                    'orange'
+                ]
+            }]
         }
     });
+}
 
-
+function createLineChart() {
+    var ctx = document.getElementById('lineChart').getContext('2d');
+        var lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Example Dataset',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
 }
 
 function getUrlParam(name) {
@@ -76,31 +146,25 @@ function getUrlParam(name) {
     if (r != null) return unescape(r[2]); return null; //返回参数值
 }
 
-function setTbody() {
-    //将#butt1设为不可点击
-    $("#butt1").attr("disabled", "disabled");
-    $("#butt1").css("cursor", "not-allowed");
-    $("#butt1").css("background-color", "gray");
-    $("#addresslist").css("display", "none");
-
+function setTbody(){
     // ajax get请求
     $.ajax({
-        url: "/tUserContact",
-        type: "GET",
-        datatype: "json",
-        data: { uId: uid },
-        success: function (data) {
+        url:"/tUserContact",
+        type:"GET",
+        datatype:"json",
+        data:{uId:uid},
+        success:function (data){
             let records = data.data.records;
-            let str = "";
-            records.forEach(function (record) {
-                str += '<tr class = "odd">';
-                str += '<td>' + record.ucName + '</td>';
-                str += '<td>' + record.ucTel + '</td>';
-                str += '<td>' + record.ucAddress + '</td>';
-                str += '<td><a href="./useraddressupdate.html?id=' + record.id + '">修改</a>&nbsp;<a href="del(' + record.id + ')">删除</a></td>';
-                str += '</tr>';
-            });
-            $("#tbody").html(str);
+           let str = "";
+           records.forEach(function(record){
+            str += '<tr class = "odd">';
+            str += '<td>'+record.ucName+'</td>';
+            str += '<td>'+record.ucTel+'</td>';
+            str += '<td>'+record.ucAddress+'</td>';
+            str += '<td><a href="./useraddressupdate.html?id='+record.id+'">修改</a>&nbsp;<a href="del('+record.id+')">删除</a></td>';
+            str += '</tr>';
+           });
+           $("#tbody").html(str);
         }
     });
 }
@@ -143,33 +207,3 @@ function offline() {
     $(".onlogin").css("display", "none");
     $(".unlogin").css("display", "block");
 }
-
-$("#butt1").click(function () {
-    $("#butt1").attr("disabled", "disabled");
-    $("#butt1").css("cursor", "not-allowed");
-    $("#butt1").css("background-color", "gray");
-    $("#addresslist").css("display", "none");
-
-
-    //将butt2恢复为可点击
-    $("#butt2").removeAttr("disabled");
-    $("#butt2").css("cursor", "pointer");
-    $("#butt2").css("background-color", "#efefef");
-
-
-    $("#money").css("display", "block");
-});
-
-$("#butt2").click(function () {
-    $("#butt2").attr("disabled", "disabled");
-    $("#butt2").css("cursor", "not-allowed");
-    $("#butt2").css("background-color", "gray");
-    $("#money").css("display", "none");
-
-    //将butt1恢复为可点击
-    $("#butt1").removeAttr("disabled");
-    $("#butt1").css("cursor", "pointer");
-    $("#butt1").css("background-color", "#efefef");
-
-    $("#addresslist").css("display", "block");
-});

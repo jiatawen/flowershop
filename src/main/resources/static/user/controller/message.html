@@ -13,14 +13,14 @@
     <script src="../rely/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
     <script src="../rely/js/logout.js"></script>
     <script src="../rely/js/chart.js"></script>
-    
+    <script src="../rely/js/message.js"></script>
 </head>
 
 <body>
     <div id="panelwrap">
         <div class="header">
             <div class="title">
-                <a href="/user/index/index.html">
+                <a href="../index/index.html">
                     <span style="font-weight: bold;">绿意花居</span>
                 </a>
             </div>
@@ -43,18 +43,41 @@
                 <div id="right_content">
                     <h2>用户详情</h2>
                     <div>
-                        <input id="butt1" type="button" value="用户详情" />
-                        <input id="butt2" type="button" value="地址详情"/>
+                        <input id="but1" type="button" value="鲜花种类" onclick="javascript:but1();" />
+                        <input id="but2" type="button" value="登陆周期" onclick="javascript:but2();" />
+                        <input id="but3" type="button" value="金额大小" onclick="javascript:but3();" />
+                        <input id="but4" type="button" value="地址详情" onclick="javascript:but4();" />
+                    </div>
+                    <div id="flower" style="display: flex;align-items: flex-start;">
+                        <span style="width: 30%;display: inline-block;">
+                            <canvas id="pieChart"></canvas>
+                        </span>
+                        <span style="font-size: 20px;width: 60%;display: inline-block;">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam dolores placeat et dolore
+                            excepturi aperiam iusto, rem facilis, pariatur explicabo esse natus qui nesciunt quod
+                            incidunt
+                            aliquam fuga consectetur ipsa.
+                        </span>
+                    </div>
+
+                    <div id="login" style="width:100%">
+                        <canvas id="barChart"></canvas>
+                        <div style="font-size: 20px;">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam dolores placeat et dolore
+                            excepturi aperiam iusto, rem facilis, pariatur explicabo esse natus qui nesciunt quod
+                            incidunt
+                            aliquam fuga consectetur ipsa.
+                        </div>
                     </div>
                     <div id="money">
                         <canvas id="lineChart"></canvas>
-                        <!-- <div style="font-size: 20px;">
+                        <div style="font-size: 20px;">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam dolores placeat et dolore
                             excepturi aperiam iusto, rem facilis, pariatur explicabo esse natus qui nesciunt quod incidunt
                             aliquam fuga consectetur ipsa.
-                        </div> -->
+                        </div>
                     </div>
-                    <div id="addresslist">
+                    <div id="adresslist">
                         <table id="rounded-corner">
                             <thead>
                                 <tr>
@@ -108,5 +131,5 @@
     </div>
     </div>
 </body>
-<script src="../rely/js/message.js"></script>
+
 </html>

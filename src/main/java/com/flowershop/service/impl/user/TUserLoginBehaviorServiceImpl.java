@@ -3,7 +3,7 @@ package com.flowershop.service.impl.user;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.flowershop.dao.user.TUserLoginBehaviorDao;
 import com.flowershop.entity.user.TUserLoginBehavior;
-import com.flowershop.entity.user.UserMonthlyActivity;
+import com.flowershop.entity.user.VUserLogin;
 import com.flowershop.service.user.TUserLoginBehaviorService;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class TUserLoginBehaviorServiceImpl extends ServiceImpl<TUserLoginBehavio
     private TUserLoginBehaviorDao tUserLoginBehaviorDao;
 
     @Override
-    public UserMonthlyActivity getPerMonth(Integer uid) {
+    public VUserLogin getPerMonth(Integer uid) {
         tUserLoginBehaviorDao.getPerMonth(uid);
         return null;
     }

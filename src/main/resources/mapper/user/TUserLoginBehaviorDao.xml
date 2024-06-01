@@ -27,7 +27,7 @@
         on duplicate key update
         u_id = values(u_id) , ulb_type = values(ulb_type) , ulb_time = values(ulb_time)
     </insert>
-    <select id="getPerMonth" resultType="com.flowershop.entity.user.UserMonthlyActivity">
+    <select id="getPerMonth" resultType="com.flowershop.entity.user.VUserLogin">
         SELECT DATE_FORMAT(ulb_time, '%Y-%m') AS month,
     COUNT(*) AS login_count
         FROM
