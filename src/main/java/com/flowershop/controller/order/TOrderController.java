@@ -1,7 +1,9 @@
 package com.flowershop.controller.order;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -32,12 +34,11 @@ public class TOrderController extends ApiController {
      * 分页查询所有数据
      *
      * @param page   分页对象
-     * @param tOrder 查询实体
      * @return 所有数据
      */
-    @GetMapping
-    public R selectAll(Page<TOrder> page, TOrder tOrder) {
-        return success(this.tOrderService.page(page, new QueryWrapper<>(tOrder)));
+    @GetMapping("/getAll")
+    public R getAll(Page<TOrder> page) {
+        return success(this.tOrderService.page(page, Wrappers.emptyWrapper()));
     }
 
     /**
@@ -68,9 +69,14 @@ public class TOrderController extends ApiController {
      * @param tOrder 实体对象
      * @return 修改结果
      */
-    @PutMapping
-    public R update(@RequestBody TOrder tOrder) {
-        return success(this.tOrderService.updateById(tOrder));
+    @PutMapping("/update/{id}")
+    public R update(@PathVariable Integer id, TOrder tOrder) {
+        //获取原始数据
+        TOrder oldOrder = this.tOrderService.getById(id);
+        //更新数据
+        oldOrder.setOStatus(tOrder.getOStatus());
+        oldOrder.setOAddress(tOrder.getOAddress());
+        return success(this.tOrderService.updateById(oldOrder));
     }
 
     /**

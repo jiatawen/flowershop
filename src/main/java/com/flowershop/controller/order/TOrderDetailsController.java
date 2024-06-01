@@ -28,6 +28,14 @@ public class TOrderDetailsController extends ApiController {
     @Resource
     private TOrderDetailsService tOrderDetailsService;
 
+    @GetMapping("/getAll/{orderId}")
+    public R getAll(@PathVariable Integer orderId) {
+        //构造查询条件
+        QueryWrapper<TOrderDetails> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("o_id", orderId);
+        return success(this.tOrderDetailsService.list(queryWrapper));
+    }
+
     /**
      * 分页查询所有数据
      *
