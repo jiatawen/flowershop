@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 收货联系方式表;(TUserContact)表控制层
+ * 收货联系方式表;(.)表控制层
  *
  * @author makejava
  * @since 2024-05-20 19:54:58
@@ -63,14 +63,14 @@ public class TUserContactController extends ApiController {
     }
 
     /**
-     * 修改数据
+     * 新增或修改数据
      *
      * @param tUserContact 实体对象
      * @return 修改结果
      */
     @PutMapping
     public R update(@RequestBody TUserContact tUserContact) {
-        return success(this.tUserContactService.updateById(tUserContact));
+        return success(this.tUserContactService.insertOrUpdateBatch(tUserContact));
     }
 
     /**

@@ -2,6 +2,7 @@ package com.flowershop.dao.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.flowershop.entity.user.TUserLoginBehavior;
+import com.flowershop.entity.user.VUserLogin;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -33,5 +34,6 @@ public interface TUserLoginBehaviorDao extends BaseMapper<TUserLoginBehavior> {
      */
     int insertOrUpdateBatch(@Param("entities") List<TUserLoginBehavior> entities);
 
+    VUserLogin getPerMonth(Integer uid);
 }
 

@@ -83,5 +83,16 @@ public class TUserLoginBehaviorController extends ApiController {
     public R delete(@RequestParam("idList") List<Long> idList) {
         return success(this.tUserLoginBehaviorService.removeByIds(idList));
     }
+
+    /**
+     * 统计各月份登录计数
+     *
+     * @param uid 用户id
+     * @return VUserLogin
+     */
+    @GetMapping("count")
+    public R count(@RequestParam("uid") Integer uid) {
+        return success(this.tUserLoginBehaviorService.getPerMonth(uid));
+    }
 }
 

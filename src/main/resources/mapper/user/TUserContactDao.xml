@@ -20,14 +20,18 @@
     </insert>
     <!-- 批量插入或按主键更新 -->
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into flower_shop.t_user_contact(u_id, uc_name, uc_address, uc_tel)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.uId}, #{entity.ucName}, #{entity.ucAddress}, #{entity.ucTel})
-        </foreach>
-        on duplicate key update
-        u_id = values(u_id) , uc_name = values(uc_name) , uc_address = values(uc_address) , uc_tel = values(uc_tel)
-    </insert>
+    insert into flower_shop.t_user_contact (id, u_id, uc_name, uc_address, uc_tel)
+    values
+    <foreach collection="entities" item="entity" separator=",">
+        (#{entity.id}, #{entity.uId}, #{entity.ucName}, #{entity.ucAddress}, #{entity.ucTel})
+    </foreach>
+    on duplicate key update
+    u_id = values(u_id),
+    uc_name = values(uc_name),
+    uc_address = values(uc_address),
+    uc_tel = values(uc_tel)
+</insert>
+
 
 </mapper>
 

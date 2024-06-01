@@ -2,6 +2,7 @@ package com.flowershop.service.user;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.flowershop.entity.user.TUserLoginBehavior;
+import com.flowershop.entity.user.VUserLogin;
 
 /**
  * 用户登录行为记录表;(TUserLoginBehavior)表服务接口
@@ -11,5 +12,6 @@ import com.flowershop.entity.user.TUserLoginBehavior;
  */
 public interface TUserLoginBehaviorService extends IService<TUserLoginBehavior> {
 
+    VUserLogin getPerMonth(Integer uid);
 }
 

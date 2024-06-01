@@ -11,5 +11,6 @@ import com.flowershop.entity.user.TUserContact;
  */
 public interface TUserContactService extends IService<TUserContact> {
 
+    int insertOrUpdateBatch(TUserContact tUserContact);
 }
 

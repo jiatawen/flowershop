@@ -12,7 +12,8 @@
     <script src="../rely/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
     <script src="../rely/js/userupdate.js"></script>
     <script src="../rely/js/logout.js"></script>
-    <script src="../rely/js/onlinestatus.js"></script>
+    
+    
 </head>
 
 <body>
@@ -30,8 +31,8 @@
                     <a href="javascript:logout();" class="logout">退出</a>
                 </span>
                 <span class="unlogin">
-                    <a href="register.html">用户注册</a>
-                    <a href="login.html">用户登录</a>
+                    <a href="../index/register.html">用户注册</a>
+                    <a href="../index/login.html">用户登录</a>
                 </span>
             </div>
         </div>
@@ -54,36 +55,33 @@
             <div id="right_wrap">
                 <div id="right_content">
                     <h2>
-                        xxxx个人信息
+                        <span id="titlename">xxxx</span>个人信息
                     </h2>
                     <div id="tab1" class="tabcontent">
                         <form action="" method="post" onsubmit="return checkform()">
                             <div class="form">
-                                <div class="form_row">
-                                    <label>默认地址:</label>
-                                    <select name="default" id="default">
-                                        <option value="0">是</option>
-                                        <option value="1">否</option>
-                                    </select>
+                                <div style="display: none;">
+                                    <input type="text" name="id" id="id">
+                                    <input type="text" name="uid" id="uid">
                                 </div>
                                 <div class="form_row">
                                     <label>姓名:</label>
-                                    <input type="text" class="form_input" name="xingming" id="xingmingid" value="" />
+                                    <input type="text" class="form_input" name="ucName" id="ucName" value="" />
                                 </div>
 
                                 <div class="form_row">
                                     <label>收货地址:</label>
-                                    <input type="text" class="form_input" name="dizhi" id="dizhiid" value="" />
+                                    <input type="text" class="form_input" name="ucAddress" id="ucAddress" value="" />
                                 </div>
 
                                 <div class="form_row">
                                     <label>手机:</label>
-                                    <input type="text" class="form_input" name="dianhua" id="dianhuaid" value="" />
+                                    <input type="text" class="form_input" name="ucTel" id="ucTel" value="" />
                                 </div>
 
 
                                 <div class="form_row">
-                                    <input type="submit" class="form_submit" value="提交" />
+                                    <input type="button" class="form_submit" value="提交" id="formbotton"/>
                                 </div>
                                 <div class="clear"></div>
                             </div>
@@ -140,6 +138,5 @@
 
 
 </body>
-
+<script src="../rely/js/useraddressupdate.js"></script>
 </html>
-```

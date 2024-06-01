@@ -14,7 +14,6 @@
     <script src="../rely/js/logout.js"></script>
     <script src="../rely/js/chart.js"></script>
     <script src="../rely/js/message.js"></script>
-    <script src="../rely/js/onlinestatus.js"></script>
 </head>
 
 <body>
@@ -45,8 +44,9 @@
                     <h2>用户详情</h2>
                     <div>
                         <input id="but1" type="button" value="鲜花种类" onclick="javascript:but1();" />
-                        <input id="but2" type="button" value="登陆周期" onclick="javascript:but2();" disabled />
+                        <input id="but2" type="button" value="登陆周期" onclick="javascript:but2();" />
                         <input id="but3" type="button" value="金额大小" onclick="javascript:but3();" />
+                        <input id="but4" type="button" value="地址详情" onclick="javascript:but4();" />
                     </div>
                     <div id="flower" style="display: flex;align-items: flex-start;">
                         <span style="width: 30%;display: inline-block;">
@@ -76,6 +76,42 @@
                             excepturi aperiam iusto, rem facilis, pariatur explicabo esse natus qui nesciunt quod incidunt
                             aliquam fuga consectetur ipsa.
                         </div>
+                    </div>
+                    <div id="adresslist">
+                        <table id="rounded-corner">
+                            <thead>
+                                <tr>
+                                    <th>收货人</th>
+                                    <th>手机</th>
+                                    <th>地址</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                <tr class="odd">
+                                    <td>
+                                        xxxxx
+                                    </td>
+                                    <td>
+                                        xxxx
+                                    </td>
+                                    <td>
+                                        xxxxxx
+                                    </td>
+                                    <td>
+                                        <a href="./useraddressupdate.html">修改</a>
+                                        <a href="">删除</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <a href="./useraddressupdate.html">添加收货地址</a>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
 
