@@ -129,10 +129,7 @@ $("#codebutton").click(function () {
     var email = $("#email").val();
     $.ajax({
         type: "get",
-        url: "/tUser/email",
-        data: {
-            email: email
-        },
+        url: "/tUser/email/" + email,
         dataType: "json",
         success: function (data) {
             if (data.code == 0) {
@@ -151,7 +148,7 @@ $("#codebutton").click(function () {
                         }
                     }, 1000);
 
-                    
+
                     $.ajax({
                         type: "get",
                         url: "/email/code",
@@ -188,13 +185,14 @@ $("#sub").click(function () {
             code: code,
             status: status
         },
-        success: function(data) {
-           if(data == 1){
-            alert("注册失败");
-           }else{
-             //重定向至登录页面
-             window.location.href = "./login.html";
-           }
+        success: function (data) {
+            if (data == 1) {
+                alert("注册失败");
+            } else {
+                //重定向至登录页面
+                window.location.href = "./login.html";
+            }
 
         }
-})});
+    })
+});

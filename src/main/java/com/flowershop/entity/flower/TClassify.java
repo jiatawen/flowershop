@@ -1,6 +1,7 @@
 package com.flowershop.entity.flower;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class TClassify extends Model<TClassify> {
     //公告id
+    @TableId("c_id")
     private Integer cId;
     //品种
     private String cVariety;

@@ -1,9 +1,10 @@
 package com.flowershop.controller.user;
 
+import com.flowershop.dao.user.TUserLoginBehaviorDao;
 import com.flowershop.entity.user.TUser;
+import com.flowershop.entity.user.TUserLoginBehavior;
 import com.flowershop.service.user.ChatService;
 import com.flowershop.service.user.LoginService;
-import com.flowershop.service.user.TUserLoginBehaviorService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("login")
@@ -21,7 +24,7 @@ public class LoginController {
     @Resource
     private LoginService loginService;
     @Resource
-    private TUserLoginBehaviorService tUserLoginBehaviorService;
+    private TUserLoginBehaviorDao loginBehaviorDao;
 
     @Resource
     private ChatService chatService;
@@ -34,9 +37,14 @@ public class LoginController {
 
         try {
             if (user != null) {
-//                tUserLoginBehaviorService.(user, 0);
                 session.setAttribute("user", user);
-            }else {
+                TUserLoginBehavior data = new TUserLoginBehavior();
+                data.setUId(user.getUId());
+                data.setUlbType("0");
+                List<TUserLoginBehavior> datas = new ArrayList<>();
+                datas.add(data);
+                loginBehaviorDao.insertBatch(datas);
+            } else {
                 //向浏览器抛出404异常
                 response.sendError(404);
                 return null;

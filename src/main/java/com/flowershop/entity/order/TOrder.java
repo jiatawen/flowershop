@@ -1,6 +1,7 @@
 package com.flowershop.entity.order;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.sql.Date;
 @SuppressWarnings("serial")
 public class TOrder extends Model<TOrder> {
     //订单id
+    @TableId("o_id")
     private Integer oId;
     //用户id
     private Integer uId;
