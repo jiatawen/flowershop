@@ -77,6 +77,10 @@
                 }
             })
         }
+
+        function pay(){
+            window.open("/tCart/pay")
+        }
     </script>
 </head>
 <body>
@@ -137,7 +141,7 @@
                     <tr>
                         <td>
                                     <span id="cartTotalPrice">总计：</span>
-                                        <input class="form_submit" type="button" value="结算，生成订单">
+                                        <input class="form_submit" type="button" onclick="pay()" value="结算，生成订单">
 
                         </td>
                     </tr>

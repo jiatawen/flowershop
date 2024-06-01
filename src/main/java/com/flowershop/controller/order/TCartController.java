@@ -1,22 +1,30 @@
 package com.flowershop.controller.order;
 
 
+import cn.hutool.http.HttpResponse;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.flowershop.entity.flower.TFlower;
-import com.flowershop.entity.order.TCart;
-import com.flowershop.entity.order.TCartVO;
+import com.flowershop.entity.order.*;
 import com.flowershop.entity.user.TUser;
+import com.flowershop.entity.user.TUserContact;
 import com.flowershop.service.flower.TFlowerService;
+import com.flowershop.service.impl.order.TOrderDetailsServiceImpl;
+import com.flowershop.service.impl.user.TUserContactServiceImpl;
 import com.flowershop.service.order.TCartService;
+import com.flowershop.service.order.TOrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +44,19 @@ public class TCartController extends ApiController {
     private TCartService tCartService;
 
     @Resource
+    private TOrderService tOrderService;
+
+    @Resource
     private TFlowerService tFlowerService;
+
+    @Resource
+    private TOrderDetailsServiceImpl tOrderDetailsService;
+
+    @Resource
+    private AliPayUtil aliPayUtil;
+
+    @Resource
+    private TUserContactServiceImpl tUserContactService;
 
     @GetMapping("/getAll")
     public R getAll(HttpSession session) {
@@ -92,6 +112,51 @@ public class TCartController extends ApiController {
 
         }
         return success(sum.toString());
+    }
+
+    @Transactional
+    @GetMapping("/pay")
+    public void pay(HttpServletResponse response, HttpSession session) throws Exception {
+        //获取用户ID
+        TUser user = (TUser) session.getAttribute("user");
+        Integer uId = user.getUId();
+        //获取用户联系方式
+        QueryWrapper<TUserContact> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("u_id", uId);
+        TUserContact userContact = tUserContactService.getOne(queryWrapper1);
+        //新建订单
+        TOrder order = new TOrder();
+        order.setUId(uId);
+        order.setOName(user.getUName());
+        order.setOCreateTime(new Date());
+        order.setOStatus("0");
+        order.setOAddress(userContact.getUcAddress());
+        order.setOTel(userContact.getUcTel());
+        order.setOSumPrice(new BigDecimal("0"));
+        //保存订单获取订单号
+        tOrderService.save(order);
+        //构造查询条件
+        QueryWrapper<TCart> queryWrapper2 = new QueryWrapper<>();
+        queryWrapper2.eq("u_id", uId);
+        List<TCart> carts = this.tCartService.list(queryWrapper2);
+        BigDecimal sum = new BigDecimal("0");
+        //处理返回结果
+        for (TCart cart : carts) {
+            TFlower flower = tFlowerService.getById(cart.getFId());
+            //新增订单详情
+            TOrderDetails orderDetails = new TOrderDetails();
+            orderDetails.setOId(order.getOId().intValue());
+            orderDetails.setFId(flower.getFId());
+            orderDetails.setOdCount(cart.getCCount());
+            //保存订单详情
+            tOrderDetailsService.save(orderDetails);
+            //计算当前总价
+            sum = sum.add(flower.getFPrice().multiply(new BigDecimal(cart.getCCount())));
+        }
+        order.setOSumPrice(sum);//设置总价
+        tOrderService.updateById(order);//更新订单
+        aliPayUtil.pay(
+                new AliPay(String.valueOf(order.getOId()), sum.toString(), "鲜花订单", ""), response);
     }
 
     /**
