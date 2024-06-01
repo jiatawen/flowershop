@@ -1,38 +1,50 @@
-// ajax get请求
+//ajax get请求
 
+
+//ajax get请求
 $.ajax({
-    url: "/tCart?uId="+ 2,
+    url: "/tCart",
     type: "get",
     dataType: "json",
     success: function (data) {
-        let datas = data.data.records;
+        let datas = data.data.records
         let html = "";
         datas.forEach(function (cart) {
-            html += '<tr class = "odd">';
-            html += '<td align="left">'+  cart.fid +'</td>' ;
-            html += '<td align="left">'+ cart.fid +'</td>';
-            html += '<td align="left"><input style="width:30px;" type="text" name="number" value="'+ cart.ccount +'">&nbsp;<a href="" onclick="change('+cart.id+')">变更</a></td>';
-            html += '<td align="left">￥'+ cart.fid*cart.ccount +'</td>';
-            html += '<td align="left"><a href="deleteCart('+ cart.id +');">删除</a></td>';
-        });
+            $.ajax({
+                url: "/tFlower/" + cart.fid,
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    //start
+                    //alert(data.data.fname)
+                    html+="<td>"+data.data.fname+"&nbsp"+"</td>";
+                    html+="<td>"+data.data.fprice+"&nbsp"+"</td>";
+                    html+="<td>"+'<input type="text" name="number" value="data.data.conunt" id="${bean.id }_num" size="5" />'+"&nbsp";
+                    '<a href="function();" onclick="">变更</a>'+"&nbsp"+"</td>";
+                    html+="<td>"+data.data.fprice*+"&nbsp"+"</td>";
+                    html+="<td>"+data.data.fname+"&nbsp"+"</td>";
+                    //end
+                },
+                error: function () {
+                    alert("请求失败")
+                }
+            });
+        })
+
         $("#tbody").html(html);
     },
     error: function () {
-        
+        alert("请求失败")
     }
 });
 
-function deleteCart(id){
-    $.ajax({
-        url: "/tCart",
-        type: "delete",
-        dataType: "json",
-        data: {
-            id: id
-        },
-        success: function (data) {}})
-}
+function change(id) {};
 
-function change(id){
+function del(id) {};
 
+function showname(fid) {
+    var name = "";
+    //ajax get
+
+    return name;
 }

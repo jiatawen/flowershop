@@ -8,137 +8,178 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../../user/rely/css/user.css">
 
-    
+
     <!-- jQuery file -->
     <script src="../js/jquery.min.js"></script>
     <script src="../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../user/rely/js/logout.js"></script>
-    <script src="../../user/rely/js/onlinestatus.js"></script>
-    <script src="../js/gouwuchelist.js"></script>
+    <!--    <script src="../../user/rely/js/onlinestatus.js"></script>-->
+    <!--    <script src="../js/gouwuchelist.js"></script>-->
+    <script>
+        getCart()
+        getCartTotalPrice()
+        //获取购物车信息
+        function getCart() {
+            $.ajax({
+                url: "/tCart/getAll",
+                type: "get",
+                success: function (response) {
+                    const data = response.data;
+                    const cartContent = $("#cartContent");
+                    data.forEach(item => {
+                        cartContent.append(`
+                            <tr class="odd">
+                                <td>${item.name}</td>
+                                <td>￥${item.price}</td>
+                                <td>
+                                    <input type="text" id="cart${item.id}" name="number" value="${item.number}" size="5"/>
+                                    <a onClick="updateCart(${item.id})">变更</a>
+                                </td>
+                                <td>￥${item.totalPrice}</td>
+                                <td>
+                                    <a href="#" onClick="return confirm('确定要删除吗?')">删除</a>
+                                </td>
+                            </tr>
+                        `);
+                    });
+                }
+            })
+        }
+
+        //修改数量
+        function updateCart(cartId) {
+            var id = "#cart" + cartId;
+            const number = $(id).val();
+            $.ajax({
+                url: "/tCart/update/" + cartId,
+                type: "put",
+                data: {
+                    cCount: number
+                },
+                success: function (response) {
+                    alert("修改成功");
+                    //情况已有数据
+                    $("#cartContent").empty();
+                    getCart()
+                }
+            })
+        }
+
+        //获取购物车总价
+        function getCartTotalPrice() {
+            $.ajax({
+                url: "/tCart/getPrice",
+                type: "get",
+                success: function (response) {
+                    const data = response.data;
+                    $("#cartTotalPrice").text(`总计：￥${data}`);
+
+                }
+            })
+        }
+    </script>
 </head>
 <body>
-    <div id="panelwrap">
-        <div class="header">
-            <div class="title">
-                <a href="./index.html">
-                    <span style="font-weight: bold;">绿意花居</span>
-                </a>
-            </div>
+<div id="panelwrap">
+    <div class="header">
+        <div class="title">
+            <a href="./index.html">
+                <span style="font-weight: bold;">绿意花居</span>
+            </a>
+        </div>
 
-            <div class="header_right">
+        <div class="header_right">
                 <span class="onlogin">
                    <span id="welcome"> 欢迎 xxxx,</span>
                     <a href="passwordupdate.html" class="settings">修改密码</a>
                     <a href="javascript:logout()" class="logout">退出</a>
                 </span>
-                <span class="unlogin">
+            <span class="unlogin">
                     <a href="register.html">用户注册</a>
                     <a href="login.html">用户登录</a>
                 </span>
-            </div>
         </div>
+    </div>
 
-        <div class="submenu">
-            <ul>
-                <li><a href="./index.html">主页</a></li>
-                <span class="unlogin">
+    <div class="submenu">
+        <ul>
+            <li><a href="./index.html">主页</a></li>
+            <span class="unlogin">
                     <li><a href="register.html">用户注册</a></li>
                     <li><a href="login.html">用户登录</a></li>
                 </span>
-                <span class="onlogin">
+            <span class="onlogin">
                     <li><a href="">我的购物车</a></li>
                     <li><a href="">我的订单</a></li>
                     <li><a href="../controller/userupdatelist.html">个人信息</a></li>
                     <li><a href="javascript:logout()">用户退出</a></li>
                 </span>
-            </ul>
-        </div>
-        <div class="center_content">
-            <div id="right_wrap">
-                <div id="right_content">
-                    <h2>我的购物车</h2>
-                    <table id="rounded-corner">
-                        <thead>
-                            <tr>
-                                <th align="left">商品名</th>
-                                <th align="left">单价</th>
-                                <th align="left">购买数量</th>
-                                <th align="left">小计</th>
-                                <th align="left">操作</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <td>
-                                    <span>
-                                        总计：￥${zongjia }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input class="form_submit" type="button" value="结算，生成订单">
-                                    </span>
-                                </td>
-                            </tr>
-                        </tfoot>
-                        <tbody id="tbody">
-                            <tr class="odd">
-
-                                <td>
-                                    ${bean.pname }&nbsp;
-                                </td>
-                                <td>
-                                    ￥${bean.jiage }&nbsp;
-                                </td>
-                                <td>
-                                    <input type="text" name="number" value="${bean.shuliang }" id="${bean.id }_num"
-                                        size="5" />&nbsp;
-                                    <a href="javascript:;" onclick="">变更</a> &nbsp;
-                                </td>
-                                <td>
-                                    ￥${bean.jiage *bean.shuliang }&nbsp;
-                                </td>
-                                <td>
-                                    <a href="indexServlet/gouwuchedelete?id=${bean.id }"
-                                        onclick=" return confirm('确定要删除吗?'); ">删除</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div><!-- end of right content-->
-            
-            <div class="sidebar" id="sidebar">
-                <h2>鲜花搜索</h2>
-                <form action=".." method="post">
-                    <br />
-                    鲜花名：<input type="text" name="pname" value="" size="10" />
-                    <br /> <br />
-                    价格￥：<input type="text" name="jiage1" size="1" value="" />
-                    -
-                    <input type="text" name="jiage2" size="1" value="" />
-                    <input type="submit" value="搜索" />
-    
-                </form>
-                <h2>鲜花分类</h2>
-    
-                <ul>
-                    <li><a href="">热门推荐</a></li>
-                    <li><a href="">xxxx</a></li>
-                </ul>
-    
-                <h2>销量排行榜</h2>
-                <ul>
-                    <li><a href="">xxxx</a></li>
-                </ul>
-    
-                <h2>花店公告</h2>
-                <ul>
-                    <li><a href="">xxxx</a></li>
-                </ul>
-    
-            </div>
-    
-
-            <div class="clear"></div>
-        </div>
+        </ul>
     </div>
+    <div class="center_content">
+        <div id="right_wrap">
+            <div id="right_content">
+                <h2>我的购物车</h2>
+                <table id="rounded-corner">
+                    <thead>
+                    <tr>
+                        <th align="left">商品名</th>
+                        <th align="left">单价</th>
+                        <th align="left">购买数量</th>
+                        <th align="left">小计</th>
+                        <th align="left">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cartContent">
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td>
+                                    <span id="cartTotalPrice">总计：</span>
+                                        <input class="form_submit" type="button" value="结算，生成订单">
+
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div><!-- end of right content-->
+
+        <div class="sidebar" id="sidebar">
+            <h2>鲜花搜索</h2>
+            <form action=".." method="post">
+                <br/>
+                鲜花名：<input type="text" name="pname" value="" size="10"/>
+                <br/> <br/>
+                价格￥：<input type="text" name="jiage1" size="1" value=""/>
+                -
+                <input type="text" name="jiage2" size="1" value=""/>
+                <input type="submit" value="搜索"/>
+
+            </form>
+            <h2>鲜花分类</h2>
+
+            <ul>
+                <li><a href="">热门推荐</a></li>
+                <li><a href="">xxxx</a></li>
+            </ul>
+
+            <h2>销量排行榜</h2>
+            <ul>
+                <li><a href="">xxxx</a></li>
+            </ul>
+
+            <h2>花店公告</h2>
+            <ul>
+                <li><a href="">xxxx</a></li>
+            </ul>
+
+        </div>
+
+
+        <div class="clear"></div>
+    </div>
+</div>
 </body>
-<script src="../js/gouwuchelist.js"></script>
 </html>

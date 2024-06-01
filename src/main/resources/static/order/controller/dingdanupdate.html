@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绿意花居</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../user/rely/css/user.css">
+
+
+    <!-- jQuery file -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../user/rely/js/logout.js"></script>
+    <script src="../../user/rely/js/onlinestatus.js"></script>
+    <!--    <script src="../js/gouwuchelist.js"></script>-->
+    <script>
+        //获取orderId参数
+        const orderId = new URLSearchParams(window.location.search).get('orderId');
+        //获取订单详情
+        $.ajax({
+            url: "/tOrder/" + orderId,
+            type: "get",
+            success: function (data) {
+                console.log(data)
+                data = data.data;
+                var statusText = '';
+                switch (data.ostatus) {
+                    case '0':
+                        statusText = '待付款';
+                        break;
+                    case '1':
+                        statusText = '付款未发货';
+                        break;
+                    case '2':
+                        statusText = '已发货';
+                        break;
+                    case '3':
+                        statusText = '待评价';
+                        break;
+                    case '4':
+                        statusText = '结单';
+                        break;
+                    default:
+                        statusText = '未知状态';
+                }
+                $("#orderId").text(data.oid);
+                $("#oName").text(data.oname);
+                $("#oTel").text(data.otel);
+                $("#oAddress").val(data.oaddress);
+                $("#oCreateTime").text(data.ocreateTime);
+                $("#oSumPrice").text(data.osumPrice);
+                $("#oStatus").val(data.ostatus);
+                $("#oNotes").text(data.onotes);
+                getOrderDetail(orderId);
+            }
+        })
+        function updateOrder(){
+            var orderId = $("#orderId").text();
+            var oAddress = $("#oAddress").val();
+            var oStatus = $("#oStatus").val();
+            $.ajax({
+                url: "/tOrder/update/" + orderId,
+                type: "put",
+                data: {
+                    oAddress: oAddress,
+                    oStatus: oStatus,
+                },
+                success: function (data) {
+                        alert("修改成功");
+                }
+            })
+        }
+
+        function getOrderDetail(orderId){
+            $.ajax({
+                url: "/tOrderDetails/getAll/" + orderId,
+                type: "get",
+                success: function (data) {
+                    data = data.data;
+                    data.forEach(orderDetail => {
+                        getFlowerName(orderDetail.fid, orderDetail.odCount);
+                    });
+
+                }
+            })
+        }
+
+        function getFlowerName(flowerId, odCount){
+            $.ajax({
+                url: "/tFlower/" + flowerId,
+                type: "get",
+                success: function (data) {
+                    data = data.data;
+                    $("#oDetails").append(`
+                            <span>花名： ${data.fname} 数量：${odCount}</span><br/>
+                        `);
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div id="panelwrap">
+    <div class="header">
+        <div class="title">
+            <a href="./index.html">
+                <span style="font-weight: bold;">绿意花居</span>
+            </a>
+        </div>
+
+        <div class="header_right">
+            <span class="onlogin">
+               <span id="welcome"> 欢迎 xxxx,</span>
+                <a href="passwordupdate.html" class="settings">修改密码</a>
+                <a href="javascript:logout()" class="logout">退出</a>
+            </span>
+            <span class="unlogin">
+                <a href="register.html">用户注册</a>
+                <a href="login.html">用户登录</a>
+            </span>
+        </div>
+    </div>
+
+    <div class="submenu">
+        <ul>
+            <li><a href="./index.html">主页</a></li>
+            <span class="unlogin">
+                <li><a href="register.html">用户注册</a></li>
+                <li><a href="login.html">用户登录</a></li>
+            </span>
+            <span class="onlogin">
+                <li><a href="">我的购物车</a></li>
+                <li><a href="">我的订单</a></li>
+                <li><a href="../controller/userupdatelist.html">个人信息</a></li>
+                <li><a href="javascript:logout()">用户退出</a></li>
+            </span>
+        </ul>
+    </div>
+
+    <div class="center_content">
+
+        <div id="right_wrap">
+            <div id="right_content">
+                <h2>订单信息详情</h2>
+                <div id="tab1" class="tabcontent">
+                    <div class="form">
+                        <div class="form_row">
+                            <label>订单号:</label>
+                            <span id="orderId"></span>
+                        </div>
+                        <div class="form_row">
+                            <label>收货人姓名:</label>
+                            <span id="oName"></span>
+                        </div>
+                        <div class="form_row">
+                            <label>收货人手机:</label>
+                            <span id="oTel"></span>
+                        </div>
+                        <div class="form_row">
+                            <label>收货地址:</label>
+                            <input id="oAddress" value="">
+<!--                            <span id="oAddress"></span>-->
+                        </div>
+                        <div class="form_row">
+                            <label>生成时间:</label>
+                            <span id="oCreateTime"></span>
+                        </div>
+                        <div class="form_row">
+                            <label>总价 :</label>
+                            <span id="oSumPrice"></span>
+                        </div>
+                        <div class="form_row">
+                            <label>订单状态:</label>
+                            <select id="oStatus">
+                                <option value="0">待付款</option>
+                                <option value="1">付款未发货</option>
+                                <option value="2">已发货</option>
+                                <option value="3">待评价</option>
+                                <option value="4">结单</option>
+                            </select>
+                        </div>
+                        <div class="form_row">
+                            <label>备注:</label>
+                            <span id="oNotes"></span>
+                        </div>
+                        <div class="form_row">
+                            <label>订单详情:</label><br/><br/><br/>
+                            <span id="oDetails"></span>
+                        </div>
+                        <div class="form_row">
+                            <input type="button" class="form_submit" value="返回" onclick="javascript:history.go(-1);"/>
+                        </div>
+                        <div class="form_row">
+                            <input type="button" class="form_submit" value="保存" onclick="updateOrder();"/>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div><!-- end of right content-->
+
+
+        <div class="sidebar" id="sidebar">
+            <h2>鲜花搜索</h2>
+            <form action=".." method="post">
+                <br/>
+                鲜花名：<input type="text" name="pname" value="" size="10"/>
+                <br/> <br/>
+                价格￥：<input type="text" name="jiage1" size="1" value=""/>
+                -
+                <input type="text" name="jiage2" size="1" value=""/>
+                <input type="submit" value="搜索"/>
+
+            </form>
+            <h2>鲜花分类</h2>
+
+            <ul>
+                <li><a href="">热门推荐</a></li>
+                <li><a href="">xxxx</a></li>
+            </ul>
+
+            <h2>销量排行榜</h2>
+            <ul>
+                <li><a href="">xxxx</a></li>
+            </ul>
+
+            <h2>花店公告</h2>
+            <ul>
+                <li><a href="">xxxx</a></li>
+            </ul>
+
+        </div>
+
+
+        <div class="clear"></div>
+    </div> <!--end of center_content-->
+
+    <div class="footer">
+        <span class="onlogin">
+            <a href="../controller/userlist.html">管理后台</a>
+        </span>
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -5,130 +5,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>绿意花居</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
     <link rel="stylesheet" href="../../user/rely/css/user.css">
 
     <script src="../js/jquery.min.js"></script>
     <script src="../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../user/rely/js/userupdate.js"></script>
     <script src="../../user/rely/js/logout.js"></script>
+    <script>
+        getAll()
+        //获取所有订单
+        function getAll() {
+            $.ajax({
+                url: "/tOrder/getAll?current=1&size=10",
+                type: "get",
+                success: function (data) {
+                    data = data.data.records
+                    console.log(data)
+                    data.forEach(order => {
+                        var statusText = '';
+                        switch (order.ostatus) {
+                            case '0':
+                                statusText = '待付款';
+                                break;
+                            case '1':
+                                statusText = '付款未发货';
+                                break;
+                            case '2':
+                                statusText = '已发货';
+                                break;
+                            case '3':
+                                statusText = '待评价';
+                                break;
+                            case '4':
+                                statusText = '结单';
+                                break;
+                            default:
+                                statusText = '未知状态';
+                        }
+                        $("#tableContent").append(`
+                             <tr class="odd">
+                                 <td>
+                                     <span id="orderId">${order.oid}</span>
+                                 </td>
+                                 <td>
+                                     <span id="oName">${order.oname}</span>
+                                 </td>
+                                 <td>
+                                     <span id="oStatus">${statusText}</span>
+                                 </td>
+                                 <td>
+                                     <span id="oCreateTime">${order.ocreateTime}</span>
+                                 </td>
+                                 <td>
+                                     <span id="oSumPrice">${order.osumPrice}</span>
+                                 </td>
+                                 <td>
+                                     <a href="/order/controller/dingdanupdate.html?orderId=${order.oid}">查看订单详情</a>
+                                     <a href="/delete?id=${order.id}" onClick="return confirm('确定要处理订单吗?');">处理订单</a>
+                                 </td>
+                             </tr>
+                        `);
+                    });
+                }
+            });
+        }
+        //搜索订单
+        function search() {
+            var oId = $('[name="orderid"]').val();
+            $.ajax({
+                url: "/tOrder/" + oId,
+                type: "get",
+                success: function (data) {
+                    data = data.data
+                    console.log(data)
+                    var statusText = '';
+                    switch (data.ostatus) {
+                        case '0':
+                            statusText = '待付款';
+                            break;
+                        case '1':
+                            statusText = '付款未发货';
+                            break;
+                        case '2':
+                            statusText = '已发货';
+                            break;
+                        case '3':
+                            statusText = '待评价';
+                            break;
+                        case '4':
+                            statusText = '结单';
+                            break;
+                        default:
+                            statusText = '未知状态';
+                    }
+                    $("#tableContent").html(`
+                             <tr class="odd">
+                                 <td>
+                                     <span id="orderId">${data.oid}</span>
+                                 </td>
+                                 <td>
+                                     <span id="oName">${data.oname}</span>
+                                 </td>
+                                 <td>
+                                     <span id="oStatus">${statusText}</span>
+                                 </td>
+                                 <td>
+                                     <span id="oCreateTime">${data.ocreateTime}</span>
+                                 </td>
+                                 <td>
+                                     <span id="oSumPrice">${data.osumPrice}</span>
+                                 </td>
+                                 <td>
+                                     <a href="/order/controller/dingdanupdate.html?orderId=${data.oid}">查看订单详情</a>
+                                     <a href="/delete?id=${data.id}" onClick="return confirm('确定要处理订单吗?');">处理订单</a>
+                                 </td>
+                             </tr>
+                        `);
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
-    <div id="panelwrap">
+<div id="panelwrap">
 
 
-        <div class="header">
-            <div class="title">
-                <span style="font-weight: bold;font-size: 35px;">绿意花居</span>
-
-            </div>
-
-            <div class="header_right">欢迎 xxx, <a href="manageServlet/passwordupdate" class="settings">修改密码</a> <a
-                    href="manageServlet/loginout" class="logout">退出系统</a> </div>
+    <div class="header">
+        <div class="title">
+            <span style="font-weight: bold;font-size: 35px;">绿意花居</span>
 
         </div>
 
-
-        <div class="submenu">
-
-        </div>
-
-        <div class="center_content">
-
-            <div id="right_wrap">
-                <div id="right_content">
-
-                    <h2>${biaoti }</h2>
-                    <form action="${url }" method="post">
-
-                        订单号:<input type="text" size="10" name="orderid" value="${orderid }" />
-                        订单状态:
-                        <select name="status">
-                            <option value="">所有选项</option>
-                            <option value="未处理">未处理</option>
-                            <option value="已处理">已处理</option>
-                        </select>
-                        <input type="submit" value="查询" />
-                    </form>
-
-
-                    <table id="rounded-corner">
-                        <thead>
-                            <tr>
-
-                                <th align="left">订单号</th>
-                                <th align="left">收货人姓名</th>
-                                <th align="left">订单状态</th>
-                                <th align="left">生成时间</th>
-                                <th align="left">总价</th>
-
-                                <th align="left">操作</th>
-
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <td colspan="12">${pagerinfo }</td>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <tr class="odd">
-
-                                <td>
-                                    ${bean.orderid }&nbsp;
-                                </td>
-                                <td>
-                                    ${bean.xingming }&nbsp;
-                                </td>
-                                <td>
-                                    ${bean.status }&nbsp;
-                                </td>
-                                <td>
-                                    ${bean.shijian }&nbsp;
-                                </td>
-                                <td>
-                                    ￥${bean.zongjia }&nbsp;
-                                </td>
-                                <td>
-                                    <a href="${url2 }update3?id=${bean.id }">查看订单详情</a>
-                                    <a href="${url2 }delete?id=${bean.id }"
-                                        onclick="return confirm('确定要处理订单吗?'); ">处理订单</a>
-
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-
-
-
-                </div>
-
-            </div><!-- end of right content-->
-
-
-            <div class="sidebar" id="sidebar">
-                <h2>主菜单</h2>
-
-                <ul>
-                    <li><a href="manageServlet/fenleilist">分类管理</a></li>
-                    <li><a href="manageServlet/productlist">鲜花管理</a></li>
-                    <li><a href="manageServlet/gonggaolist">公告管理</a></li>
-                    <li><a href="manageServlet/dingdanlist">订单管理</a></li>
-                    <li><a href="manageServlet/userlist">用户管理</a></li>
-                </ul>
-
-            </div>
-
-            <div class="clear"></div>
-        </div>
+        <div class="header_right">欢迎 xxx, <a href="manageServlet/passwordupdate" class="settings">修改密码</a> <a
+                href="manageServlet/loginout" class="logout">退出系统</a></div>
 
     </div>
+
+
+    <div class="submenu">
+
+    </div>
+
+    <div class="center_content">
+
+        <div id="right_wrap">
+            <div id="right_content">
+
+                <h2>订单管理</h2>
+                <!--                    <form action="${url}" method="post">-->
+
+                <!--                        订单号:<input type="text" size="10" name="orderid" value="${orderid}"/>-->
+                <!--                        订单状态:-->
+                <!--                        <select name="status">-->
+                <!--                            <option value="">所有选项</option>-->
+                <!--                            <option value="未处理">未处理</option>-->
+                <!--                            <option value="已处理">已处理</option>-->
+                <!--                        </select>-->
+                <!--                        <input type="submit" value="查询"/>-->
+                <!--                    </form>-->
+                订单号:<input type="text" size="10" name="orderid" value="" placeholder="请输入订单号"/>
+                订单状态:
+                <select name="status">
+                    <option value="">所有选项</option>
+                    <option value="未处理">未处理</option>
+                    <option value="已处理">已处理</option>
+                </select>
+                <button type="button" value="查询" onclick="search()">查询</button>
+                <table id="rounded-corner">
+                    <thead>
+                    <tr>
+                        <th align="left">订单号</th>
+                        <th align="left">收货人姓名</th>
+                        <th align="left">订单状态</th>
+                        <th align="left">生成时间</th>
+                        <th align="left">总价</th>
+
+                        <th align="left">操作</th>
+
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <td colspan="12">${pagerinfo }</td>
+                    </tr>
+                    </tfoot>
+                    <tbody id="tableContent">
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div><!-- end of right content-->
+
+
+        <div class="sidebar" id="sidebar">
+            <h2>主菜单</h2>
+
+            <ul>
+                <li><a href="manageServlet/fenleilist">分类管理</a></li>
+                <li><a href="manageServlet/productlist">鲜花管理</a></li>
+                <li><a href="manageServlet/gonggaolist">公告管理</a></li>
+                <li><a href="manageServlet/dingdanlist">订单管理</a></li>
+                <li><a href="manageServlet/userlist">用户管理</a></li>
+            </ul>
+
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+</div>
 
 
 </body>
 
 </html>
+
