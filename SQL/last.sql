@@ -5,7 +5,7 @@ USE flower_shop;
 # 李华祥开始
 DROP TABLE IF EXISTS t_flower;
 CREATE TABLE t_flower(
-    `f_id` INT NOT NULL  COMMENT '鲜花id' ,
+    `f_id` INT NOT NULL auto_increment  COMMENT '鲜花id' ,
     `f_name` VARCHAR(255) NOT NULL  COMMENT '鲜花名称',
     `f_implication` VARCHAR(255) NOT NULL  COMMENT '鲜花寓意' ,
     `f_color` VARCHAR(255) NOT NULL  COMMENT '鲜花颜色' ,
@@ -17,7 +17,7 @@ CREATE TABLE t_flower(
 
 DROP TABLE IF EXISTS t_public_notice;
 CREATE TABLE t_public_notice(
-    `pn_id` INT NOT NULL  COMMENT '公告id' ,
+    `pn_id` INT NOT NULL auto_increment  COMMENT '公告id' ,
     `pn_content` VARCHAR(255) NOT NULL comment '公告内容',
     `pn_start_time` DATETIME NOT NULL default CURRENT_TIMESTAMP comment '开始时间',
     `pn_end_time` DATETIME NOT NULL default CURRENT_TIMESTAMP comment '结束时间',
@@ -137,7 +137,7 @@ DROP TABLE IF EXISTS t_order;
 
 CREATE TABLE t_order
 (
-    o_id          int NOT NULL COMMENT '订单id',
+    o_id          int NOT NULL auto_increment COMMENT '订单id',
     u_id          int NOT NULL COMMENT '用户id',
     o_name        VARCHAR(255) NOT NULL COMMENT '收货人姓名',
     o_tel         CHAR(11)     NOT NULL COMMENT '收货人电话',

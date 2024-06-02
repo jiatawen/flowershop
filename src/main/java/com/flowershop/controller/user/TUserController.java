@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.flowershop.entity.user.TUser;
+import com.flowershop.entity.user.UserMonthlyActivity;
 import com.flowershop.service.user.TUserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -102,6 +103,14 @@ public class TUserController extends ApiController {
     @PostMapping("resetPassword")
     public Integer resetPassword(@RequestParam("email") String email, @RequestParam("code") String code, @RequestParam("password") String password) {
         return tUserService.resetPassword(email, code, password);
+    }
+
+    /**
+     * 通过uid查询用户订单情况
+     */
+    @GetMapping("/order/{uid}")
+    public UserMonthlyActivity selectByUid(@PathVariable String uid) {
+        return null;
     }
 }
 
