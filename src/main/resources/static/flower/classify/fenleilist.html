@@ -1,139 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>网上花店管理后台</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <title>网上花店管理后台</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
 
-<!-- jQuery file -->
-<script src="../../user/rely/js/jquery.min.js"></script>
-<script src="../../user/rely/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-var $ = jQuery.noConflict();
-$(function() {
-$('#tabsmenu').tabify();
-$(".toggle_container").hide(); 
-$(".trigger").click(function(){
-    $(this).toggleClass("active").next().slideToggle("slow");
-    return false;
-});
-});
-</script>
+    <!-- jQuery file -->
+    <script src="../../user/rely/js/jquery.min.js"></script>
+    <script src="../../user/rely/js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        let _user = null;
+
+        $.ajax({
+            url: "/getSession",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                if (data == null) {
+                    offline();
+                } else {
+                    _user = data;
+                    let text = "";
+                    if (data.ustatus == 0) {
+                        text = "<span>欢迎您，" + data.uname + "</span><a href=\"/user/controller/userlist.html\">控制台</a>";
+                    } else {
+                        text = "欢迎您，" + data.uname;
+                    }
+                    $("#welcome").html(text);
+                    online(data);
+
+
+                }
+            },
+            error: function () {
+                offline();
+            }
+        })
+
+
+        function online(data) {
+            // 改变class为onlogin的css样式为可见
+            $(".onlogin").css("display", "block");
+            $(".unlogin").css("display", "none");
+        }
+
+        function offline() {
+            // 改变class为onlogin的css样式为不可见
+            $(".onlogin").css("display", "none");
+            $(".unlogin").css("display", "block");
+        }
+    </script>
 </head>
+
 <body>
-<div id="panelwrap">
+    <div id="panelwrap">
 
 
-    <div class="header">
-        <div class="title">
-            <a href="../index/index.html">
-                <span style="font-weight: bold;">网上花店</span>
-            </a>
-        </div>
+        <div class="header">
+            <div class="title">
+                <a href="../index/index.html">
+                    <span style="font-weight: bold;">网上花店</span>
+                </a>
+            </div>
 
-        <div class="header_right">
+            <div class="header_right">
                 <span class="onlogin">
-                    欢迎 xxxx,
+                    欢迎 jiata,
                     <a href="passwordupdate.html" class="settings">修改密码</a>
                     <a href="javascript:logout();" class="logout">退出</a>
                 </span>
-            <span class="unlogin">
+                <span class="unlogin">
                     <a href="../index/register.html">用户注册</a>
                     <a href="../index/login.html">用户登录</a>
                 </span>
+            </div>
         </div>
-    </div>
-    
-    <div class="submenu">
-    
-    </div>          
-                    
-    <div class="center_content">  
- 
-    <div id="right_wrap">
-    <div id="right_content">             
-    <h2>${biaoti }</h2> 
-                    
-                    
+
+        <div class="submenu">
+
+        </div>
+
+        <div class="center_content">
+
+            <div id="right_wrap">
+                <div id="right_content">
+                    <h2>分类管理</h2>
 
 
-    
-    
-    
-    <div id="tab1" class="tabcontent">
-       
-        <div class="form">
-            
-            <form action="${url }" method="post">
-            <input  onclick="javascript:window.location.href='<%=basePath %>${url2 }add';" class="buttoncss" type="button" value="添加新分类" />
-            &nbsp;&nbsp;&nbsp;
-            分类名:<input type="text" size="10"  name="fname"  value="${fname }"/>     
-            <input type="submit"  value="查询" />     
-            </form>
-            
-            
-            <table id="rounded-corner">
-                <thead>
-                    <tr>
-                        
-                        <th align="left">分类名</th>
-                        <th align="left">操作</th>
-                    
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td colspan="12">${pagerinfo }</td>
-                    </tr>
-                </tfoot>
-                <tbody>
 
-                    <tr class="odd">
-                        
-                        <td>
-                        ${bean.fname }&nbsp;
-                        </td>
-                        <td>
-                        <a href="${url2 }update3?id=${bean.id }">查看</a> &nbsp; &nbsp; &nbsp;
-                        <a href="${url2 }update?id=${bean.id }">修改</a> &nbsp; &nbsp; &nbsp;
-                        <a href="${url2 }delete?id=${bean.id }" onclick="return confirm('确定要删除吗?'); ">删除</a>
-                        </td>
-                    
-                    </tr>
-                
-                </tbody>
-            </table>
-            
-            
+
+
+
+
+                    <div id="tab1" class="tabcontent">
+
+                        <div class="form">
+
+                            <form action="${url }" method="post">
+                                <input onclick="javascript:window.location.href='<%=basePath %>${url2 }add';"
+                                    class="buttoncss" type="button" value="添加新分类" />
+                                &nbsp;&nbsp;&nbsp;
+                                分类名:<input type="text" size="10" name="fname" value="" />
+                                <input type="submit" value="查询" />
+                            </form>
+
+
+                            <table id="rounded-corner">
+                                <thead>
+                                    <tr>
+
+                                        <th align="left">分类名</th>
+                                        <th align="left">操作</th>
+
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="12"></td>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+
+                                    <tr class="odd">
+
+                                        <td>
+                                            友情类&nbsp;
+                                        </td>
+                                        <td>
+                                            <a href="${url2 }update3?id=${bean.id }">查看</a> &nbsp; &nbsp; &nbsp;
+                                            <a href="${url2 }update?id=${bean.id }">修改</a> &nbsp; &nbsp; &nbsp;
+                                            <a href="${url2 }delete?id=${bean.id }"
+                                                onclick="return confirm('确定要删除吗?'); ">删除</a>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="odd">
+
+                                        <td>
+                                            爱情类&nbsp;
+                                        </td>
+                                        <td>
+                                            <a href="${url2 }update3?id=${bean.id }">查看</a> &nbsp; &nbsp; &nbsp;
+                                            <a href="${url2 }update?id=${bean.id }">修改</a> &nbsp; &nbsp; &nbsp;
+                                            <a href="${url2 }delete?id=${bean.id }"
+                                                onclick="return confirm('确定要删除吗?'); ">删除</a>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div><!-- end of right content-->
+
+
+            <div class="sidebar" id="sidebar">
+                <h2>主菜单</h2>
+
+                <ul>
+                    <li><a href="/flower/classify/fenleilist.html">分类管理</a></li>
+                    <li><a href="">鲜花管理</a></li>
+                    <li><a href="/flower/gonggao/gonggaolist.html">公告管理</a></li>
+                    <li><a href="/order/controller/dingdanlist.html">订单管理</a></li>
+                    <li><a href="/user/controller/userlist.html">用户管理</a></li>
+                </ul>
+
+            </div>
+
             <div class="clear"></div>
         </div>
+
     </div>
-    
 
-      
-     </div>
-     </div><!-- end of right content-->
-                     
-                    
-     <div class="sidebar" id="sidebar">
-    <h2>主菜单</h2>
-    
-        <ul>
-            <li><a href="../../manageServlet/fenleilist" >分类管理</a></li>
-            <li><a href="../../manageServlet/productlist" >鲜花管理</a></li>
-            <li><a href="../../manageServlet/gonggaolist" >公告管理</a></li>
-            <li><a href="../../manageServlet/dingdanlist" >订单管理</a></li>
-            <li><a href="../../manageServlet/userlist" >用户管理</a></li>
-        </ul>
 
- </div>        
-    
-    <div class="clear"></div>
-    </div> 
-
-</div>
-
-        
 </body>
+
 </html>

@@ -1,105 +1,329 @@
--- 添加测试鲜花数据
-INSERT INTO t_flower (f_name, f_implication, f_color, f_img, f_price, f_number)
-VALUES
-    ('玫瑰', '爱情', '红色', 'rose.jpg', 99.99, '100'),
-    ('郁金香', '美好', '粉色', 'tulip.jpg', 89.99, '80'),
-    ('百合', '纯洁', '白色', 'lily.jpg', 79.99, '120'),
-    ('康乃馨', '母爱', '粉白色', 'carnation.jpg', 69.99, '150'),
-    ('勿忘我', '不变的爱', '蓝色', 'forget_me_not.jpg', 59.99, '200'),
-    ('向日葵', '阳光', '黄色', 'sunflower.jpg', 49.99, '180'),
-    ('满天星', '美梦成真', '紫色', 'baby\'s_breath.jpg', 39.99, '220'),
-    ('康乃馨', '美好的一天', '粉色', 'pink_carnation.jpg', 69.99, '190'),
-    ('桔梗', '希望', '蓝紫色', 'bellflower.jpg', 59.99, '210'),
-    ('玉簪', '纯真', '淡黄色', 'freesia.jpg', 79.99, '140');
-
--- 添加测试用户数据
-INSERT INTO t_user (u_name, u_status, u_password, u_mail, u_expect, u_creat_time)
-VALUES
-    ('admin', '0', 'admin123', 'admin@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user1', '1', 'user123', 'user1@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user2', '1', 'user123', 'user2@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user3', '1', 'user123', 'user3@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user4', '1', 'user123', 'user4@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user5', '1', 'user123', 'user5@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user6', '1', 'user123', 'user6@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user7', '1', 'user123', 'user7@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user8', '1', 'user123', 'user8@example.com', 0.85, '2023-01-01 00:00:00'),
-    ('user9', '1', 'user123', 'user9@example.com', 0.85, '2023-01-01 00:00:00');
-
--- 添加测试鲜花分类数据
-INSERT INTO t_classify (c_variety)
-VALUES
-    ('玫瑰'),
-    ('郁金香'),
-    ('百合'),
-    ('康乃馨'),
-    ('勿忘我'),
-    ('向日葵'),
-    ('满天星'),
-    ('康乃馨'),
-    ('桔梗'),
-    ('玉簪');
-
--- 添加测试用户收货联系方式数据
-INSERT INTO t_user_contact (u_id, uc_name, uc_address, uc_tel)
-SELECT
-    u_id,
-    CONCAT('收货人', u_id),
-    CONCAT('地址', u_id),
-    CONCAT('电话', u_id)
-FROM t_user;
-
--- 添加测试用户鲜花期望数据
-INSERT INTO t_user_settings (u_id, c_id, us_expect)
-SELECT
-    u_id,
-    c_id,
-    RAND() * 0.15 + 0.7 -- 随机生成期望值
-FROM t_user, t_classify;
-
--- 添加测试用户登录行为记录数据
-INSERT INTO t_user_login_behavior (u_id, ulb_type, ulb_time)
-SELECT
-    u_id,
-    '0',
-    DATE_ADD('2023-01-01 00:00:00', INTERVAL FLOOR(RAND() * 365) DAY) -- 随机生成一年内的时间
-FROM t_user
-LIMIT 50;
-
--- 添加测试用户搜索行为记录数据
-INSERT INTO t_user_search_behavior (u_id, usb_time, ft_id, usb_content)
-SELECT
-    u_id,
-    DATE_ADD('2023-01-01 00:00:00', INTERVAL FLOOR(RAND() * 365) DAY), -- 随机生成一年内的时间
-    FLOOR(RAND() * 10) + 1, -- 随机鲜花种类id
-    CONCAT('搜索内容', u_id)
-FROM t_user
-LIMIT 50;
-
--- 添加测试购物车数据
-INSERT INTO t_Cart (u_id, f_id, c_count, c_status)
-SELECT
-    u_id,
-    FLOOR(RAND() * 10) + 1, -- 随机鲜花id
-    FLOOR(RAND() * 10) + 1, -- 随机数量
-    '1'
-FROM t_user
-LIMIT 50;
-
--- 添加测试订单数据
-INSERT INTO t_order (u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status)
-SELECT
-    u_id,
-    CONCAT('收货人', u_id),
-    CONCAT('电话', u_id),
-    CONCAT('地址', u_id),
-    CONCAT('备注', u_id),
-    DATE_ADD('2023-01-01 00:00:00', INTERVAL FLOOR(RAND() * 365) DAY), -- 随机生成一年内的时间
-    0,
-    FLOOR(RAND() * 5)
-FROM t_user
-LIMIT 50;
-
--- 添加测试订单详情数据
-INSERT INTO t_order_details (o_id, f_id, od_count)
-SELECT
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (1, 'QgdxMKEgfy', 'dmVhMGWefKpOrctFlXpp', 'kUTIE', 'flower_img_0', 41.81, '11');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (2, 'ClCOfATkov', 'hZhXjwsUqMyEuMRYWqjw', 'QeSCc', 'flower_img_1', 18.74, '50');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (3, 'LNxbhlROuT', 'TrdvOpnufpzDwonThhNP', 'fQMmf', 'flower_img_2', 29.91, '17');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (4, 'SRHTyLMHVj', 'gySJFVSoEaXbpLZvTpyu', 'uOAsa', 'flower_img_3', 97.44, '12');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (5, 'rdaXywwQvO', 'vRwEvhftxYNmRjNZgCFE', 'XPicm', 'flower_img_4', 33.01, '3');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (6, 'FnfGhutpwj', 'vNQMQMehLMHHzwLaqIvt', 'fbmXv', 'flower_img_5', 70.55, '14');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (7, 'ncxlvETvaT', 'eUNuhTdNiMJLaUubVOvH', 'vvOPu', 'flower_img_6', 48.38, '42');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (8, 'xbiVBiJsiM', 'VvRhlSfjEZFGGAbsGMDa', 'oZZcU', 'flower_img_7', 98.63, '39');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (9, 'NtfRKrarke', 'zOBEfCdSuTCDaIVwqzdp', 'toETF', 'flower_img_8', 58.3, '24');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (10, 'mBnEPZGKqI', 'ZQIgEdRliariEkxYZGEx', 'uadpg', 'flower_img_9', 95.04, '19');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (11, 'KFflghhRWL', 'azVcVRcJsTRxFnkDpawd', 'Catgb', 'flower_img_10', 26.82, '14');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (12, 'uWKnfMEVBK', 'gWJkmqDBRThSZWJZDWDE', 'FgtGC', 'flower_img_11', 79.53, '24');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (13, 'BwBDkWrGze', 'qLPZdZivrArtXetNuzXx', 'Quzvl', 'flower_img_12', 37.63, '25');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (14, 'ACwidVNBHF', 'hpIpUmuzmVJCQyntQuZy', 'ZVVJT', 'flower_img_13', 70.82, '23');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (15, 'bbXSJzSzWw', 'EIOyINUzvXYZyfKcyttU', 'gxNaf', 'flower_img_14', 38.47, '43');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (16, 'hvWbkVFUnD', 'xYzChSUUNVVHXDxoevXt', 'PqyjZ', 'flower_img_15', 23.43, '35');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (17, 'JiFORgkfIf', 'iFZoIxYRurRNhPbHFoPF', 'JEgYC', 'flower_img_16', 55.4, '23');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (18, 'dFfacmfddC', 'NkDBeTOCsVAQpHhAWQiI', 'LiWQA', 'flower_img_17', 11.12, '20');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (19, 'hnltUWQFih', 'hjWWwcXbEpZGxybYHAyo', 'sdayZ', 'flower_img_18', 25.87, '29');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (20, 'ZNCApnyyaJ', 'pxGYyHUGHrHFVvBxBUdo', 'ldRNO', 'flower_img_19', 76.93, '12');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (21, 'JjUmXEVGuJ', 'zdyfjcDFUcLcEAoJNeAl', 'fCwqc', 'flower_img_20', 51.19, '2');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (22, 'QXfpADDOzO', 'AEhrnakerewomnpGSifj', 'mKeUz', 'flower_img_21', 32.51, '25');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (23, 'PPGWoGUCgz', 'ZSAljHlNFiKowDowhcqB', 'ICXos', 'flower_img_22', 74.46, '12');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (24, 'WahnEJDiQX', 'cONDluDsfwHqhPyzyMiJ', 'ksByB', 'flower_img_23', 80.0, '30');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (25, 'EJdWyMuRUm', 'dmUlnUAfmSpIXPFqDYZJ', 'BWloV', 'flower_img_24', 60.15, '21');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (26, 'owwJghGmrX', 'kbGPamCEZtpCqvnBxBhz', 'BgbBd', 'flower_img_25', 72.64, '48');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (27, 'qiDYNqGqpS', 'XXtMzXiTzXqqDsudurSn', 'TpGKV', 'flower_img_26', 79.81, '12');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (28, 'AoXzYujLgZ', 'MjZboOznwxUhuSKpyRNV', 'LbuDu', 'flower_img_27', 53.29, '9');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (29, 'yUwNuwvhFW', 'tsNDlRrviVoQUMPtMhxq', 'ufPUO', 'flower_img_28', 35.34, '36');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (30, 'BDesIxvpvZ', 'dUxCWAoLsgjxvHnQtQJf', 'LpeDJ', 'flower_img_29', 34.89, '22');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (31, 'QbjdjyXPcK', 'CVrBFzEKYfYyIiPSkwZy', 'hsPIE', 'flower_img_30', 51.93, '19');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (32, 'WXQWOqFMjS', 'lEmuKWsOYTzvXKIfsTXD', 'NQqLN', 'flower_img_31', 29.89, '15');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (33, 'fGdajnTWbq', 'fsMCxaBPHTckKtcjrGqa', 'bhtOE', 'flower_img_32', 87.33, '42');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (34, 'agnDWnouJM', 'ONawhFYajlKoNaAnEfdX', 'AGLIT', 'flower_img_33', 82.78, '46');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (35, 'IUEjOilmhL', 'egXonCBkEluloxCxRjeF', 'GDssO', 'flower_img_34', 79.7, '17');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (36, 'efQZGQqQaN', 'YIuSxOwnAfreQmeroYub', 'IqnxG', 'flower_img_35', 96.6, '33');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (37, 'OvhwWnRGxc', 'WdufFAtEIqeCztuNFVQY', 'tKVwV', 'flower_img_36', 77.59, '39');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (38, 'OsstxASAcE', 'QwsEojiaUlReBZpVGsjy', 'tPqXD', 'flower_img_37', 27.63, '7');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (39, 'zcFeCrSbEB', 'WZJIQaRfmRKlNQuXtayd', 'optmg', 'flower_img_38', 48.1, '25');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (40, 'MHigMwdYpt', 'boEsfDeoTlpnCzeAineI', 'APdke', 'flower_img_39', 42.74, '35');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (41, 'VfMoyuuUAG', 'enQbVAjzRTemaHRpoAiD', 'KcDLT', 'flower_img_40', 44.33, '24');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (42, 'KpdaWagGxj', 'qBmGelcnuXAGUpnVVyCY', 'hHlNz', 'flower_img_41', 97.85, '29');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (43, 'ImJmDWLKqU', 'xfQJdgLSZGOUUndFjQyo', 'kEkHO', 'flower_img_42', 24.63, '6');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (44, 'UkgeaQFsdG', 'EeYTWXKwFYkAtnARbzar', 'hGEYj', 'flower_img_43', 66.89, '19');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (45, 'FTfFuJYFTd', 'EysJyUPMFFuzUcATeDiO', 'LEbIS', 'flower_img_44', 13.91, '43');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (46, 'qdZFLriRwM', 'rbwmYIgSDvXWyiBYDZOS', 'IjbAx', 'flower_img_45', 26.02, '33');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (47, 'KrtycudZNR', 'sCslLTfzsYHtFTmSJAvp', 'djkvS', 'flower_img_46', 30.2, '24');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (48, 'TTuEKhAPEF', 'udLyxqBFoDJdSTQWhQrL', 'RhFzV', 'flower_img_47', 67.96, '24');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (49, 'HQaMQeLnDC', 'UxxhggWjcshExMcPjIZu', 'YbgkH', 'flower_img_48', 71.82, '38');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (50, 'uSozjaYgSj', 'KnttjIXiUgwzGRexEtxL', 'AQkOa', 'flower_img_49', 92.06, '28');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (51, 'SinzVksPDA', 'tNGtZJGaEaGQaGUFzsmn', 'zXVYF', 'flower_img_50', 78.35, '50');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (52, 'pbgLwQCeKm', 'zVPJmRZdOKsNHwZzqkFw', 'ESEir', 'flower_img_51', 52.28, '14');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (53, 'umhHDtmCcv', 'jZhAOLYPXILKsDfQibyR', 'yiSSp', 'flower_img_52', 44.41, '13');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (54, 'DNlbdtQqvI', 'oDJAIWxKlriaNkZGpKOv', 'poRDE', 'flower_img_53', 40.46, '44');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (55, 'XAfixdDNlv', 'KGHIlQyTIgmKvZtgvWHs', 'EBvKG', 'flower_img_54', 17.62, '10');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (56, 'LBSeLrSIlH', 'KnjrYaibtFCwwqOGvzwY', 'nPfSz', 'flower_img_55', 87.31, '38');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (57, 'HFjVMyIgQE', 'nBvXWekUefzElQKPEMHs', 'dGKdU', 'flower_img_56', 11.45, '14');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (58, 'bLjLuOwZUp', 'mfLuggAKuxrqxtOUxmAj', 'TpcNA', 'flower_img_57', 73.07, '6');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (59, 'WfIYBlVODV', 'IoGBYUOyPnwuDstYfsGC', 'FeYyq', 'flower_img_58', 14.84, '24');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (60, 'KXZYHUNbzg', 'HgcsabgqGKtrTcAahQsZ', 'pHFpw', 'flower_img_59', 52.23, '44');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (61, 'wHlxNvZQTt', 'awqzjLXBHpffjFCDCHmT', 'ZiYPU', 'flower_img_60', 78.71, '35');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (62, 'bKFZgmJORE', 'KCZaLlTxjWbXmvbjTdoP', 'ijLWa', 'flower_img_61', 46.91, '12');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (63, 'jFGhBjtmil', 'zTNbuAmtPhPUVNeqvcLa', 'bsdui', 'flower_img_62', 30.79, '44');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (64, 'EcXqLYdSTr', 'BOkqSSNsrXyjMQVyBdaD', 'WsIAG', 'flower_img_63', 20.33, '6');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (65, 'TyYxTRrndk', 'jjKJXQitDrGcpZomBMtk', 'LcLgQ', 'flower_img_64', 89.48, '49');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (66, 'ISakGaRYJd', 'KQTfiMWBzErJCKHtuphl', 'vGIGI', 'flower_img_65', 90.74, '32');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (67, 'oWVWErOiQk', 'LrOusbdEWcIScFioAhLv', 'xvWpn', 'flower_img_66', 64.33, '18');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (68, 'VOcFxAmHee', 'lzVHoTWXipuAPHvBwBuc', 'xWHJq', 'flower_img_67', 35.18, '21');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (69, 'YGsqfwknwg', 'OFNaOPzNBhPuSuWWzaJi', 'pziHu', 'flower_img_68', 37.35, '10');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (70, 'UNPKECzdwX', 'lkixMvQdTSFfmlUCgBNz', 'sUBoe', 'flower_img_69', 44.74, '8');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (71, 'jsXCFpszWd', 'jDYDXoBxTVBRNNrwEmhi', 'uAQLe', 'flower_img_70', 64.13, '27');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (72, 'KKWmTMaFtG', 'lDcbjehQqJzBRpgDZDcz', 'ARefv', 'flower_img_71', 25.53, '49');
+INSERT INTO t_flower (f_id, f_name, f_implication, f_color, f_img, f_price, f_number) VALUES (73, 'gHxHpRxdzs', 'FdbUnRXvxFwyvGuvgTWL', 'cPTYk', 'flower_img_72', 59.64, '41');
+INSERT INTO t_classify (c_id, c_variety) VALUES (1, 'gRpowaVT');
+INSERT INTO t_classify (c_id, c_variety) VALUES (2, 'Dhufojna');
+INSERT INTO t_classify (c_id, c_variety) VALUES (3, 'vSvJGHHw');
+INSERT INTO t_classify (c_id, c_variety) VALUES (4, 'numDzQHZ');
+INSERT INTO t_classify (c_id, c_variety) VALUES (5, 'ftuxjWgw');
+INSERT INTO t_classify (c_id, c_variety) VALUES (6, 'TyCfQKUV');
+INSERT INTO t_classify (c_id, c_variety) VALUES (7, 'XrlzoMjG');
+INSERT INTO t_classify (c_id, c_variety) VALUES (8, 'cmHtmVsu');
+INSERT INTO t_classify (c_id, c_variety) VALUES (9, 'htITPfAH');
+INSERT INTO t_classify (c_id, c_variety) VALUES (10, 'yKYfyuPu');
+INSERT INTO t_classify (c_id, c_variety) VALUES (11, 'LQPJhyQI');
+INSERT INTO t_classify (c_id, c_variety) VALUES (12, 'ZXbReDxX');
+INSERT INTO t_classify (c_id, c_variety) VALUES (13, 'QDPrOAMV');
+INSERT INTO t_classify (c_id, c_variety) VALUES (14, 'VfgcgWkw');
+INSERT INTO t_classify (c_id, c_variety) VALUES (15, 'uNunKOKi');
+INSERT INTO t_classify (c_id, c_variety) VALUES (16, 'tWQUdiMz');
+INSERT INTO t_classify (c_id, c_variety) VALUES (17, 'CJFCygDu');
+INSERT INTO t_classify (c_id, c_variety) VALUES (18, 'prittTpQ');
+INSERT INTO t_classify (c_id, c_variety) VALUES (19, 'guBUFOBb');
+INSERT INTO t_classify (c_id, c_variety) VALUES (20, 'WToyiTfM');
+INSERT INTO t_classify (c_id, c_variety) VALUES (21, 'gdYqehWm');
+INSERT INTO t_classify (c_id, c_variety) VALUES (22, 'LVVIUiIQ');
+INSERT INTO t_classify (c_id, c_variety) VALUES (23, 'McnmBcLG');
+INSERT INTO t_classify (c_id, c_variety) VALUES (24, 'SMOnlAOz');
+INSERT INTO t_classify (c_id, c_variety) VALUES (25, 'FgvoLQLF');
+INSERT INTO t_classify (c_id, c_variety) VALUES (26, 'CmiIAtCd');
+INSERT INTO t_classify (c_id, c_variety) VALUES (27, 'XtQlKQvo');
+INSERT INTO t_classify (c_id, c_variety) VALUES (28, 'dYoJFgQo');
+INSERT INTO t_classify (c_id, c_variety) VALUES (29, 'QTZICNlO');
+INSERT INTO t_classify (c_id, c_variety) VALUES (30, 'ToUHYEie');
+INSERT INTO t_classify (c_id, c_variety) VALUES (31, 'GxHyHrLL');
+INSERT INTO t_classify (c_id, c_variety) VALUES (32, 'cnzvdeVw');
+INSERT INTO t_classify (c_id, c_variety) VALUES (33, 'nFdNcXCb');
+INSERT INTO t_classify (c_id, c_variety) VALUES (34, 'OPzetOIK');
+INSERT INTO t_classify (c_id, c_variety) VALUES (35, 'uZDwGjZN');
+INSERT INTO t_classify (c_id, c_variety) VALUES (36, 'JXhQhKaj');
+INSERT INTO t_classify (c_id, c_variety) VALUES (37, 'krVzskQm');
+INSERT INTO t_classify (c_id, c_variety) VALUES (38, 'pZQKKccn');
+INSERT INTO t_classify (c_id, c_variety) VALUES (39, 'sTseZHYV');
+INSERT INTO t_classify (c_id, c_variety) VALUES (40, 'sfdNUdFJ');
+INSERT INTO t_classify (c_id, c_variety) VALUES (41, 'LhDLYIoS');
+INSERT INTO t_classify (c_id, c_variety) VALUES (42, 'fgxKfDSn');
+INSERT INTO t_classify (c_id, c_variety) VALUES (43, 'VKTPAaiF');
+INSERT INTO t_classify (c_id, c_variety) VALUES (44, 'GFdiDBNv');
+INSERT INTO t_classify (c_id, c_variety) VALUES (45, 'HYUtwcvy');
+INSERT INTO t_classify (c_id, c_variety) VALUES (46, 'xMFgDuYY');
+INSERT INTO t_classify (c_id, c_variety) VALUES (47, 'gpJccCKn');
+INSERT INTO t_classify (c_id, c_variety) VALUES (48, 'DyYuEBjE');
+INSERT INTO t_classify (c_id, c_variety) VALUES (49, 'BBECtbcV');
+INSERT INTO t_classify (c_id, c_variety) VALUES (50, 'bYoiWDGB');
+INSERT INTO t_classify (c_id, c_variety) VALUES (51, 'ispAbVYE');
+INSERT INTO t_classify (c_id, c_variety) VALUES (52, 'tOhkSEay');
+INSERT INTO t_classify (c_id, c_variety) VALUES (53, 'YZWKhvSo');
+INSERT INTO t_classify (c_id, c_variety) VALUES (54, 'gFeXKAjL');
+INSERT INTO t_classify (c_id, c_variety) VALUES (55, 'PvcDJPtY');
+INSERT INTO t_classify (c_id, c_variety) VALUES (56, 'exwOADIr');
+INSERT INTO t_classify (c_id, c_variety) VALUES (57, 'oDphJIOu');
+INSERT INTO t_classify (c_id, c_variety) VALUES (58, 'IJGzyJhY');
+INSERT INTO t_classify (c_id, c_variety) VALUES (59, 'ngEjDYaY');
+INSERT INTO t_classify (c_id, c_variety) VALUES (60, 'lKWwCfCG');
+INSERT INTO t_classify (c_id, c_variety) VALUES (61, 'vqPDorYB');
+INSERT INTO t_classify (c_id, c_variety) VALUES (62, 'tkhaxxZa');
+INSERT INTO t_classify (c_id, c_variety) VALUES (63, 'xfBDumNb');
+INSERT INTO t_classify (c_id, c_variety) VALUES (64, 'MGsDoWGo');
+INSERT INTO t_classify (c_id, c_variety) VALUES (65, 'kWFuygwy');
+INSERT INTO t_classify (c_id, c_variety) VALUES (66, 'ErtHqHbv');
+INSERT INTO t_classify (c_id, c_variety) VALUES (67, 'PNgBtxHg');
+INSERT INTO t_classify (c_id, c_variety) VALUES (68, 'kCVCjnOR');
+INSERT INTO t_classify (c_id, c_variety) VALUES (69, 'IbRSFUWf');
+INSERT INTO t_classify (c_id, c_variety) VALUES (70, 'TAukLYHK');
+INSERT INTO t_classify (c_id, c_variety) VALUES (71, 'DIpMDZMb');
+INSERT INTO t_classify (c_id, c_variety) VALUES (72, 'jPFbbkJy');
+INSERT INTO t_classify (c_id, c_variety) VALUES (73, 'nzEUTKpn');
+INSERT INTO t_classify (c_id, c_variety) VALUES (74, 'aGgJbTjL');
+INSERT INTO t_classify (c_id, c_variety) VALUES (75, 'LMycEbnz');
+INSERT INTO t_classify (c_id, c_variety) VALUES (76, 'owwzNRJe');
+INSERT INTO t_classify (c_id, c_variety) VALUES (77, 'ZlfkMhks');
+INSERT INTO t_classify (c_id, c_variety) VALUES (78, 'aoSCGaAv');
+INSERT INTO t_classify (c_id, c_variety) VALUES (79, 'gNhvdhEp');
+INSERT INTO t_classify (c_id, c_variety) VALUES (80, 'ZlCMAJHX');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (1, 'PiWACKJR', '1', 'PskcjIRwTnTc', 'PiWACKJR@example.com', 0.75, '2024-01-25 21:21:41');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (2, 'vpwNiVKD', '1', 'SoHBWdggqOFL', 'vpwNiVKD@example.com', 0.93, '2023-09-10 03:28:48');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (3, 'SSxZgjWq', '1', 'urHVxXtXQtYg', 'SSxZgjWq@example.com', 0.9, '2024-03-03 17:41:14');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (4, 'siYYtUkH', '1', 'XCWxgxKkXLvS', 'siYYtUkH@example.com', 0.83, '2023-12-01 00:15:55');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (5, 'weFHNMnY', '1', 'DxfSkvbwpVKG', 'weFHNMnY@example.com', 0.96, '2023-09-12 08:58:30');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (6, 'fNzbGEKm', '1', 'tSsmbfnCnFoM', 'fNzbGEKm@example.com', 0.91, '2024-01-20 07:02:16');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (7, 'tmgwJBxa', '1', 'ZmbIqAJJrsOd', 'tmgwJBxa@example.com', 0.93, '2024-01-06 07:50:07');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (8, 'Msskmhtk', '1', 'BSkczlfdhirI', 'Msskmhtk@example.com', 0.77, '2023-09-30 11:42:05');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (9, 'NIaQuvcj', '1', 'EZoFXKETMPCv', 'NIaQuvcj@example.com', 0.8, '2024-03-02 04:56:36');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (10, 'rfFuvDXY', '1', 'RRysKuSSRskx', 'rfFuvDXY@example.com', 0.82, '2024-02-04 04:14:37');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (11, 'aBrfuJPJ', '1', 'hxClMCNFDNKo', 'aBrfuJPJ@example.com', 0.83, '2023-11-02 06:33:21');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (12, 'CudFAgYV', '1', 'PgQgbXwUTzcz', 'CudFAgYV@example.com', 0.76, '2023-09-16 08:20:35');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (13, 'VjRZKgKk', '1', 'gNIUVBTIylhr', 'VjRZKgKk@example.com', 0.79, '2023-12-01 08:37:12');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (14, 'fDMkZWzH', '1', 'NtERJmILiNgg', 'fDMkZWzH@example.com', 0.74, '2023-09-15 06:19:37');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (15, 'HqLwYtvn', '1', 'YstjLVDOXNXb', 'HqLwYtvn@example.com', 0.83, '2023-06-19 14:29:57');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (16, 'GRBINaUS', '1', 'UKBRGdtvvelD', 'GRBINaUS@example.com', 0.77, '2023-09-16 06:22:22');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (17, 'KOayEsxn', '1', 'RgXSSQooUZFK', 'KOayEsxn@example.com', 0.81, '2024-05-04 08:44:58');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (18, 'jFSxNeGH', '1', 'kqaNORmGIXsy', 'jFSxNeGH@example.com', 0.73, '2023-06-27 18:08:58');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (19, 'ShaJCBfi', '1', 'QaICwfWXxBLI', 'ShaJCBfi@example.com', 0.94, '2024-05-04 14:27:45');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (20, 'bfhrWlAD', '1', 'ZqckDjELspcP', 'bfhrWlAD@example.com', 0.93, '2023-09-29 19:23:38');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (21, 'LhlzSCmj', '1', 'TTAazRAvauOq', 'LhlzSCmj@example.com', 0.74, '2023-09-21 16:25:56');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (22, 'UAKGFOgp', '1', 'CLOAJUkSlIWj', 'UAKGFOgp@example.com', 0.74, '2023-12-14 01:17:26');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (23, 'jCImzFOq', '1', 'tdRaRMoOSqqd', 'jCImzFOq@example.com', 0.88, '2024-04-12 08:30:10');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (24, 'tQafXOzK', '1', 'sOzYJpZZBaHI', 'tQafXOzK@example.com', 0.97, '2023-06-25 04:23:54');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (25, 'msdFPKWZ', '1', 'fCsepqbHZnZb', 'msdFPKWZ@example.com', 0.74, '2023-12-16 16:10:09');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (26, 'eOSgNRge', '1', 'lnxDQZuDCXzz', 'eOSgNRge@example.com', 0.81, '2024-04-02 04:26:49');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (27, 'xvFGINtj', '1', 'qAxoIwlvMoHz', 'xvFGINtj@example.com', 0.95, '2024-01-17 03:57:34');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (28, 'aKPUTJkK', '1', 'mupzvJhhujUj', 'aKPUTJkK@example.com', 0.8, '2024-03-19 22:06:27');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (29, 'cjzmRGfu', '1', 'eVFqfrLjCYRu', 'cjzmRGfu@example.com', 0.99, '2023-08-13 15:46:37');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (30, 'IXuBeeWX', '1', 'FXvbUJDbsBHv', 'IXuBeeWX@example.com', 0.86, '2023-12-09 04:26:57');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (31, 'tYGmvPXR', '1', 'gcnfzmLdLBSJ', 'tYGmvPXR@example.com', 0.87, '2023-09-30 12:54:12');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (32, 'RSupRoqH', '1', 'IwdkpxzfauxT', 'RSupRoqH@example.com', 0.82, '2023-06-24 20:35:38');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (33, 'VjiAJtDN', '1', 'DycKDSmKKhaF', 'VjiAJtDN@example.com', 0.86, '2023-06-14 02:19:22');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (34, 'BBgCAgXr', '1', 'eFZOvZscYIom', 'BBgCAgXr@example.com', 0.95, '2024-02-29 01:25:19');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (35, 'MCWrxGqg', '1', 'yciqvJkYAXjc', 'MCWrxGqg@example.com', 0.77, '2023-12-29 03:48:08');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (36, 'deoGgoGT', '1', 'KgAOlmgXopNN', 'deoGgoGT@example.com', 0.88, '2024-05-22 07:55:55');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (37, 'IFOVSUth', '1', 'nlMoaQCDWhTm', 'IFOVSUth@example.com', 0.85, '2023-06-22 10:41:40');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (38, 'CHLBkvgr', '1', 'YqYmjFElIbIz', 'CHLBkvgr@example.com', 0.76, '2023-09-16 04:12:11');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (39, 'hEuiclTP', '1', 'MDvHrYTzHaxv', 'hEuiclTP@example.com', 0.83, '2023-07-31 03:51:41');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (40, 'FxFdGkhO', '1', 'HfdWfvBFHHwZ', 'FxFdGkhO@example.com', 0.95, '2023-11-13 06:35:36');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (41, 'PTrmXbmz', '1', 'QWtSKbKsVPLg', 'PTrmXbmz@example.com', 0.99, '2024-01-27 11:14:16');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (42, 'JDRENKCy', '1', 'CCCTWcYqVkcO', 'JDRENKCy@example.com', 0.97, '2024-05-05 06:57:25');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (43, 'HiDOOwiP', '1', 'sXmmqUhCowQQ', 'HiDOOwiP@example.com', 0.9, '2024-02-08 19:50:46');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (44, 'ffquFCKK', '1', 'iuySXKtQlzuZ', 'ffquFCKK@example.com', 0.97, '2023-07-31 15:43:09');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (45, 'YXYvCLIX', '1', 'ybahOrQQkRTD', 'YXYvCLIX@example.com', 0.81, '2023-08-04 00:58:22');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (46, 'WTqHHbgR', '1', 'WLAQolIDkqoD', 'WTqHHbgR@example.com', 0.91, '2024-03-28 00:16:37');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (47, 'bsoFobvf', '1', 'iOdOcHhQVVyM', 'bsoFobvf@example.com', 0.94, '2023-10-11 21:50:21');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (48, 'TTiuCWNT', '1', 'pVLclPukQChu', 'TTiuCWNT@example.com', 0.73, '2024-05-29 00:52:39');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (49, 'hsyAQqMw', '1', 'leeuBLyIibbt', 'hsyAQqMw@example.com', 0.81, '2023-10-05 13:22:35');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (50, 'iasdgVAF', '1', 'IcQRWhpUtMDK', 'iasdgVAF@example.com', 0.84, '2024-01-22 03:00:55');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (51, 'TyaiVSFH', '1', 'VHPUgIWbFjmp', 'TyaiVSFH@example.com', 0.71, '2024-02-24 20:56:45');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (52, 'JjIAItnP', '1', 'sBzAlElGEsZx', 'JjIAItnP@example.com', 0.97, '2024-05-20 00:45:02');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (53, 'MzJPrhKC', '1', 'NDCJluptVhaI', 'MzJPrhKC@example.com', 0.73, '2023-09-08 03:01:20');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (54, 'yEonYeIQ', '1', 'DbveiJBvogpK', 'yEonYeIQ@example.com', 0.98, '2024-05-11 16:11:04');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (55, 'IRVxBpUU', '1', 'bNseQugYjUxs', 'IRVxBpUU@example.com', 0.84, '2024-01-14 20:15:02');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (56, 'brxHPgxK', '1', 'exSeDSGqFcGZ', 'brxHPgxK@example.com', 0.84, '2023-10-22 14:06:22');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (57, 'QRNdStrr', '1', 'XivrZrjOTrsR', 'QRNdStrr@example.com', 0.92, '2024-05-01 22:42:04');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (58, 'isJRHHtZ', '1', 'wXVkitvWJEAx', 'isJRHHtZ@example.com', 0.88, '2023-08-19 10:31:47');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (59, 'NbIbNrbr', '1', 'WmEOWyeUOeWW', 'NbIbNrbr@example.com', 0.81, '2023-08-22 22:11:34');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (60, 'koFhrrdm', '1', 'tzSLJQixqrlT', 'koFhrrdm@example.com', 0.75, '2023-10-03 10:13:33');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (61, 'rookJLud', '1', 'jiMKZBtXLXZD', 'rookJLud@example.com', 0.94, '2024-01-06 18:53:55');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (62, 'YJdejmie', '1', 'lZDGvRqUGllg', 'YJdejmie@example.com', 0.82, '2023-06-18 07:49:55');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (63, 'DGhMOLKL', '1', 'zdyTpizCmfHu', 'DGhMOLKL@example.com', 0.98, '2023-12-03 02:04:45');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (64, 'EsGBkZgt', '1', 'OqavcvbtJtkh', 'EsGBkZgt@example.com', 0.81, '2024-01-05 13:30:42');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (65, 'FvSchQpa', '1', 'NNvxbGaAAWmU', 'FvSchQpa@example.com', 0.77, '2023-12-17 09:06:14');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (66, 'iWkucNUC', '1', 'yltqaxMdoGmr', 'iWkucNUC@example.com', 0.74, '2023-07-23 18:44:36');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (67, 'spUaXoAT', '1', 'iOyiIRcskJeR', 'spUaXoAT@example.com', 0.73, '2024-01-16 00:40:46');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (68, 'MayQgyuj', '1', 'SRXaIttNbfbq', 'MayQgyuj@example.com', 0.92, '2024-02-01 10:38:07');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (69, 'qqBXeYfj', '1', 'TREANydBRWLt', 'qqBXeYfj@example.com', 0.8, '2024-02-29 03:52:41');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (70, 'tSRzGaAD', '1', 'cmxEEWIYkaZq', 'tSRzGaAD@example.com', 0.86, '2024-04-08 01:29:38');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (71, 'GoZPLpGt', '1', 'pYoHCOUseynT', 'GoZPLpGt@example.com', 0.7, '2023-10-01 10:51:10');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (72, 'vYtmiWyH', '1', 'nymFpwMsorMs', 'vYtmiWyH@example.com', 0.84, '2023-11-10 20:59:36');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (73, 'fdKfgkWH', '1', 'ojuPrjpbEkGI', 'fdKfgkWH@example.com', 0.95, '2024-05-01 15:10:09');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (74, 'RKeqYhHa', '1', 'iGkqiLtfXdSS', 'RKeqYhHa@example.com', 0.92, '2024-01-11 14:38:24');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (75, 'cWWjRlCn', '1', 'ExuacvTVAQhe', 'cWWjRlCn@example.com', 0.7, '2023-06-17 15:24:38');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (76, 'xFBQROTs', '1', 'iLzUwVCmBNdm', 'xFBQROTs@example.com', 0.84, '2023-08-12 11:39:11');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (77, 'AbDVAjCl', '1', 'rVtvtqGXUWnj', 'AbDVAjCl@example.com', 0.82, '2023-12-02 12:27:32');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (78, 'bmarsSCt', '1', 'XaPdzUQnbCLU', 'bmarsSCt@example.com', 0.89, '2023-09-13 17:50:45');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (79, 'wQTgnEnk', '1', 'iDsaSEpweJDo', 'wQTgnEnk@example.com', 0.73, '2024-04-30 09:50:08');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (80, 'agdpPZDr', '1', 'ugoxNTkDJVnp', 'agdpPZDr@example.com', 0.93, '2023-10-25 09:15:41');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (81, 'HSFFWljN', '1', 'syJYfrjZoUyr', 'HSFFWljN@example.com', 0.83, '2023-07-13 17:02:13');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (82, 'xOBNrUdN', '1', 'iYVxSBNAfPMC', 'xOBNrUdN@example.com', 0.72, '2023-08-12 08:50:15');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (83, 'TeFJeLVf', '1', 'JUJeebbCysQw', 'TeFJeLVf@example.com', 0.81, '2023-10-20 01:26:10');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (84, 'ZdXOkhXt', '1', 'GwLOHljbwdMt', 'ZdXOkhXt@example.com', 0.82, '2024-01-06 00:31:04');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (85, 'akSrJiHs', '1', 'udsAHUkqhZsv', 'akSrJiHs@example.com', 0.96, '2023-06-12 14:44:49');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (86, 'jpVtxfrb', '1', 'hIpDpUMykOnr', 'jpVtxfrb@example.com', 0.92, '2023-08-13 20:20:08');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (87, 'RWnFFWtA', '1', 'LkEZozjevtAo', 'RWnFFWtA@example.com', 0.82, '2023-06-09 17:29:19');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (88, 'PnmnWDTV', '1', 'BXtqIpwZIkkY', 'PnmnWDTV@example.com', 0.95, '2023-09-19 03:00:06');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (89, 'nyAiRHEY', '1', 'EXnIrSZeHxmz', 'nyAiRHEY@example.com', 0.91, '2023-06-25 01:33:22');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (90, 'ALzvxdgr', '1', 'jnHfqjGgaTbR', 'ALzvxdgr@example.com', 0.76, '2023-08-21 04:40:09');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (91, 'QhKsbVyX', '1', 'SMclvqPRMvCJ', 'QhKsbVyX@example.com', 0.94, '2024-01-24 12:06:06');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (92, 'uivtpDwB', '1', 'OtHrzpsFJAiV', 'uivtpDwB@example.com', 0.89, '2023-12-09 20:00:19');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (93, 'cwgSFsov', '1', 'RFVNyNaFDhOn', 'cwgSFsov@example.com', 0.91, '2024-05-19 14:27:15');
+INSERT INTO t_user (u_id, u_name, u_status, u_password, u_mail, u_expect, u_creat_time) VALUES (94, 'tBLAcvKW', '1', 'DYMEqgljbIvz', 'tBLAcvKW@example.com', 0.71, '2023-11-27 03:53:11');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (1, 10, 'OiuiGdSg', '73014358286', 'WjiFuIqDbVyGiYjsdtkd', 'SvSxVxHdCkuPpxiaCTRx', '2024-05-30 00:53:33', 376.13, '4');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (2, 26, 'AAGnJQmH', '29152364073', 'YiILVRWUFJEkBEpKSnhp', 'VaCvHJKMTfFmRHOYckzw', '2023-10-30 10:20:17', 63.86, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (3, 29, 'yQiwZsKy', '22166677691', 'yWVtCcihPoYktSTMnGkf', 'GyqeOfESAGTsjiFDNWkO', '2024-03-30 06:27:45', 327.45, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (4, 33, 'AkLScSPa', '43953910373', 'DuMZEjiprLTJOlRgtwsY', 'QkeTCZlKEIJKpvraqviG', '2023-08-28 14:09:16', 191.14, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (5, 20, 'ZRzovnHT', '74011348789', 'JbGslIrmvcYukpHgUYnF', 'FJSAUsQqKzUlxgOEdRVJ', '2024-01-30 15:58:24', 148.02, '0');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (6, 7, 'qcDSeeRG', '28455812646', 'RVNjcLxnFOTSqIcLlYzz', 'SZNAEkZRGLcqWYQbsCos', '2023-09-04 22:08:31', 253.97, '4');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (7, 21, 'MqDpCsDv', '94381464821', 'orDddkugusJHLEDkPqMe', 'toAXYJWvNZCaVnhbTawD', '2024-01-16 13:06:28', 286.89, '0');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (8, 1, 'skZRzBjk', '88718682805', 'sUSOzNBHunhlOfgYvKVS', 'BDYzNBztqYZeKSDrVxkA', '2023-09-27 20:43:05', 429.77, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (9, 32, 'ofjcbHDO', '04766020299', 'xUVyYJUXrCxrDATLXEpH', 'FltCTWpzPVpTmZXalYeM', '2023-06-22 11:20:10', 156.55, '2');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (10, 35, 'VbiXBPFf', '88640573793', 'FKBATqvdlNcFEiDynGOT', 'bgomSrfZamnUVuxUGYZB', '2024-03-12 20:07:28', 245.51, '2');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (11, 4, 'MrpAZjQA', '61603671574', 'SXuKoPCVfaCLalNBcRyM', 'xXAjhePMnIbBOYTxWumn', '2024-04-26 22:30:53', 246.62, '4');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (12, 13, 'YeOFQngs', '26838792874', 'qpcVthiDasPQxiHJRcdg', 'pIbgUBMrGqFmhsnWCRDM', '2024-01-06 03:27:05', 445.86, '4');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (13, 10, 'gvawlRDC', '31541420795', 'XbHObkMrPobwqcEobEHd', 'mXTxbcNWGXartzfFCAFo', '2023-11-25 02:00:22', 252.82, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (14, 5, 'zBIoKICO', '77110586837', 'jnDGosiMajljoBpRrrMF', 'pWXljYJJLUdQzHHOdYHA', '2024-02-19 11:34:17', 86.18, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (15, 34, 'rQVSPlKQ', '33235889925', 'EaRUEiCUeLuyiVzaWhuB', 'ioIPYLrlEhiAsvcjoXBf', '2023-11-16 00:49:23', 322.31, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (16, 3, 'LIKqkkab', '50889736107', 'ElQQTSduPMbcilPbDUBz', 'CnTTNOTPcAkBXMmxnFWT', '2023-06-04 18:21:55', 94.66, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (17, 1, 'uvMWyJyW', '79251798771', 'lIuosbJdPGIDhXqVaqXY', 'kUBBqOAYPYhppUgqcfWl', '2023-08-03 10:06:50', 450.54, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (18, 29, 'TPDZnGVw', '66317995021', 'rUgEHJoiHnUAlbqzePdf', 'rOhkHbKrSBIRwtvYeRwB', '2024-01-10 12:31:13', 177.79, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (19, 27, 'stkgvexK', '66474729017', 'MkaiJqaHvIsneBcxxPcb', 'FQdRasADFpbnmdISOxVx', '2023-07-16 14:06:47', 168.21, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (20, 15, 'BKYOYvBn', '85651358044', 'tjmKLsWwYoFGiyElnZTO', 'OPVpwLVjtCsRnVHRyRMj', '2023-07-04 04:35:07', 228.17, '0');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (21, 32, 'OrGyhRtu', '00653255581', 'lhBKqDBhwVXkJJRhqYMD', 'UKPkLXrETWIKahcYOfvo', '2023-10-09 14:12:47', 454.6, '4');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (22, 31, 'mbczuynL', '34661186634', 'kqMeTFcpHLvxXCIJLlbS', 'DHoubdzSGUCBnobRyHqN', '2024-04-29 05:02:50', 491.61, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (23, 2, 'tCpooGOB', '87492291425', 'HGOqCXqapdqyfzUeTWbI', 'fqsRBlQIcPoVAuRkfRGA', '2023-09-07 13:08:59', 209.38, '4');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (24, 10, 'dkLuLUqA', '54841610251', 'qEkASYRnPxhAmZfoQnoh', 'jNVDllxKnixPSywwcEEe', '2023-09-20 20:47:05', 84.74, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (25, 21, 'AIZhrEim', '76255672985', 'jRJFHhHPIGLsHCdonXhz', 'HjhqjQkYpAktUNjnHhqP', '2024-05-09 08:47:47', 198.81, '2');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (26, 25, 'UDdLnDSU', '53394465572', 'ZNCKTArIBHgZrSsVAydQ', 'UWUsolCblUyoNcwPIEYQ', '2023-08-04 18:06:30', 416.2, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (27, 29, 'XUoPFrUy', '13405234093', 'cYywQUPyRATDfJkVLEVi', 'WHkoMcTKyHvdpfIwAJXX', '2023-11-11 19:50:43', 72.56, '4');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (28, 15, 'rpTfXbsr', '60428643534', 'jcWTrqRsmSdLgCsfUBHZ', 'XNlbJLwVRcuhQoRsFcnf', '2024-03-05 09:44:11', 76.83, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (29, 27, 'GsCNMZSg', '55192589153', 'MOBMmAeqijrVFmrxjjSN', 'xvmaauHfWjyGmNEIABck', '2024-05-19 12:44:27', 82.15, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (30, 31, 'sSuNWQib', '63424118420', 'dcuTlxWNokRfATTWiXQG', 'AjhoMcASrAbBXluoLTAZ', '2023-10-03 13:04:22', 141.64, '0');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (31, 1, 'QEnbHNEq', '29493757531', 'sHoySCuYyiCrOYJbSYzC', 'TuukEKlGXfWWTfraxByv', '2024-02-18 03:31:44', 212.71, '1');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (32, 5, 'ojroGAjO', '82961172913', 'GMdwIRVwJfrkEmUjoIPS', 'JgmjMIRGRJtRWtqmdsKn', '2024-01-12 22:11:55', 93.93, '2');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (33, 27, 'jvwjIXtb', '65113383915', 'hImddZdWXmjOOrroQfkU', 'nLSjzAgvZbJCCWscUjOE', '2023-10-28 23:02:50', 405.16, '2');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (34, 15, 'BurGbDpg', '48510429590', 'TxFDqDgrLNSRtnCVwgur', 'DXlFjCLRjaoYncQXljJa', '2024-03-16 23:23:07', 230.77, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (35, 17, 'zUccoGiH', '70938858953', 'azaIMpzBEfgfSBPtbsZd', 'zCKOfoJUgLceCjsDlaqp', '2023-11-13 14:32:30', 206.47, '2');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (36, 27, 'rQblRygY', '62534910557', 'QgTRMbYRBavEszQXaqlu', 'TinBsOYmiLoZmPRiagmj', '2023-11-26 15:23:07', 66.02, '3');
+INSERT INTO t_order (o_id, u_id, o_name, o_tel, o_address, o_notes, o_create_time, o_sum_price, o_status) VALUES (37, 20, 'FJSisOtA', '77466528310', 'FrtVjwaEzhXvGybSgumE', 'ELbcHqaAqEUhbOKJPGBD', '2023-06-21 23:18:37', 196.15, '3');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (1, 19, 44, 7, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (2, 3, 30, 10, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (3, 22, 10, 8, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (4, 6, 16, 6, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (5, 22, 28, 1, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (6, 37, 45, 6, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (7, 25, 5, 9, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (8, 23, 8, 7, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (9, 42, 32, 9, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (10, 6, 7, 1, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (11, 34, 14, 1, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (12, 14, 29, 9, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (13, 34, 23, 2, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (14, 27, 5, 4, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (15, 37, 19, 1, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (16, 20, 32, 8, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (17, 37, 16, 6, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (18, 43, 42, 3, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (19, 35, 6, 9, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (20, 40, 24, 8, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (21, 37, 32, 9, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (22, 32, 4, 8, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (23, 1, 18, 7, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (24, 42, 11, 1, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (25, 38, 21, 8, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (26, 7, 31, 9, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (27, 1, 16, 5, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (28, 13, 32, 5, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (29, 9, 30, 9, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (30, 35, 19, 5, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (31, 45, 42, 8, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (32, 44, 15, 8, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (33, 24, 5, 3, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (34, 10, 14, 6, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (35, 33, 10, 3, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (36, 27, 37, 10, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (37, 30, 7, 3, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (38, 5, 10, 2, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (39, 19, 20, 3, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (40, 13, 5, 6, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (41, 28, 26, 8, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (42, 45, 30, 5, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (43, 44, 24, 3, '0');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (44, 16, 29, 5, '1');
+INSERT INTO t_Cart (id, u_id, f_id, c_count, c_status) VALUES (45, 5, 20, 2, '0');
