@@ -119,9 +119,9 @@ CREATE TABLE t_user_search_behavior
 
 # 陈成开始
 
-DROP TABLE IF EXISTS t_Cart;
+DROP TABLE IF EXISTS t_cart;
 
-CREATE TABLE t_Cart
+CREATE TABLE t_cart
 (
     id       int AUTO_INCREMENT COMMENT '序号id',
     u_id     int NOT NULL COMMENT '用户id',
